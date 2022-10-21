@@ -61,12 +61,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         firstName: {
           //refactored code
-          type: Sequelize.STRING(30),
+          type: DataTypes.STRING(30),
           allowNull: false,
         },
         lastName: {
           //refactored code
-          type: Sequelize.STRING(30),
+          type: DataTypes.STRING(30),
           allowNull: false,
         },
       },
