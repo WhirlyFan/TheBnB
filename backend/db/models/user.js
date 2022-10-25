@@ -31,18 +31,25 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    static async signup({ username, email, password }) {
+    static async signup({ username, email, password, firstName, lastName }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         username,
         email,
         hashedPassword,
+        firstName,
+        lastName,
       });
       return await User.scope("currentUser").findByPk(user.id);
     }
 
     static associate(models) {
       // define association here
+      User.hasMany(models.Spot, { foreignKey: "ownerId" });
+      User.belongsToMany(models.Spot, { through: models.Booking });
+      User.belongsToMany(models.Spot, { through: models.Review });
+      User.hasMany(models.Booking, { foreignKey: "userId" });
+      User.hasMany(models.Review, { foreignKey: "userId" });
     }
   }
 
@@ -58,6 +65,16 @@ module.exports = (sequelize, DataTypes) => {
               throw new Error("Cannot be an email.");
             }
           },
+        },
+        firstName: {
+          //refactored code
+          type: DataTypes.STRING(30),
+          allowNull: false,
+        },
+        lastName: {
+          //refactored code
+          type: DataTypes.STRING(30),
+          allowNull: false,
         },
       },
       email: {
@@ -96,5 +113,3 @@ module.exports = (sequelize, DataTypes) => {
   );
   return User;
 };
-
-//
