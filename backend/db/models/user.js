@@ -66,16 +66,16 @@ module.exports = (sequelize, DataTypes) => {
             }
           },
         },
-        firstName: {
-          //refactored code
-          type: DataTypes.STRING(30),
-          allowNull: false,
-        },
-        lastName: {
-          //refactored code
-          type: DataTypes.STRING(30),
-          allowNull: false,
-        },
+      },
+      firstName: {
+        //refactored code
+        type: DataTypes.STRING(30),
+        allowNull: false,
+      },
+      lastName: {
+        //refactored code
+        type: DataTypes.STRING(30),
+        allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
