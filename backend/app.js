@@ -72,6 +72,7 @@ app.use((err, _req, res, _next) => {
     title: isProduction ? null : err.title || "Server Error",
     message: err.message,
     errors: err.errors,
+    statusCode: res.statusCode,
     stack: isProduction ? null : err.stack,
   });
 });
