@@ -10,6 +10,20 @@ const {
 } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 
+const { check } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
+
+const validateReview = [
+  check("review")
+    .exists({ checkFalsy: true })
+    .withMessage("Review text is required"),
+  check("stars")
+    .exists({ checkFalsy: true })
+    .isInt({ min: 1, max: 5 })
+    .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors,
+];
+
 const requireAuthor = async function (req, _res, next) {
   const userId = await Review.findByPk(req.params.reviewId, {
     attributes: ["userId"],
@@ -106,15 +120,21 @@ router.post(
   }
 );
 
-router.put("/:reviewId", requireAuth, requireAuthor, async (req, res) => {
-  const { review, stars } = req.body;
-  const update = await Review.findByPk(req.params.reviewId);
-  update.set({
-    review,
-    stars,
-  });
-  await update.save();
-  return res.json(update);
-});
+router.put(
+  "/:reviewId",
+  requireAuth,
+  requireAuthor,
+  validateReview,
+  async (req, res) => {
+    const { review, stars } = req.body;
+    const update = await Review.findByPk(req.params.reviewId);
+    update.set({
+      review,
+      stars,
+    });
+    await update.save();
+    return res.json(update);
+  }
+);
 
 module.exports = router;
