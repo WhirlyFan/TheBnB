@@ -33,7 +33,6 @@ const validateSpot = [
 ];
 
 const requireAuthentication = async function (req, _res, next) {
-  // console.log(req.params.spotId)
   const ownerId = await Spot.findByPk(req.params.spotId, {
     attributes: ["ownerId"],
   });
@@ -70,7 +69,7 @@ router.get("/", async (req, res) => {
     Spots.push(spot);
   }
 
-  res.json({
+  return res.json({
     Spots,
   });
 });
