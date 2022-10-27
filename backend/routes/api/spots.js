@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { Spot, SpotImage, Sequelize } = require("../../db/models");
+const { Spot, SpotImage, User, Sequelize } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 
 const { check } = require("express-validator");
@@ -37,13 +37,17 @@ const requireAuthentication = async function (req, _res, next) {
   const ownerId = await Spot.findByPk(req.params.spotId, {
     attributes: ["ownerId"],
   });
+
+  if (!ownerId) {
+    const err = new Error("Couldn't find a Spot with the specified id");
+    err.title = "Couldn't find a Spot with the specified id";
+    err.errors = ["Spot couldn't be found"];
+    err.status = 404;
+    return next(err);
+  }
+
   if (req.user.id === ownerId.toJSON().ownerId) return next();
 
-  const err = new Error("Unauthorized");
-  err.title = "Unauthorized";
-  err.errors = ["Unauthorized"];
-  err.status = 401;
-  return next(err);
 };
 
 //GET all spots
@@ -98,28 +102,32 @@ router.get("/current", requireAuth, async (req, res) => {
 });
 
 //GET spot of id
-router.get("/:spotId", requireAuth, async (req, res) => {
-  const { spotId } = req.params;
-  const spotsList = await Spot.findAll({ where: { id: spotId } });
-  const Spots = [];
-
-  for (let i = 0; i < spotsList.length; i++) {
-    let spot = spotsList[i];
-    const review = await spot.getReviews({
-      //aggregate function to find average of Stars column
-      attributes: [[Sequelize.fn("AVG", Sequelize.col("stars")), "avgRating"]],
-    });
-    spot = spot.toJSON();
-    spot.getRating = review[0].dataValues.avgRating;
-    const previewImage = await SpotImage.findOne({
-      where: { preview: true, spotId: spot.id },
-    });
-    spot.previewImage = previewImage ? previewImage.toJSON().url : null;
-    Spots.push(spot);
+router.get("/:spotId", async (req, res, next) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    const err = new Error("Couldn't find a Spot with the specified id");
+    err.title = "Couldn't find a Spot with the specified id";
+    err.errors = ["Spot couldn't be found"];
+    err.status = 404;
+    return next(err);
   }
-  res.json({
-    Spots,
+  const avgStarRating = await spot.getReviews({
+    //aggregate function to find average of Stars column
+    attributes: [[Sequelize.fn("AVG", Sequelize.col("stars")), "avgRating"]],
   });
+  const numReviews = await spot.getReviews({
+    attributes: [[Sequelize.fn("COUNT", Sequelize.col("stars")), "numReviews"]],
+  });
+
+  spot = spot.toJSON();
+  spot.numReviews = numReviews[0].dataValues.numReviews;
+  spot.avgStarRating = avgStarRating[0].dataValues.avgRating;
+  spot.SpotImages = await SpotImage.findAll({ where: { spotId: req.params.spotId } })
+  spot.Owner = await User.findByPk(spot.ownerId, {
+    attributes: { exclude: ['username'] }
+  })
+
+  res.json(spot);
 });
 
 //POST a spot
@@ -150,13 +158,6 @@ router.post(
   async (req, res) => {
     const { url, preview } = req.body;
     const { spotId } = req.params;
-    // if (!spotId) {
-    //   (res.statusCode = 404),
-    //     res.json({
-    //       message: "Spot couldn't be found",
-    //       statusCode,
-    //     });
-    // }
     const spotImage = await SpotImage.create({
       spotId,
       url,
@@ -165,5 +166,25 @@ router.post(
     res.json(spotImage);
   }
 );
+
+//edit a spot
+router.put('/:spotId', requireAuth, requireAuthentication, validateSpot, async (req, res) => {
+  const { address, city, state, country, lat, lng, name, description, price } =
+    req.body;
+  const spot = await Spot.findByPk(req.params.spotId)
+  spot.set({
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  })
+  await spot.save();
+  res.json(spot)
+})
 
 module.exports = router;
