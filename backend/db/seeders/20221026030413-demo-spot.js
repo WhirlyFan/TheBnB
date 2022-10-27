@@ -19,6 +19,19 @@ module.exports = {
             "Want a quick getaway to the middle of nowhere? We have a pool.",
           price: 1.99,
         },
+        {
+          ownerId: 1,
+          address: "11111 Chesapeake Rd.",
+          city: "Fullerton",
+          state: "CA",
+          country: "USA",
+          lat: 323.69829373902616,
+          lng: -16.26505036779902,
+          name: "Cozy Fullerton Cabin",
+          description:
+            "ew gross why would you stay here.",
+          price: 2.99,
+        }
       ],
       {}
     );

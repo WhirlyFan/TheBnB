@@ -11,6 +11,16 @@ module.exports = {
           url: "www.stinkerplace.com",
           preview: true,
         },
+        {
+          spotId: 2,
+          url: "www.eahown.com",
+          preview: true,
+        },
+        {
+          spotId: 2,
+          url: "www.awfaowng.com",
+          preview: false,
+        },
       ],
       {}
     );
