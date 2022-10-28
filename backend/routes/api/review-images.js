@@ -22,9 +22,9 @@ const requireAuthor = async function (req, _res, next) {
       return next(err);
     }
   } else {
-    const err = new Error("Couldn't find a Review with the specified id");
-    err.title = "Couldn't find a Review with the specified id";
-    err.errors = ["Review couldn't be found"];
+    const err = new Error("Couldn't find a Review Image with the specified id");
+    err.title = "Couldn't find a Review Image with the specified id";
+    err.errors = ["Review Image couldn't be found"];
     err.status = 404;
     return next(err);
   }

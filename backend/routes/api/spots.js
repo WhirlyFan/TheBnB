@@ -142,7 +142,8 @@ router.get("/", async (req, res, next) => {
   }
 
   if (minPrice) {
-    if (parseFloat(minPrice) - ~~minPrice || parseFloat(minPrice) === 0) { //fix this for when 100.00
+    if (parseFloat(minPrice) - ~~minPrice || parseFloat(minPrice) === 0) {
+      //fix this for when 100.00
       if (parseFloat(minPrice) >= 0) {
         whereObj.price = { [Op.gte]: minPrice };
       } else {
@@ -178,7 +179,7 @@ router.get("/", async (req, res, next) => {
       attributes: [[Sequelize.fn("AVG", Sequelize.col("stars")), "avgRating"]],
     });
     spot = spot.toJSON();
-    spot.getRating = review[0].dataValues.avgRating;
+    spot.avgRating = review[0].dataValues.avgRating;
     const previewImage = await SpotImage.findOne({
       where: { preview: true, spotId: spot.id },
     });
@@ -266,7 +267,7 @@ router.get("/:spotId/bookings", requireAuth, notOwner, async (req, res) => {
   return res.json({ Bookings });
 });
 
-//GET spot by id
+//GET Details of Spot by Id
 router.get("/:spotId", async (req, res, next) => {
   let spot = await Spot.findByPk(req.params.spotId);
   if (!spot) {
@@ -287,9 +288,12 @@ router.get("/:spotId", async (req, res, next) => {
   spot = spot.toJSON();
   spot.numReviews = numReviews[0].dataValues.numReviews;
   spot.avgStarRating = avgStarRating[0].dataValues.avgRating;
+
   spot.SpotImages = await SpotImage.findAll({
     where: { spotId: req.params.spotId },
+    attributes: ["id", "url", "preview"]
   });
+
   spot.Owner = await User.findByPk(spot.ownerId, {
     attributes: { exclude: ["username"] },
   });
@@ -344,7 +348,12 @@ router.post("/:spotId/images", requireAuthor, requireAuth, async (req, res) => {
     url,
     preview,
   });
-  return res.json(spotImage);
+  const image = spotImage.toJSON();
+  return res.json({
+    id: image.id,
+    url: image.url,
+    preview: image.preview,
+  });
 });
 
 //POST a spot

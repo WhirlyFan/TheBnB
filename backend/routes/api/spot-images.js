@@ -21,9 +21,9 @@ const requireAuthor = async function (req, _res, next) {
       return next(err);
     }
   } else {
-    const err = new Error("Couldn't find a Spot with the specified id");
-    err.title = "Couldn't find a Spot with the specified id";
-    err.errors = ["Spot couldn't be found"];
+    const err = new Error("Couldn't find a Spot Image with the specified id");
+    err.title = "Couldn't find a Spot Image with the specified id";
+    err.errors = ["Spot Image couldn't be found"];
     err.status = 404;
     return next(err);
   }
