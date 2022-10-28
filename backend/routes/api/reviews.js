@@ -120,11 +120,9 @@ router.post(
   }
 );
 
+//Edit a Review
 router.put(
-  "/:reviewId",
-  requireAuth,
-  requireAuthor,
-  validateReview,
+  "/:reviewId", requireAuth, requireAuthor, validateReview,
   async (req, res) => {
     const { review, stars } = req.body;
     const update = await Review.findByPk(req.params.reviewId);
@@ -136,5 +134,15 @@ router.put(
     return res.json(update);
   }
 );
+
+//Delete a Review
+router.delete("/:reviewId", requireAuth, requireAuthor, async (req, res) => {
+  const review = await Review.findByPk(req.params.reviewId);
+  review.destroy();
+  res.json({
+    message: "Successfully deleted",
+    statusCode: res.statusCode,
+  });
+});
 
 module.exports = router;

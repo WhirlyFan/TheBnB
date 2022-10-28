@@ -1,7 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { Spot, SpotImage, User, Review, Sequelize } = require("../../db/models");
+const {
+  Spot,
+  SpotImage,
+  User,
+  Review,
+  Booking,
+  Sequelize,
+} = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 
 const { check } = require("express-validator");
@@ -38,6 +45,27 @@ const requireAuthor = async function (req, _res, next) {
   });
   if (ownerId) {
     if (req.user.id === ownerId.toJSON().ownerId) return next();
+    else {
+      const err = new Error("Forbidden");
+      err.errors = ["Forbidden"];
+      err.status = 403;
+      return next(err);
+    }
+  } else {
+    const err = new Error("Couldn't find a Spot with the specified id");
+    err.title = "Couldn't find a Spot with the specified id";
+    err.errors = ["Spot couldn't be found"];
+    err.status = 404;
+    return next(err);
+  }
+};
+
+const notOwner = async function (req, _res, next) {
+  const ownerId = await Spot.findByPk(req.params.spotId, {
+    attributes: ["ownerId"],
+  });
+  if (ownerId) {
+    if (req.user.id !== ownerId.toJSON().ownerId) return next();
     else {
       const err = new Error("Forbidden");
       err.errors = ["Forbidden"];
@@ -138,6 +166,15 @@ router.get("/:spotId/reviews", async (req, res, next) => {
     return next(err);
   }
   return res.json({ Reviews });
+});
+
+//Get all Bookings for a Spot based on the Spot's id
+router.get("/:spotId/bookings", requireAuth, notOwner, async (req, res) => {
+  const Bookings = await Booking.findAll({
+    where: { spotId: req.params.spotId },
+    attributes: ["spotId", "startDate", "endDate"],
+  });
+  res.json({ Bookings });
 });
 
 //GET spot by id
@@ -241,6 +278,69 @@ router.post("/", validateSpot, requireAuth, async (req, res) => {
   return res.status(201).json(newSpot);
 });
 
+//Create a Booking from a Spot based on the Spot's id
+router.post(
+  "/:spotId/bookings",
+  requireAuth,
+  notOwner,
+  async (req, res, next) => {
+    const { startDate, endDate } = req.body;
+    let newStartTime = new Date(startDate)
+    newStartTime = new Date(newStartTime.toDateString()).getTime(); // get rid of hr/min/sec later
+    let newEndTime = new Date(endDate)
+    newEndTime = new Date(newEndTime.toDateString()).getTime()
+    let { spotId } = req.params;
+    if (!isNaN(spotId)) spotId = Number(spotId);
+
+    if (newEndTime <= newStartTime) {
+      const err = new Error("Validation error");
+      err.title = "Validation error";
+      err.errors = ["endDate cannot be on or before startDate"];
+      err.status = 400;
+      return next(err);
+    }
+
+    const bookings = await Booking.findAll({
+      attributes: ["startDate", "endDate"],
+    });
+    for (let i = 0; i < bookings.length; i++) {
+      let booking = bookings[i];
+
+      let { startDate, endDate } = booking;
+      startDate = new Date(startDate.toDateString()).getTime();
+      endDate = new Date(endDate.toDateString()).getTime();
+
+      if (newStartTime >= startDate && newStartTime <= endDate) {
+        const err = new Error(
+          "Sorry, this spot is already booked for the specified dates"
+        );
+        err.title = " Booking conflict";
+        err.errors = ["Start date conflicts with an existing booking"];
+        err.status = 403;
+        return next(err);
+      }
+
+      if (newEndTime >= startDate && newEndTime <= endDate) {
+        const err = new Error(
+          "Sorry, this spot is already booked for the specified dates"
+        );
+        err.title = " Booking conflict";
+        err.errors = ["End date conflicts with an existing booking"];
+        err.status = 403;
+        return next(err);
+      }
+    }
+
+    const booking = await Booking.create({
+      spotId,
+      userId: req.user.id,
+      startDate,
+      endDate,
+    });
+    res.json(booking);
+  }
+);
+
 //edit a spot
 router.put(
   "/:spotId",
@@ -275,5 +375,15 @@ router.put(
     return res.json(spot);
   }
 );
+
+//Delete a Spot
+router.delete("/:spotId", requireAuth, requireAuthor, async (req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId);
+  spot.destroy();
+  res.json({
+    message: "Successfully deleted",
+    statusCode: res.statusCode,
+  });
+});
 
 module.exports = router;
