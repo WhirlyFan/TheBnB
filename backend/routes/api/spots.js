@@ -13,6 +13,7 @@ const { requireAuth } = require("../../utils/auth");
 
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const { Op } = require("sequelize");
 
 const validateSpot = [
   check("address")
@@ -82,8 +83,92 @@ const notOwner = async function (req, _res, next) {
 };
 
 //GET all spots
-router.get("/", async (req, res) => {
-  const spotsList = await Spot.findAll();
+router.get("/", async (req, res, next) => {
+  //pagination
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
+    req.query;
+
+  page = parseInt(page);
+  size = parseInt(size);
+
+  if (isNaN(page)) page = 1;
+  if (isNaN(size)) size = 20;
+
+  let pagination = {};
+  pagination.limit = size;
+  pagination.offset = size * (page - 1);
+
+  const err = new Error("Query parameter validation errors");
+  err.title = "Query parameter validation errors";
+  err.errors = [];
+  err.status = 400;
+
+  whereObj = {};
+
+  if (minLat) {
+    console.log(minLat);
+    console.log(parseFloat(minLat) - ~~minLat);
+    if (parseFloat(minLat) - ~~minLat) {
+      whereObj.lat = { [Op.gte]: minLat };
+    } else {
+      err.errors.push("Minimum latitude is invalid");
+    }
+  }
+
+  if (maxLat) {
+    if (parseFloat(maxLat) - ~~maxLat) {
+      whereObj.lat = { [Op.lte]: maxLat };
+    } else {
+      err.errors.push("Maximum latitude is invalid");
+    }
+  }
+
+  if (minLng) {
+    console.log(minLng);
+    console.log(parseFloat(minLng) - ~~minLng);
+    if (parseFloat(minLng) - ~~minLng) {
+      whereObj.lng = { [Op.gte]: minLng };
+    } else {
+      err.errors.push("Minimum latitude is invalid");
+    }
+  }
+
+  if (maxLng) {
+    if (parseFloat(maxLng) - ~~maxLng) {
+      whereObj.lng = { [Op.lte]: maxLng };
+    } else {
+      err.errors.push("Maximum latitude is invalid");
+    }
+  }
+
+  if (minPrice) {
+    if (parseFloat(minPrice) - ~~minPrice || parseFloat(minPrice) === 0) { //fix this for when 100.00
+      if (parseFloat(minPrice) >= 0) {
+        whereObj.price = { [Op.gte]: minPrice };
+      } else {
+        err.errors.push("Minimum price must be greater than or equal to 0");
+      }
+    } else {
+      err.errors.push("Minimum price is invalid");
+    }
+  }
+
+  if (maxPrice) {
+    if (parseFloat(maxPrice) - ~~maxPrice || parseFloat(maxPrice) === 0) {
+      if (parseFloat(maxPrice) >= 0) {
+        whereObj.price = { [Op.lte]: maxPrice };
+      } else {
+        err.errors.push("Maximum price must be greater than or equal to 0");
+      }
+    } else {
+      err.errors.push("Maximum price is invalid");
+    }
+  }
+
+  const spotsList = await Spot.findAll({
+    where: whereObj,
+    ...pagination,
+  });
   const Spots = [];
 
   for (let i = 0; i < spotsList.length; i++) {
@@ -100,9 +185,13 @@ router.get("/", async (req, res) => {
     spot.previewImage = previewImage ? previewImage.toJSON().url : null;
     Spots.push(spot);
   }
-
+  if (err.errors.length) {
+    return next(err);
+  }
   return res.json({
     Spots,
+    page,
+    size,
   });
 });
 
@@ -174,7 +263,7 @@ router.get("/:spotId/bookings", requireAuth, notOwner, async (req, res) => {
     where: { spotId: req.params.spotId },
     attributes: ["spotId", "startDate", "endDate"],
   });
-  res.json({ Bookings });
+  return res.json({ Bookings });
 });
 
 //GET spot by id
@@ -285,10 +374,10 @@ router.post(
   notOwner,
   async (req, res, next) => {
     const { startDate, endDate } = req.body;
-    let newStartTime = new Date(startDate)
+    let newStartTime = new Date(startDate);
     newStartTime = new Date(newStartTime.toDateString()).getTime(); // get rid of hr/min/sec later
-    let newEndTime = new Date(endDate)
-    newEndTime = new Date(newEndTime.toDateString()).getTime()
+    let newEndTime = new Date(endDate);
+    newEndTime = new Date(newEndTime.toDateString()).getTime();
     let { spotId } = req.params;
     if (!isNaN(spotId)) spotId = Number(spotId);
 
@@ -337,7 +426,7 @@ router.post(
       startDate,
       endDate,
     });
-    res.json(booking);
+    return res.json(booking);
   }
 );
 
@@ -380,7 +469,7 @@ router.put(
 router.delete("/:spotId", requireAuth, requireAuthor, async (req, res) => {
   const spot = await Spot.findByPk(req.params.spotId);
   spot.destroy();
-  res.json({
+  return res.json({
     message: "Successfully deleted",
     statusCode: res.statusCode,
   });

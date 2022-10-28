@@ -70,7 +70,7 @@ router.put(
       endDate,
     });
     booking.save();
-    res.json(booking);
+    return res.json(booking);
   }
 );
 
@@ -88,7 +88,7 @@ router.delete(
 
     if (!(currentDate > startDate && currentDate < endDate)) {
       booking.destroy();
-      res.json({
+      return res.json({
         message: "Successfully deleted",
         statusCode: res.statusCode,
       });

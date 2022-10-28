@@ -34,7 +34,7 @@ const requireAuthor = async function (req, _res, next) {
 router.delete("/:imageId", requireAuth, requireAuthor, async (req, res) => {
   const image = await ReviewImage.findByPk(req.params.imageId);
   image.destroy();
-  res.json({
+  return res.json({
     message: "Successfully deleted",
     statusCode: res.statusCode,
   });
