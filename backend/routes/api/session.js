@@ -59,7 +59,7 @@ router.get("/", requireAuth, (req, res) => {
     return res.json({
       ...user.toSafeObject(),
     });
-  } else return res.json({});
+  } else return res.json(null); //was {}
 });
 
 module.exports = router;
