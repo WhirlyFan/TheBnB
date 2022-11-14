@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
+import SpotCard from "../SpotCard";
 
 export default function AllSpots() {
   const spots = useSelector((state) => state.spots.Spots);
@@ -15,9 +16,7 @@ export default function AllSpots() {
     <div>
       {Object.values(spots).map((spot) => {
         return (
-          <div key={`spot-${spot.id}`}>
-            {`id: ${spot.id},  address: ${spot.address}, avgRating: ${spot.avgRating}, price: ${spot.price}`}
-          </div>
+            <SpotCard spot={spot}/>
         );
       })}
     </div>
