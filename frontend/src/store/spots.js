@@ -20,12 +20,20 @@ export const getAllSpotsThunk = () => async (dispatch) => {
   return response;
 };
 
+//normalization array to object with id keys
+const normalizedData = (data) => {
+  const obj = {};
+  data.map((el) => (obj[el.id] = el));
+  return obj;
+};
+
 //reducer
 export default function spotsReducer(state = {}, action) {
-  let newState;
+  let newState = { ...state };
   switch (action.type) {
     case GET_ALL_SPOTS:
-      newState = [...action.spots];
+      const allSpots = normalizedData(action.spots.Spots);
+      newState["Spots"] = allSpots;
       return newState;
     default:
       return state;
