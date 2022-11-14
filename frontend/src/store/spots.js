@@ -3,37 +3,89 @@ import { csrfFetch } from "./csrf";
 //types
 const GET_ALL_SPOTS = "spots/getAllSpots";
 const GET_SPOT_DETAILS = "spots/getSpotDetails";
+const GET_MY_SPOTS = "spots/getMySpots";
+const CREATE_A_SPOT = "spots/createASpot";
 
 //action creators
-export const getAllSpots = (spots) => {
+export const getAllSpots = (payload) => {
   //action object
   return {
     type: GET_ALL_SPOTS,
-    spots,
+    payload,
   };
 };
 
-export const getSpotDetails = (spots) => {
+export const getSpotDetails = (payload) => {
   return {
     type: GET_SPOT_DETAILS,
-    spots,
+    payload,
+  };
+};
+
+export const getMySpots = (payload) => {
+  return {
+    type: GET_MY_SPOTS,
+    payload,
+  };
+};
+
+export const createASpot = (payload) => {
+  return {
+    type: CREATE_A_SPOT,
+    payload,
   };
 };
 
 //thunk
 export const getAllSpotsThunk = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots", { method: "GET" });
-  const data = await response.json();
-  dispatch(getAllSpots(data));
-  return response;
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getAllSpots(data));
+    return data;
+  } else {
+    throw response;
+  }
 };
 
 export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, { method: "GET" });
-  const data = await response.json();
-  dispatch(getSpotDetails(data));
-  return response;
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getSpotDetails(data));
+    return data;
+  } else {
+    throw response;
+  }
 };
+
+export const getMySpotsThunk = () => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/current`, { method: "GET" });
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getMySpots(data));
+    return data;
+  } else {
+    throw response;
+  }
+};
+
+export const createASpotThunk = (spot) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/`, {
+    method: "POST",
+    body: JSON.stringify(spot),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(createASpot(data));
+    //const imageResponse = await csrfFetch(`/api/${data.id}/images`)
+    return data;
+  } else {
+    throw response;
+  }
+};
+
 //normalization array to object with id keys
 const normalizedData = (data) => {
   const obj = {};
@@ -46,12 +98,20 @@ export default function spotsReducer(state = {}, action) {
   let newState = { ...state };
   switch (action.type) {
     case GET_ALL_SPOTS:
-      const allSpots = normalizedData(action.spots.Spots);
+      const allSpots = normalizedData(action.payload.Spots);
       newState["Spots"] = allSpots;
       return newState;
     case GET_SPOT_DETAILS:
-      newState["SpotDetails"] = action.spots
-      return newState
+      newState["SpotDetails"] = action.payload;
+      return newState;
+    case GET_MY_SPOTS:
+      const mySpots = normalizedData(action.payload.Spots);
+      newState["MySpots"] = mySpots;
+      return newState;
+    case CREATE_A_SPOT:
+      const key = action.payload.id;
+      newState["Spots"][key] = action.payload;
+      return newState;
     default:
       return state;
   }
