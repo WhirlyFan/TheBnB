@@ -4,7 +4,8 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_SPOTS = "spots/getAllSpots";
 const GET_SPOT_DETAILS = "spots/getSpotDetails";
 const GET_MY_SPOTS = "spots/getMySpots";
-const CREATE_A_SPOT = "spots/createASpot";
+const CREATE_SPOT = "spots/createSpot";
+const EDIT_SPOT = "spots/editSpot"
 
 //action creators
 export const getAllSpots = (payload) => {
@@ -31,7 +32,14 @@ export const getMySpots = (payload) => {
 
 export const createASpot = (payload) => {
   return {
-    type: CREATE_A_SPOT,
+    type: CREATE_SPOT,
+    payload,
+  };
+};
+
+export const editSpot = (payload) => {
+  return {
+    type: EDIT_SPOT,
     payload,
   };
 };
@@ -86,6 +94,23 @@ export const createASpotThunk = (spot) => async (dispatch) => {
   }
 };
 
+export const editSpotThunk = (spot) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spot.id}`, {
+    method: "PUT",
+    body: JSON.stringify(spot),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(createASpot(data));
+    //const imageResponse = await csrfFetch(`/api/${data.id}/images`)
+    return data;
+  } else {
+    throw response;
+  }
+};
+
+
 //normalization array to object with id keys
 const normalizedData = (data) => {
   const obj = {};
@@ -108,7 +133,7 @@ export default function spotsReducer(state = {}, action) {
       const mySpots = normalizedData(action.payload.Spots);
       newState["MySpots"] = mySpots;
       return newState;
-    case CREATE_A_SPOT:
+    case CREATE_SPOT:
       const key = action.payload.id;
       newState["Spots"][key] = action.payload;
       return newState;
