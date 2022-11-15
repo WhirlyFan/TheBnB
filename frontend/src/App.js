@@ -18,17 +18,22 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <Switch>
-        <Route exact path={"/"}>
-          <AllSpots />
-        </Route>
-        <Route path={`/spots/:spotId`}>
-          <SpotDetails />
-        </Route>
-        <Route path={`/:username/profile`}>
-          <Profile />
-        </Route>
-      </Switch>
+      {isLoaded && (
+        <Switch>
+          <Route exact path={"/"}>
+            <AllSpots />
+          </Route>
+          <Route path={`/spots/:spotId`}>
+            <SpotDetails />
+          </Route>
+          <Route path={`/:username/profile`}>
+            <Profile />
+          </Route>
+          <Route path={`/:username/newfixthis`}>
+            {/* <Some new form /> */}
+          </Route>
+        </Switch>
+      )}
     </>
   );
 }

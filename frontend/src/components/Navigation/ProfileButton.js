@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 function ProfileButton({ user, setLogin, setShowModal }) {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -33,8 +33,13 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
   const profile = (e) => {
     e.preventDefault();
-    history.push(`/${user.username}/profile`)
-  }
+    history.push(`/${user.username}/profile`);
+  };
+
+  const createSpot = (e) => {
+    e.preventDefault();
+    history.push(`/${user.username}/new`);
+  };
 
   return (
     <>
@@ -46,6 +51,9 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           <ul className="profile-dropdown">
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <li>
+              <button onClick={createSpot}>Become a Host</button>
+            </li>
             <li>
               <button onClick={profile}>Profile</button>
             </li>
