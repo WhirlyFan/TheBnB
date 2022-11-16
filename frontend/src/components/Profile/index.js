@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
@@ -10,17 +10,22 @@ export default function Profile() {
   const sessionUser = useSelector((state) => state.session.user);
   const spots = useSelector((state) => state.spots.MySpots);
 
+  const [hasSubmit, setHasSubmit] = useState(false);
+
   useEffect(() => {
     dispatch(spotsActions.getMySpotsThunk());
-  }, [dispatch]);
+  }, [dispatch, hasSubmit]);
+
 
   if (!sessionUser) return <Redirect to={"/"} />;
 
   if (!spots) return null;
 
-  const clickDelete = async (spot) => {
-    dispatch(spotsActions.deleteSpotThunk(spot.id));
-    return dispatch(spotsActions.getMySpotsThunk());
+  const clickDelete = (spot) => {
+    dispatch(spotsActions.deleteSpotThunk(spot.id)).then(() => {
+      setHasSubmit(!hasSubmit);
+      return;
+    });
   };
 
   const clickEdit = (spot) => {

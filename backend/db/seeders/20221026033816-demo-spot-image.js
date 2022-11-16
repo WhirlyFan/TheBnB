@@ -19,7 +19,27 @@ module.exports = {
         {
           spotId: 2,
           url: "https://blogs-images.forbes.com/games/files/2017/04/Wuhu-Town.jpeg",
-          preview: false,
+          preview: true,
+        },
+        {
+          spotId: 3,
+          url: "https://i.ytimg.com/vi/dX_g9D6uBu0/maxresdefault.jpg",
+          preview: true,
+        },
+        {
+          spotId: 4,
+          url: "https://i.ytimg.com/vi/dX_g9D6uBu0/maxresdefault.jpg",
+          preview: true,
+        },
+        {
+          spotId: 5,
+          url: "https://i.ytimg.com/vi/dX_g9D6uBu0/maxresdefault.jpg",
+          preview: true,
+        },
+        {
+          spotId: 6,
+          url: "https://i.ytimg.com/vi/dX_g9D6uBu0/maxresdefault.jpg",
+          preview: true,
         },
       ],
       {}

@@ -170,11 +170,12 @@ export default function spotsReducer(state = {}, action) {
     case CREATE_SPOT:
       // const key = action.payload.id;
       // newState["Spots"][key] = action.payload;
-      newState["NewSpot"] = action.payload;
+      // newState["NewSpot"] = action.payload;
       return newState;
     case EDIT_SPOT:
+      return newState
     case DELETE_SPOT:
-      delete newState["Spots"][action.payload.id];
+      // delete newState["Spots"][action.payload.id];
       return newState;
     default:
       return state;
