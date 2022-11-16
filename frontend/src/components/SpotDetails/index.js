@@ -31,6 +31,7 @@ export default function SpotDetails() {
         {spot.SpotImages.map((spot) => {
           return (
             <img
+              key={`spot-${spot.id}`}
               className="spot-details-images"
               src={spot.url}
               alt={`spot-${spot.id}`}

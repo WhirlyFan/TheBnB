@@ -8,6 +8,7 @@ import AllSpots from "./components/AllSpots";
 import SpotDetails from "./components/SpotDetails";
 import Profile from "./components/Profile";
 import NewSpot from "./components/NewSpot";
+import EditSpot from "./components/EditSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function App() {
             <SpotDetails />
           </Route>
           <Route exact path={`/spots/:spotId/edit`}>
-            <SpotDetails />
+            <EditSpot />
           </Route>
           <Route path={`/:username/profile`}>
             <Profile />

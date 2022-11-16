@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
 
-export default function NewSpot() {
+export default function EditSpot() {
+  const { spotId } = useParams();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [address, setAddress] = useState("");
@@ -22,7 +23,7 @@ export default function NewSpot() {
     e.preventDefault();
     setErrors([]);
     return dispatch(
-      spotsActions.createASpotThunk(
+      spotsActions.editSpotThunk(
         {
           address,
           city,
@@ -34,7 +35,8 @@ export default function NewSpot() {
           description,
           price,
         },
-        { url: previewImage, preview: true }
+        { url: previewImage, preview: true },
+        spotId
       )
     ).catch(async (res) => {
       const data = await res.json();
@@ -142,7 +144,7 @@ export default function NewSpot() {
         />
       </label>
       <label>
-        Preview Image Url
+        Add Image Url
         <input
           type="text"
           value={previewImage}
@@ -152,7 +154,7 @@ export default function NewSpot() {
         />
       </label>
 
-      <button type="submit">Create</button>
+      <button type="submit">Edit</button>
     </form>
   );
 }
