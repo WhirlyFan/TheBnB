@@ -15,7 +15,7 @@ export default function SpotDetails() {
   if (!spot) return null;
 
   return (
-    <>
+    <div className="spot-card">
       <div>
         {spot.name}
         <div>
@@ -41,6 +41,6 @@ export default function SpotDetails() {
       </div>
       <div>{spot.description}</div>
       <div>{"reviews"}</div>
-    </>
+    </div>
   );
 }

@@ -9,6 +9,7 @@ import "./Navigation.css";
 import { Modal } from "../../context/Modal";
 import LoginForm from "../LoginFormModal/LoginForm";
 import SignupFormPage from "../SignupFormModal/SignupForm";
+import logoUrl from "./logo.png";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -31,7 +32,7 @@ function Navigation({ isLoaded }) {
     <ul>
       <li>
         <NavLink exact to="/">
-          Home
+          <img className={"logo"} src={logoUrl} alt={"logo"}></img>
         </NavLink>
         {isLoaded && (
           <ProfileButton

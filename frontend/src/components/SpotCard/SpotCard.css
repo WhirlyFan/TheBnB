@@ -1,17 +1,12 @@
 /* .spot-card {
 grid-area: auto;
 } */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
 
-/* .spot-card {
+.spot-card {
   display: flex;
   flex-wrap: wrap;
-} */
+  justify-content: center;
+}
 
 /* .spot-card {
   display: grid;
@@ -27,4 +22,5 @@ body {
 .spot-card-image {
   width: 250px;
   height: 250px;
+  border-radius: 5%;
 }
