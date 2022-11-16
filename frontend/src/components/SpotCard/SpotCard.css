@@ -1,0 +1,26 @@
+/* .spot-card {
+grid-area: auto;
+} */
+
+.spot-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* .spot-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . .";
+} */
+
+.spot-card-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 5%;
+}
