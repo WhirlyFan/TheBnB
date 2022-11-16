@@ -12,7 +12,7 @@ export default function SpotCard({ spot }) {
     <div className="spot-card" onClick={() => handleClick(spot.id)}>
       <img className={"spot-card-image"} src={spot.previewImage} alt={`spot-${spot.id}-preview`}></img>
       <h3>
-        {spot.city}, {spot.state} ★{spot.avgRating}
+        {spot.city}, {spot.state} ★{spot.avgRating || spot.getRating}
       </h3>
       <h3>${spot.price} night</h3>
     </div>

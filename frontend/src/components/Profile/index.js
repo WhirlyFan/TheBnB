@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import SpotCard from "../SpotCard";
 
 export default function Profile() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const spots = useSelector((state) => state.spots.MySpots);
 
@@ -17,16 +18,38 @@ export default function Profile() {
 
   if (!spots) return null;
 
+  const clickDelete = () => {
+    return "test";
+  };
+
+  const clickEdit = (spot) => {
+    history.push(`/spots/${spot.id}/edit`);
+  };
+
   return (
     <div>
       <div className="about-me">
         <h1>Welcome {sessionUser.username}!</h1>
-        <span>Joined in __year__</span>
+        {/* <span>Joined in __year__</span> */}
       </div>
       <div className="my-spots">
-        <h1>My Spots</h1>
+        <h1>Your Spots</h1>
         {Object.values(spots).map((spot) => {
-          return <SpotCard key={`spot-${spot.id}`} spot={spot} />;
+          return (
+            <div>
+              <SpotCard key={`spot-${spot.id}`} spot={spot} />
+              <div>
+                <button
+                  onClick={() => {
+                    clickEdit(spot);
+                  }}
+                >
+                  Edit
+                </button>
+                <button onClick={() => {}}>Delete</button>
+              </div>
+            </div>
+          );
         })}
       </div>
     </div>

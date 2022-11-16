@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import SpotDetails from "./components/SpotDetails";
 import Profile from "./components/Profile";
+import NewSpot from "./components/NewSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,14 +24,17 @@ function App() {
           <Route exact path={"/"}>
             <AllSpots />
           </Route>
-          <Route path={`/spots/:spotId`}>
+          <Route exact path={`/spots/:spotId`}>
+            <SpotDetails />
+          </Route>
+          <Route exact path={`/spots/:spotId/edit`}>
             <SpotDetails />
           </Route>
           <Route path={`/:username/profile`}>
             <Profile />
           </Route>
-          <Route path={`/:username/newfixthis`}>
-            {/* <Some new form /> */}
+          <Route path={`/:username/new`}>
+            <NewSpot />
           </Route>
         </Switch>
       )}
