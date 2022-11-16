@@ -18,8 +18,9 @@ export default function Profile() {
 
   if (!spots) return null;
 
-  const clickDelete = () => {
-    return "test";
+  const clickDelete = async (spot) => {
+    dispatch(spotsActions.deleteSpotThunk(spot.id));
+    return dispatch(spotsActions.getMySpotsThunk());
   };
 
   const clickEdit = (spot) => {
@@ -36,8 +37,8 @@ export default function Profile() {
         <h1>Your Spots</h1>
         {Object.values(spots).map((spot) => {
           return (
-            <div>
-              <SpotCard key={`spot-${spot.id}`} spot={spot} />
+            <div key={`spot-${spot.id}`}>
+              <SpotCard spot={spot} />
               <div>
                 <button
                   onClick={() => {
@@ -46,7 +47,13 @@ export default function Profile() {
                 >
                   Edit
                 </button>
-                <button onClick={() => {}}>Delete</button>
+                <button
+                  onClick={() => {
+                    clickDelete(spot);
+                  }}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           );
