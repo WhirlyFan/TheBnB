@@ -1,0 +1,30 @@
+/* .spot-card {
+grid-area: auto;
+} */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* .spot-card {
+  display: flex;
+  flex-wrap: wrap;
+} */
+
+/* .spot-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . .";
+} */
+
+.spot-card-image {
+  width: 250px;
+  height: 250px;
+}

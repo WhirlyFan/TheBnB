@@ -13,7 +13,7 @@ export default function AllSpots() {
   if (!spots) return null;
 
   return (
-    <div className="allSpots">
+    <div className="all-spots">
       {Object.values(spots).map((spot) => {
         return (
             <SpotCard key={`spot-${spot.id}`} spot={spot}/>
