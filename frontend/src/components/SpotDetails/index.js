@@ -24,7 +24,8 @@ export default function SpotDetails() {
     dispatch(reviewActions.getSpotReviewsThunk(spotId));
   }, [dispatch, spotId, hasClicked]);
 
-  if (!reviews) return null;
+  console.log(reviews);
+  // if (!reviews) return null;
   if (!spot) return null;
 
   const clickEdit = (review, spotId) => {
@@ -84,34 +85,40 @@ export default function SpotDetails() {
       </div>
       <div>{spot.description}</div>
       <div className="spot-reviews">
-        <h2>Reviews</h2>
-        <ul>
-          {Object.values(reviews).map((review) => {
-            return (
-              <div className={"review"} key={`review-${review.id}`}>
-                <li>{review.review}</li>
-                {user && user.id === review.userId && (
-                  <div className={"my-buttons"}>
-                    <button
-                      onClick={() => {
-                        clickEdit(review, spot.id);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        clickDelete(review.id);
-                      }}
-                    >
-                      Delete
-                    </button>
+        {reviews && Object.values(reviews).length > 0 ? (
+          <>
+            <h2>Reviews</h2>
+            <ul>
+              {Object.values(reviews).map((review) => {
+                return (
+                  <div className={"review"} key={`review-${review.id}`}>
+                    <li>{review.review}</li>
+                    {user && user.id === review.userId && (
+                      <div className={"my-buttons"}>
+                        <button
+                          onClick={() => {
+                            clickEdit(review, spot.id);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => {
+                            clickDelete(review.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            );
-          })}
-        </ul>
+                );
+              })}
+            </ul>
+          </>
+        ) : (
+          <h2>No Reviews</h2>
+        )}
         {user && (
           <form onSubmit={handleSubmit}>
             <ul>

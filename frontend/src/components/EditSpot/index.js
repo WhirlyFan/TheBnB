@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
 
 export default function EditSpot() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -22,7 +23,7 @@ export default function EditSpot() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(
+    dispatch(
       spotsActions.editSpotThunk(
         {
           address,
@@ -38,10 +39,14 @@ export default function EditSpot() {
         { url: previewImage, preview: true },
         spotId
       )
-    ).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+    )
+      .then(() => {
+        history.push(`/spots/${spotId}`);
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
   };
 
   if (!sessionUser) return <Redirect to={"/"} />;
@@ -149,7 +154,6 @@ export default function EditSpot() {
           type="text"
           value={previewImage}
           onChange={(e) => setPreviewImage(e.target.value)}
-          required
           placeholder="www.imageurl.com"
         />
       </label>
