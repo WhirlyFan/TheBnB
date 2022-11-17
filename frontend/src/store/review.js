@@ -43,8 +43,8 @@ export const createReviewThunk = (review, spotId) => async (dispatch) => {
   }
 };
 
-export const editSpotReviewThunk = (review) => async (dispatch) => {
-  const response = await csrfFetch(`/api/${review.id}/reviews`, {
+export const editSpotReviewThunk = (review, reviewId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "PUT",
     body: JSON.stringify(review),
   });
