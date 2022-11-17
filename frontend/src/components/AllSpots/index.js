@@ -7,6 +7,7 @@ import "./AllSpots.css";
 export default function AllSpots() {
   const spots = useSelector((state) => state.spots.Spots);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(spotsActions.getAllSpotsThunk());
   }, [dispatch]);

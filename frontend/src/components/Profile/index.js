@@ -16,7 +16,6 @@ export default function Profile() {
     dispatch(spotsActions.getMySpotsThunk());
   }, [dispatch, hasSubmit]);
 
-
   if (!sessionUser) return <Redirect to={"/"} />;
 
   if (!spots) return null;
