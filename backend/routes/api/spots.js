@@ -224,11 +224,12 @@ router.get("/current", requireAuth, async (req, res) => {
 
 //Get all Reviews by a Spot's id
 router.get("/:spotId/reviews", async (req, res, next) => {
-  const reviewsList = await Review.findAll({
-    where: { spotId: req.params.spotId },
-  });
-  let Reviews = [];
-  if (reviewsList.length) {
+  const spot = await Spot.findByPk(req.params.spotId);
+  if (spot) {
+    let Reviews = [];
+    const reviewsList = await Review.findAll({
+      where: { spotId: req.params.spotId },
+    });
     for (let i = 0; i < reviewsList.length; i++) {
       let review = reviewsList[i];
 
@@ -248,14 +249,13 @@ router.get("/:spotId/reviews", async (req, res, next) => {
       review.ReviewImages = ReviewImages;
       Reviews.push(review);
     }
-  } else {
-    const err = new Error("Couldn't find a Spot with the specified id");
-    err.title = "Couldn't find a Spot with the specified id";
-    err.errors = ["Spot couldn't be found"];
-    err.status = 404;
-    return next(err);
+    return res.json({ Reviews });
   }
-  return res.json({ Reviews });
+  const err = new Error("Couldn't find a Spot with the specified id");
+  err.title = "Couldn't find a Spot with the specified id";
+  err.errors = ["Spot couldn't be found"];
+  err.status = 404;
+  return next(err);
 });
 
 //Get all Bookings for a Spot based on the Spot's id
@@ -291,7 +291,7 @@ router.get("/:spotId", async (req, res, next) => {
 
   spot.SpotImages = await SpotImage.findAll({
     where: { spotId: req.params.spotId },
-    attributes: ["id", "url", "preview"]
+    attributes: ["id", "url", "preview"],
   });
 
   spot.Owner = await User.findByPk(spot.ownerId, {

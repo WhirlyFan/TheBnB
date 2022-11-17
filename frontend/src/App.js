@@ -9,6 +9,7 @@ import SpotDetails from "./components/SpotDetails";
 import Profile from "./components/Profile";
 import NewSpot from "./components/NewSpot";
 import EditSpot from "./components/EditSpot";
+import EditReview from "./components/EditReview";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route exact path={`/spots/:spotId/edit`}>
             <EditSpot />
+          </Route>
+          <Route exact path={`/spots/:spotId/reviews/:reviewId/edit`}>
+            <EditReview />
           </Route>
           <Route path={`/:username/profile`}>
             <Profile />

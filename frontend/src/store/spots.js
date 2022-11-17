@@ -146,7 +146,7 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
 };
 
 //normalization array to object with id keys
-const normalizedData = (data) => {
+export const normalizedData = (data) => {
   const obj = {};
   data.map((el) => (obj[el.id] = el));
   return obj;
