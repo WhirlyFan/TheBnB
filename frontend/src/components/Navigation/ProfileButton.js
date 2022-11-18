@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
-import "./Navigation.css"
+import "./Navigation.css";
 
 function ProfileButton({ user, setLogin, setShowModal }) {
   const history = useHistory();
@@ -45,7 +45,8 @@ function ProfileButton({ user, setLogin, setShowModal }) {
   return (
     <>
       <button id={"profile-button"} onClick={openMenu}>
-        <i className="fas fa-user-circle" id={'profile-pic'}/>
+        <i className="fas fa-bars" id="profile-hamburger" />
+        <i className="fas fa-user" id={"profile-pic"} />
       </button>
       {showMenu &&
         (user ? (
@@ -63,7 +64,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             </li>
           </ul>
         ) : (
-          <ul>
+          <ul className="profile-dropdown">
             <li>
               <button
                 onClick={() => {

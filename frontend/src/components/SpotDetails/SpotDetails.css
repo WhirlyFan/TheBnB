@@ -1,10 +1,57 @@
-/* .spot-details-images {
-  width: 400px;
-  height: 400px;
+.spot-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-} */
+.spot-details-lower-header {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1rem;
+}
+
+.share-save > span{
+  margin: 1rem;
+}
+
+.preview > img {
+  object-fit: cover;
+  margin: 2rem 0;
+  width: 50rem;
+  height: 35rem;
+  border-radius: 10px;
+}
+
+.my-buttons {
+  margin-top: .5rem;
+}
+
+.my-buttons > button {
+  margin: .5rem;
+}
+
+.review {
+  margin: 1rem;
+}
+
+.review > div{
+  font-weight: bold;
+}
+
+.add-review {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-review > textarea {
+  resize: vertical;
+  min-height: 3rem;
+}
+
+.add-review > button {
+  margin-top: .5rem;
+}
+
+.login-buttons > button{
+  margin: .5rem .5rem;
+}

@@ -37,6 +37,7 @@ export default function Profile() {
       <div className="about-me">
         <h1>Welcome {sessionUser.username}!</h1>
         {/* <span>Joined in __year__</span> */}
+        <span>About Me Page Coming Soon!</span>
       </div>
       <div className="my-spots">
         <h1>Your Spots</h1>

@@ -8,7 +8,7 @@ module.exports = {
       [
         {
           spotId: 1,
-          url: "https://purepng.com/public/uploads/large/purepng.com-big-househousebuildinghomewood-houseconcrete-house-1701528487110fbg0f.png",
+          url: "https://www.architectureartdesigns.com/wp-content/uploads/2014/12/1357.jpg",
           preview: true,
         },
         {
