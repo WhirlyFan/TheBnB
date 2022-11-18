@@ -3,6 +3,11 @@
     justify-content: center;
 }
 
+.about-me {
+    margin: 0 2rem;
+}
 .my-spots {
     display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
 }

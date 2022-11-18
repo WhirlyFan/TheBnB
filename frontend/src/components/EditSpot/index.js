@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
+import "./EditSpot.css";
 
 export default function EditSpot() {
   const { spotId } = useParams();
@@ -52,113 +53,115 @@ export default function EditSpot() {
   if (!sessionUser) return <Redirect to={"/"} />;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Address
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-          placeholder="123 Disney Lane"
-        />
-      </label>
-      <label>
-        City
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          required
-          placeholder="San Francisco"
-        />
-      </label>
-      <label>
-        State
-        <input
-          type="text"
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-          required
-          placeholder="California"
-        />
-      </label>
-      <label>
-        Country
-        <input
-          type="text"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          required
-          placeholder="United States of America"
-        />
-      </label>
-      <label>
-        Latitude
-        <input
-          type="text"
-          value={lat}
-          onChange={(e) => setLat(e.target.value)}
-          required
-          placeholder="37.7645358"
-        />
-      </label>
-      <label>
-        Longitude
-        <input
-          type="text"
-          value={lng}
-          onChange={(e) => setLng(e.target.value)}
-          required
-          placeholder="-122.4730327"
-        />
-      </label>
-      <label>
-        Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          placeholder="App Academy"
-        />
-      </label>
-      <label>
-        Description
-        <textarea
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          placeholder="Place where web developers are created"
-        />
-      </label>
-      <label>
-        Price
-        <input
-          type="text"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          required
-          placeholder="123"
-        />
-      </label>
-      <label>
-        Add Image Url
-        <input
-          type="text"
-          value={previewImage}
-          onChange={(e) => setPreviewImage(e.target.value)}
-          placeholder="www.imageurl.com"
-        />
-      </label>
+    <div className="edit-spot-div">
+      <form className="edit-spot" onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <label>
+          Address
+        </label>
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+            placeholder="123 Disney Lane"
+          />
+        <label>
+          City
+        </label>
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+            placeholder="San Francisco"
+          />
+        <label>
+          State
+        </label>
+          <input
+            type="text"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            required
+            placeholder="California"
+          />
+        <label>
+          Country
+        </label>
+          <input
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            required
+            placeholder="United States of America"
+          />
+        <label>
+          Latitude
+        </label>
+          <input
+            type="text"
+            value={lat}
+            onChange={(e) => setLat(e.target.value)}
+            required
+            placeholder="37.7645358"
+          />
+        <label>
+          Longitude
+        </label>
+          <input
+            type="text"
+            value={lng}
+            onChange={(e) => setLng(e.target.value)}
+            required
+            placeholder="-122.4730327"
+          />
+        <label>
+          Name
+        </label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            placeholder="App Academy"
+          />
+        <label>
+          Description
+        </label>
+          <textarea
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            placeholder="Place where web developers are created"
+          />
+        <label>
+          Price
+        </label>
+          <input
+            type="text"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+            placeholder="123"
+          />
+        <label>
+          {'Add an Image (Optional)'}
+        </label>
+          <input
+            type="text"
+            value={previewImage}
+            onChange={(e) => setPreviewImage(e.target.value)}
+            placeholder="www.imageurl.com"
+          />
 
-      <button type="submit">Edit</button>
-    </form>
+        <button type="submit">Edit</button>
+      </form>
+    </div>
   );
 }

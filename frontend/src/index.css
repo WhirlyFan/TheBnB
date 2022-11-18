@@ -3,6 +3,8 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: .9rem;
 }
 
 html {
@@ -13,4 +15,15 @@ html {
 ul {
   list-style: none;
   padding: 0;
+}
+
+button:not(#profile-button) {
+  cursor: pointer;
+  width: 7rem;
+  height: 42px;
+  border-radius: 40px;
+  font-weight: bold;
+  background-color: #fe375b;
+  color: white;
+  border: none;
 }

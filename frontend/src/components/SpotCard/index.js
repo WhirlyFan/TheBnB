@@ -9,23 +9,29 @@ export default function SpotCard({ spot }) {
   }
 
   let rating = spot.avgRating || spot.getRating;
-  rating = parseFloat(rating).toFixed(1)
+  rating = parseFloat(rating).toFixed(1);
 
   return (
     <div className="spot-card" onClick={() => handleClick(spot.id)}>
+      <div></div>
       <img
         className={"spot-card-image"}
         src={spot.previewImage}
         alt={`spot-${spot.id}-preview`}
       ></img>
       <div>
-      <h3>
-        {spot.city}, {spot.state}
-        {/* broken on heroku needs refactoring to prevent NaN on spots without reviews */}
-      </h3>
-      <h3>★ {!isNaN(rating) ? rating : "No Reviews"}</h3>
+        <h3>
+          {spot.city}, {spot.state}
+          {/* broken on heroku needs refactoring to prevent NaN on spots without reviews */}
+        </h3>
+        <span>★ {!isNaN(rating) ? rating : "No Reviews"}</span>
       </div>
-      <h3>${spot.price} night</h3>
+      <div className="name-price">
+        <span>{spot.name}</span>
+        <span>
+          <span className="spot-price">${spot.price}</span> night
+        </span>
+      </div>
     </div>
   );
 }

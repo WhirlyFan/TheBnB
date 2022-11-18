@@ -1,31 +1,29 @@
 .spot-card {
 display: inline-block;
+margin: .5rem;
 }
-
-
-
-/* .spot-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    ". . ."
-    ". . ."
-    ". . .";
-} */
-
 .spot-card-image {
   width: 250px;
   height: 250px;
+  object-fit: cover;
   border-radius: 5%;
 }
 
 .spot-card > div {
   display: flex;
+  line-height: 1.75rem;
   justify-content: space-between;
 }
 
 .spot-card > div, h3 {
   margin: 0;
+}
+
+.name-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.spot-price {
+  font-weight: bold;
 }
