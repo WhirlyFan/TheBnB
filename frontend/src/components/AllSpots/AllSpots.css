@@ -1,6 +1,10 @@
 .all-spots {
-    border: 0;
-    margin: 30px;
-    padding: 0;
-    display: flex;
+  border: 0;
+  margin: 30px;
+  padding: 0;
+  /* object-fit: cover; */
+  display: flex;
+  /* background-color: red; */
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }

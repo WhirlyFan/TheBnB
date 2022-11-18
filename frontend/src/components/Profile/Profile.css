@@ -1,0 +1,8 @@
+.profile {
+    display: flex;
+    justify-content: center;
+}
+
+.my-spots {
+    display: flex;
+}

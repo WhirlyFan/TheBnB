@@ -1,12 +1,8 @@
-/* .spot-card {
-grid-area: auto;
-} */
-
 .spot-card {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+display: inline-block;
 }
+
+
 
 /* .spot-card {
   display: grid;
@@ -23,4 +19,13 @@ grid-area: auto;
   width: 250px;
   height: 250px;
   border-radius: 5%;
+}
+
+.spot-card > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spot-card > div, h3 {
+  margin: 0;
 }
