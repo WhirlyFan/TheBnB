@@ -92,6 +92,7 @@ export default function SpotDetails() {
               {Object.values(reviews).map((review) => {
                 return (
                   <div className={"review"} key={`review-${review.id}`}>
+                    <div>User: {review.userId}</div>
                     <li>{review.review}</li>
                     {user && user.id === review.userId && (
                       <div className={"my-buttons"}>
