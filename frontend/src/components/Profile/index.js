@@ -3,6 +3,7 @@ import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import SpotCard from "../SpotCard";
+import "./Profile.css"
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ export default function Profile() {
   };
 
   return (
-    <div>
+    <div className="profile">
       <div className="about-me">
         <h1>Welcome {sessionUser.username}!</h1>
         {/* <span>Joined in __year__</span> */}
@@ -43,7 +44,7 @@ export default function Profile() {
           return (
             <div key={`spot-${spot.id}`}>
               <SpotCard spot={spot} />
-              <div>
+              <div className="edit-delete-buttons">
                 <button
                   onClick={() => {
                     clickEdit(spot);

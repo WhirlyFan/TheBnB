@@ -29,29 +29,34 @@ function Navigation({ isLoaded }) {
   // }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          <img className={"logo"} src={logoUrl} alt={"logo"}></img>
-        </NavLink>
-        {isLoaded && (
-          <ProfileButton
-            user={sessionUser}
-            setLogin={setLogin}
-            setShowModal={setShowModal}
-          />
-        )}
-      </li>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          {login ? (
-            <LoginForm setShowModal={setShowModal} />
-          ) : (
-            <SignupFormPage setShowModal={setShowModal} />
+    <>
+      <ul className="navigation">
+        <li className="header">
+          <NavLink exact to="/">
+            <img className={"logo"} src={logoUrl} alt={"logo"}></img>
+          </NavLink>
+        </li>
+        <div className="profile-button-div">
+          {isLoaded && (
+            <ProfileButton
+              user={sessionUser}
+              setLogin={setLogin}
+              setShowModal={setShowModal}
+            />
           )}
-        </Modal>
-      )}
-    </ul>
+        </div>
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            {login ? (
+              <LoginForm setShowModal={setShowModal} />
+            ) : (
+              <SignupFormPage setShowModal={setShowModal} />
+            )}
+          </Modal>
+        )}
+      </ul>
+      <hr className={"page-break"}></hr>
+    </>
   );
 }
 
