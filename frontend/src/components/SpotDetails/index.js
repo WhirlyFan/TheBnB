@@ -56,15 +56,16 @@ export default function SpotDetails() {
       });
   };
 
+  let rating = spot.avgStarRating;
+  rating = parseFloat(rating).toFixed(1);
+
   return (
     <div className="spot-details">
       <div className="spot-info">
         <span>{spot.name}</span>
         <div className="spot-details-lower-header">
-          <div>
-            <span>★{spot.avgStarRating}</span>
-            <span>{spot.numReviews} reviews</span>
-          </div>
+            <p>★{!isNaN(rating) ? rating : "No Reviews"}</p>
+            <p>{spot.numReviews} reviews</p>
           {/* <div className="share-save">
           <span>Share</span>
           <span>Save</span>
