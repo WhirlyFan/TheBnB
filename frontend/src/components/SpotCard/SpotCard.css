@@ -1,6 +1,7 @@
 .spot-card {
-display: inline-block;
-margin: .5rem;
+  display: inline-block;
+  margin: 0.5rem;
+  cursor: pointer;
 }
 .spot-card-image {
   width: 250px;
@@ -15,7 +16,8 @@ margin: .5rem;
   justify-content: space-between;
 }
 
-.spot-card > div, h3 {
+.spot-card > div,
+h3 {
   margin: 0;
 }
 
