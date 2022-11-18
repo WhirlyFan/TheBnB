@@ -8,7 +8,8 @@ export default function SpotCard({ spot }) {
     history.push(`/spots/${spotId}`);
   }
 
-  const rating = spot.avgRating || spot.getRating;
+  let rating = spot.avgRating || spot.getRating;
+  rating = rating.toFixed(1)
 
   return (
     <div className="spot-card" onClick={() => handleClick(spot.id)}>
