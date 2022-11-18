@@ -9,7 +9,7 @@ export default function SpotCard({ spot }) {
   }
 
   let rating = spot.avgRating || spot.getRating;
-  rating = rating.toFixed(1)
+  rating = parseFloat(rating).toFixed(1)
 
   return (
     <div className="spot-card" onClick={() => handleClick(spot.id)}>
