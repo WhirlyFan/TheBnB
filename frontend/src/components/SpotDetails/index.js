@@ -22,7 +22,9 @@ export default function SpotDetails() {
   useEffect(() => {
     dispatch(spotsActions.getSpotDetailsThunk(spotId));
     dispatch(reviewActions.getSpotReviewsThunk(spotId));
-  }, [dispatch, spotId, hasClicked]);
+    setReview("");
+    setStars("");
+  }, [dispatch, spotId, hasClicked, user]);
 
   if (!spot) return null;
 
@@ -64,8 +66,8 @@ export default function SpotDetails() {
       <div className="spot-info">
         <span>{spot.name}</span>
         <div className="spot-details-lower-header">
-            <p>★{!isNaN(rating) ? rating : "No Reviews"}</p>
-            <p>{spot.numReviews} reviews</p>
+          <p>★{!isNaN(rating) ? rating : "No Reviews"}</p>
+          <p>{spot.numReviews} reviews</p>
           {/* <div className="share-save">
           <span>Share</span>
           <span>Save</span>

@@ -21,11 +21,18 @@ function LoginForm({ setShowModal }) {
       });
   };
 
-  const demoUser = () => {
-    setCredential('demo@user.io')
-    setPassword('password')
-    dispatch(sessionActions.login({ credential, password}))
-  }
+  const demoUser = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(
+      sessionActions.login({ credential: "demo@user.io", password: "password" })
+    )
+      .then(() => setShowModal(false))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
+  };
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
