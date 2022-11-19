@@ -24,7 +24,7 @@ function LoginForm({ setShowModal }) {
   const demoUser = () => {
     setCredential('demo@user.io')
     setPassword('password')
-    dispatch(sessionActions.login({ credential, password}))
+    return dispatch(sessionActions.login({ credential, password}))
   }
 
   return (
