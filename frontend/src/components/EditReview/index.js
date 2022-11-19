@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as reviewActions from "../../store/review";
+import "./EditReview.css";
 
 export default function EditReview() {
   const { spotId } = useParams();
