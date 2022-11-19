@@ -32,6 +32,9 @@
 
 .review {
   margin: 1rem;
+  inline-size: 50rem;
+  overflow-wrap: break-word;
+  hyphens: manual;
 }
 
 .review > div{

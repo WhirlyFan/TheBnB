@@ -21,25 +21,39 @@ function SignupFormPage({ setShowModal }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      setErrors([]);
-      return dispatch(
-        sessionActions.signup({
-          firstName,
-          lastName,
-          email,
-          username,
-          password,
-        })
-      )
-        .then(() => setShowModal(false))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+      if (firstName.length <= 20 && firstName.length >= 3) {
+        if (lastName.length <= 20 && lastName.length >= 3) {
+          setErrors([]);
+          return dispatch(
+            sessionActions.signup({
+              firstName,
+              lastName,
+              email,
+              username,
+              password,
+            })
+          )
+            .then(() => setShowModal(false))
+            .catch(async (res) => {
+              const data = await res.json();
+              if (data && data.errors) setErrors(data.errors);
+            });
+        } else {
+          return setErrors([
+            "Last name must be between 3 and 20 characters long.",
+          ]);
+        }
+      } else {
+        return setErrors([
+          "First name must be between 3 and 20 characters long.",
+        ]);
+      }
+    } else {
+
+      return setErrors([
+        "Confirm Password field must be the same as the Password field.",
+      ]);
     }
-    return setErrors([
-      "Confirm Password field must be the same as the Password field",
-    ]);
   };
 
   return (

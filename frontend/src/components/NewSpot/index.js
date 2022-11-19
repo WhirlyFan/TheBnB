@@ -138,7 +138,6 @@ export default function NewSpot() {
           required
           placeholder="www.imageurl.com"
         />
-
         <button type="submit">Create</button>
       </form>
     </div>
