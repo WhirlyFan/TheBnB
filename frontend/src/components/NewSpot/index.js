@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
-import "./NewSpot.css";
 
 export default function NewSpot() {
   const dispatch = useDispatch();
@@ -51,8 +50,8 @@ export default function NewSpot() {
   if (!sessionUser) return <Redirect to={"/"} />;
 
   return (
-    <div className="new-spot-div">
-      <form className="new-spot" onSubmit={handleSubmit}>
+    <div className="form-div">
+      <form className="form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>

@@ -27,3 +27,27 @@ button:not(#profile-button) {
   color: white;
   border: none;
 }
+
+button:hover {
+  box-shadow: 0 0 3px gray;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 50rem;
+}
+.form > * {
+  margin: .2rem;
+  margin: .5rem;
+}
+
+.form-div {
+  display: flex;
+  justify-content: center;
+}
+
+.form > textarea {
+  resize: vertical;
+  min-height: 3rem;
+}

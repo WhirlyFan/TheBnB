@@ -31,8 +31,9 @@
   width: 77px;
   height: 42px;
   border-radius: 40px;
-  background: none;
+  background: white;
   cursor: pointer;
+  border: 1px solid lightgrey;
 }
 
 .profile-dropdown {
@@ -46,5 +47,5 @@
 }
 
 .profile-dropdown > * {
-  margin: .5rem;
+  margin: 0.5rem;
 }

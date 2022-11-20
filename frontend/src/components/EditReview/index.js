@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as reviewActions from "../../store/review";
-import "./EditReview.css";
 
 export default function EditReview() {
   const { spotId } = useParams();
@@ -35,14 +34,14 @@ export default function EditReview() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Review
+    <div className="form-div">
+      <form className="form" onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <label>Review</label>
         <textarea
           type="text"
           value={review}
@@ -50,9 +49,7 @@ export default function EditReview() {
           required
           placeholder="This place was great!"
         />
-      </label>
-      <label>
-        Stars
+        <label>Stars</label>
         <input
           type="number"
           min="1"
@@ -62,8 +59,8 @@ export default function EditReview() {
           required
           placeholder="5"
         />
-      </label>
-      <button type="submit">Edit Review</button>
-    </form>
+        <button type="submit">Edit Review</button>
+      </form>
+    </div>
   );
 }

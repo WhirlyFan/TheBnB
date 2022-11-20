@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
-import "./EditSpot.css";
 
 export default function EditSpot() {
   const { spotId } = useParams();
@@ -53,8 +52,8 @@ export default function EditSpot() {
   if (!sessionUser) return <Redirect to={"/"} />;
 
   return (
-    <div className="edit-spot-div">
-      <form className="edit-spot" onSubmit={handleSubmit}>
+    <div className="form-div">
+      <form className="form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
