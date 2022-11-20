@@ -25,12 +25,15 @@ export default function SpotDetails() {
       .then(() => {
         dispatch(reviewActions.getSpotReviewsThunk(spotId));
       })
-      .then(() => setIsLoaded(true));
-    setReview("");
-    setStars("");
+      .then(() => {
+        setIsLoaded(true);
+        setReview("");
+        setStars("");
+      });
   }, [dispatch, spotId, hasClicked, user]);
 
   if (!spot) return null;
+  if (!isLoaded) return null;
 
   const clickEdit = (review, spotId) => {
     history.push(`/spots/${spotId}/reviews/${review.id}/edit`);
@@ -41,8 +44,29 @@ export default function SpotDetails() {
     });
   };
 
+  // const validate = () => {
+  //   setErrors([])
+  //   const newErrors = [];
+  //   if (firstName.length > 20 || firstName.length < 3) {
+  //     newErrors.push("First name must be 3-20 characters long.");
+  //   }
+  //   if (lastName.length > 20 || lastName.length < 3) {
+  //     newErrors.push("Last name must be 3-20 characters long.");
+  //   }
+  //   if (password !== confirmPassword) {
+  //     newErrors.push(
+  //       "Confirm Password field must be the same as the Password field."
+  //     );
+  //   }
+  //   setErrors(newErrors);
+  //   if (errors.length) return true;
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+        // let errorHandler = validate();
+    // if (errorHandler) return console.log('pass');
+    // return console.log('fail')
     setErrors([]);
     dispatch(
       reviewActions.createReviewThunk(
@@ -64,8 +88,6 @@ export default function SpotDetails() {
 
   let rating = spot.avgStarRating;
   rating = parseFloat(rating).toFixed(1);
-
-  if (!isLoaded) return null
 
   return (
     <div className="spot-details">

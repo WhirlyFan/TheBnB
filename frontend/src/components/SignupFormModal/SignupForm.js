@@ -41,6 +41,7 @@ function SignupFormPage({ setShowModal }) {
     // let errorHandler = validate();
     // if (errorHandler) return console.log('pass');
     // return console.log('fail')
+    setErrors([]);
     return dispatch(
       sessionActions.signup({
         firstName,
