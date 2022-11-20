@@ -22,6 +22,11 @@
   border-radius: 10px;
 }
 
+.preview {
+  display: flex;
+  justify-content: center;
+}
+
 .my-buttons {
   margin-top: .5rem;
 }

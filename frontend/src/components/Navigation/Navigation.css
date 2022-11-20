@@ -15,12 +15,16 @@
   justify-content: space-between;
 }
 
-.profile-button-div {
+.header-right{
   display: flex;
   margin-right: 2rem;
   align-items: center;
   align-items: center;
   position: relative;
+}
+
+.header-right > * {
+  margin: 0 .4rem;
 }
 
 #profile-button {
@@ -48,4 +52,8 @@
 
 .profile-dropdown > * {
   margin: 0.5rem;
+}
+
+.create-spot {
+
 }

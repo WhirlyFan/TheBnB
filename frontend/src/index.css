@@ -49,5 +49,5 @@ button:hover {
 
 .form > textarea {
   resize: vertical;
-  min-height: 3rem;
+  min-height: 6rem;
 }

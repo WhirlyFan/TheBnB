@@ -131,7 +131,7 @@ export default function NewSpot() {
         />
         <label>Preview Image Url</label>
         <input
-          type="text"
+          type="url"
           value={previewImage}
           onChange={(e) => setPreviewImage(e.target.value)}
           required

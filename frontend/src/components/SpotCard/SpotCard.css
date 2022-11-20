@@ -4,8 +4,8 @@
   cursor: pointer;
 }
 .spot-card-image {
-  width: 250px;
-  height: 250px;
+  width: 17rem;
+  height: 17rem;
   object-fit: cover;
   border-radius: 5%;
 }
