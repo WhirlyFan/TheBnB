@@ -60,11 +60,14 @@
   padding: 0;
 }
 
+.button-div {
+  width: 100%;
+}
 .button-dropdown {
   margin: 0;
   padding: 0.5rem;
   width: 100%;
-  background-color: white;
+  background-color: transparent;
   border: none;
 }
 
