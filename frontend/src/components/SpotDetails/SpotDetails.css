@@ -4,12 +4,6 @@
   align-items: center;
 }
 
-.spot-details-lower-header {
-  display: flex;
-  justify-content: space-between;
-  line-height: 1rem;
-}
-
 .share-save > span{
   margin: 1rem;
 }
@@ -63,7 +57,7 @@
 .login-buttons > button{
   margin: .5rem .5rem;
 }
-.spot-details-lower-header{
-  display: flex;
-  justify-content: space-between;
+
+.air-cover {
+  height: 2rem;
 }

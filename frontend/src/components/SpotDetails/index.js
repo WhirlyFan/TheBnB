@@ -64,10 +64,12 @@ export default function SpotDetails() {
   return (
     <div className="spot-details">
       <div className="spot-info">
-        <span>{spot.name}</span>
-        <div className="spot-details-lower-header">
-          <p>★{!isNaN(rating) ? rating : "No Reviews"}</p>
-          <p>{spot.numReviews} reviews</p>
+        <h1>{spot.name}</h1>
+        <div>
+          <span>
+            ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews}{" "}
+            reviews · {spot.address}
+          </span>
           {/* <div className="share-save">
           <span>Share</span>
           <span>Save</span>
@@ -90,11 +92,25 @@ export default function SpotDetails() {
         </div>
         <hr></hr>
         <h2>Spot hosted by {spot.Owner.firstName}</h2>
+        <hr></hr>
+        <div>
+          <img
+            className="air-cover"
+            src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
+            alt="aircover"
+          ></img>
+          <p>
+            Every booking includes free protection from Host cancellations,
+            listing inaccuracies, and other issues like trouble checking in.
+          </p>
+        </div>
+        <hr></hr>
         <p>{spot.description}</p>
+        <hr></hr>
+
         <div className="spot-reviews">
           {reviews && Object.values(reviews).length > 0 ? (
             <>
-              <hr></hr>
               <h2>Reviews</h2>
               <ul>
                 {Object.values(reviews).map((review) => {
