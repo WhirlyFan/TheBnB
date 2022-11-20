@@ -4,7 +4,7 @@ body {
   padding: 0;
   border: 0;
   font-family: "Montserrat", sans-serif;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 html {
@@ -17,7 +17,7 @@ ul {
   padding: 0;
 }
 
-button:not(#profile-button) {
+button:not(#profile-button, .create-spot) {
   cursor: pointer;
   width: 7rem;
   height: 42px;
@@ -28,7 +28,7 @@ button:not(#profile-button) {
   border: none;
 }
 
-button:hover {
+button:hover:not(.create-spot) {
   box-shadow: 0 0 3px gray;
 }
 
@@ -38,8 +38,8 @@ button:hover {
   width: 50rem;
 }
 .form > * {
-  margin: .2rem;
-  margin: .5rem;
+  margin: 0.2rem;
+  margin: 0.5rem;
 }
 
 .form-div {
