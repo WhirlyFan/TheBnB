@@ -39,9 +39,8 @@ export default function NewSpot() {
         { url: previewImage, preview: true }
       )
     )
-      .then(() => {
-        history.push("/");
-        // history.push(`/spots/${spotsObj.NewSpot.id}`); //fix to redirect to new spot details page
+      .then((res) => {
+        history.push(`/spots/${res.id}`);
       })
       .catch(async (res) => {
         const data = await res.json();
