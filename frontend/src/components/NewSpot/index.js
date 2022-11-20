@@ -20,32 +20,9 @@ export default function NewSpot() {
   const [previewImage, setPreviewImage] = useState("");
   const [errors, setErrors] = useState([]);
 
-  // const validate = () => {
-  //   const newErrors = []
-  //   if (address.length >= 255) {
-  //    newErrors.push("Address must be 255 characters or less!");
-  //   }
-  //   if (city.length >= 255) {
-  //     newErrors.push("City name must be 255 characters or less!");
-  //   }
-  //   if (state.length >= 255) {
-  //     newErrors.push("State must be 255 characters or less!");
-  //   }
-  //   if (country.length >= 255) {
-  //     newErrors.push("Country name must be 255 characters or less!");
-  //   }
-  //   if (description.length >= 255) {
-  //     newErrors.push("Description must be 255 characters or less!");
-  //   }
-  //   setErrors(newErrors)
-  //   if (errors.length) return true;
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    // let errorHandler = validate()
-    // if (errorHandler) return;
     return dispatch(
       spotsActions.createASpotThunk(
         {
