@@ -17,21 +17,8 @@ function Navigation({ isLoaded }) {
   const [showModal, setShowModal] = useState(false);
   const [login, setLogin] = useState(true);
 
-  // let sessionLinks;
-  // if (user) {
-  //   sessionLinks = <ProfileButton user={user} />;
-  // } else {
-  //   sessionLinks = (
-  //     <>
-  //       <LoginFormModal />
-  //       <SignupFormModal />
-  //     </>
-  //   );
-  // }
-
   const createSpot = (e) => {
     e.preventDefault();
-    // history.push(`/${user.username}/new`);
     history.push(`/spots/new`);
   };
 
@@ -47,7 +34,7 @@ function Navigation({ isLoaded }) {
           {user && (
             <li>
               <button className="create-spot" onClick={createSpot}>
-                Become a Host
+                Bnb your home
               </button>
             </li>
           )}
