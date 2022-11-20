@@ -32,7 +32,7 @@ function Navigation({ isLoaded }) {
   const createSpot = (e) => {
     e.preventDefault();
     // history.push(`/${user.username}/new`);
-    history.push(`/${user.username}/new`);
+    history.push(`/spots/new`);
   };
 
   return (

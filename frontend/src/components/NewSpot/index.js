@@ -39,7 +39,7 @@ export default function NewSpot() {
       )
     )
       .then(() => {
-        history.push("/");
+        history.push("/"); //fix to redirect to new spot details page
       })
       .catch(async (res) => {
         const data = await res.json();
