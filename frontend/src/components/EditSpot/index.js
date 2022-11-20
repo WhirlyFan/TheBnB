@@ -94,7 +94,7 @@ export default function EditSpot() {
         <label>Latitude</label>
         <input
           type="number"
-          min="0"
+          step="any"
           value={lat}
           onChange={(e) => setLat(e.target.value)}
           required
@@ -103,7 +103,7 @@ export default function EditSpot() {
         <label>Longitude</label>
         <input
           type="number"
-          min="0"
+          step="any"
           value={lng}
           onChange={(e) => setLng(e.target.value)}
           required

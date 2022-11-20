@@ -24,12 +24,12 @@ export default function EditReview() {
         reviewId
       )
     )
+      .then(() => {
+        if (!errors.length) history.push(`/spots/${spotId}`);
+      })
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
-      })
-      .then(() => {
-        if (!errors.length) history.push(`/spots/${spotId}`);
       });
   };
 
