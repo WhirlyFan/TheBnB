@@ -37,11 +37,6 @@ function ProfileButton({ user, setLogin, setShowModal }) {
     history.push(`/${user.username}/profile`);
   };
 
-  const createSpot = (e) => {
-    e.preventDefault();
-    history.push(`/${user.username}/new`);
-  };
-
   return (
     <>
       <button id={"profile-button"} onClick={openMenu}>
@@ -53,9 +48,6 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           <ul className="profile-dropdown">
             <li>{user.username}</li>
             <li>{user.email}</li>
-            <li>
-              <button onClick={createSpot}>Become a Host</button>
-            </li>
             <li>
               <button onClick={profile}>Profile</button>
             </li>

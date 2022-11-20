@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
-import "./NewSpot.css";
 
 export default function NewSpot() {
   const dispatch = useDispatch();
@@ -40,7 +39,7 @@ export default function NewSpot() {
       )
     )
       .then(() => {
-        history.push("/");
+        history.push("/"); //fix to redirect to new spot details page
       })
       .catch(async (res) => {
         const data = await res.json();
@@ -51,8 +50,8 @@ export default function NewSpot() {
   if (!sessionUser) return <Redirect to={"/"} />;
 
   return (
-    <div className="new-spot-div">
-      <form className="new-spot" onSubmit={handleSubmit}>
+    <div className="form-div">
+      <form className="form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -132,7 +131,7 @@ export default function NewSpot() {
         />
         <label>Preview Image Url</label>
         <input
-          type="text"
+          type="url"
           value={previewImage}
           onChange={(e) => setPreviewImage(e.target.value)}
           required

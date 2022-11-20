@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/index.js
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 // import LoginFormModal from "../LoginFormModal";
@@ -12,13 +12,14 @@ import SignupFormPage from "../SignupFormModal/SignupForm";
 import logoUrl from "./logo.png";
 
 function Navigation({ isLoaded }) {
-  const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
+  const user = useSelector((state) => state.session.user);
   const [showModal, setShowModal] = useState(false);
   const [login, setLogin] = useState(true);
 
   // let sessionLinks;
-  // if (sessionUser) {
-  //   sessionLinks = <ProfileButton user={sessionUser} />;
+  // if (user) {
+  //   sessionLinks = <ProfileButton user={user} />;
   // } else {
   //   sessionLinks = (
   //     <>
@@ -28,6 +29,12 @@ function Navigation({ isLoaded }) {
   //   );
   // }
 
+  const createSpot = (e) => {
+    e.preventDefault();
+    // history.push(`/${user.username}/new`);
+    history.push(`/spots/new`);
+  };
+
   return (
     <>
       <ul className="navigation">
@@ -36,10 +43,17 @@ function Navigation({ isLoaded }) {
             <img className={"logo"} src={logoUrl} alt={"logo"}></img>
           </NavLink>
         </li>
-        <div className="profile-button-div">
+        <div className="header-right">
+          {user && (
+            <li>
+              <button className="create-spot" onClick={createSpot}>
+                Become a Host
+              </button>
+            </li>
+          )}
           {isLoaded && (
             <ProfileButton
-              user={sessionUser}
+              user={user}
               setLogin={setLogin}
               setShowModal={setShowModal}
             />
