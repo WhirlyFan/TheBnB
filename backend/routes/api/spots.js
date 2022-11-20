@@ -20,32 +20,32 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .withMessage("Street address is required")
     .isLength({ min: 0 })
-    .isLength({ max: 255 })
-    .withMessage("Address must be 255 characters or less"),
+    .isLength({ max: 80 })
+    .withMessage("Address must be 80 characters or less"),
   check("city")
     .exists({ checkFalsy: true })
     .withMessage("City is required")
     .isLength({ min: 0 })
-    .isLength({ max: 255 })
-    .withMessage("City name must be 255 characters or less"),
+    .isLength({ max: 80 })
+    .withMessage("City name must be 80 characters or less"),
   check("state")
     .exists({ checkFalsy: true })
     .withMessage("State is required")
     .isLength({ min: 0 })
-    .isLength({ max: 255 })
-    .withMessage("City name must be 255 characters or less"),
+    .isLength({ max: 80 })
+    .withMessage("City name must be 80 characters or less"),
   check("lat")
     .exists({ checkFalsy: true })
     .withMessage("Latitude is not valid")
     .isLength({ min: 0 })
-    .isLength({ max: 255 })
-    .withMessage("Latitude must be 255 characters or less"),
+    .isLength({ max: 80 })
+    .withMessage("Latitude must be 80 characters or less"),
   check("lng")
     .exists({ checkFalsy: true })
     .withMessage("Longitude is not valid")
     .isLength({ min: 0 })
-    .isLength({ max: 255 })
-    .withMessage("Longitude must be 255 characters or less"),
+    .isLength({ max: 80 })
+    .withMessage("Longitude must be 80 characters or less"),
   check("name")
     .exists({ checkFalsy: true })
     .isLength({ max: 50 })
