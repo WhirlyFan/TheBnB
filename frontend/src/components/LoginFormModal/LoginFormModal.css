@@ -5,3 +5,7 @@
 .login-form > * {
     margin: .2rem;
 }
+
+.login-buttons {
+    margin-bottom: 0;
+}

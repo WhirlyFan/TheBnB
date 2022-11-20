@@ -26,9 +26,10 @@ ul {
   background-color: #fe375b;
   color: white;
   border: none;
+  transition: box-shadow 0.2s ease;
 }
 
-button:hover:not(.create-spot) {
+.button:hover {
   box-shadow: 0 0 3px gray;
 }
 
