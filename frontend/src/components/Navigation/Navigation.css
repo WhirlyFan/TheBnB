@@ -41,6 +41,10 @@
   transition: box-shadow 0.2s ease;
 }
 
+#profile-button:hover {
+  box-shadow: 0 2px 5px lightgray;
+}
+
 .profile-dropdown {
   position: absolute;
   top: 55px;

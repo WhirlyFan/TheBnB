@@ -30,7 +30,7 @@ ul {
 }
 
 .button:hover {
-  box-shadow: 0 0 3px gray;
+  box-shadow: 0 2px 5px lightgray;
 }
 
 .form {
