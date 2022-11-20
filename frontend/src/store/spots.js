@@ -100,7 +100,7 @@ export const createASpotThunk = (spot, preview) => async (dispatch) => {
       body: JSON.stringify(preview),
     });
     if (imageResponse.ok) {
-      return data
+      return data;
     } else {
       throw imageResponse;
     }
@@ -123,7 +123,7 @@ export const editSpotThunk = (spot, preview, spotId) => async (dispatch) => {
       body: JSON.stringify(preview),
     });
     if (imageResponse.ok) {
-      return data
+      return data;
     } else {
       throw imageResponse;
     }
@@ -173,7 +173,7 @@ export default function spotsReducer(state = {}, action) {
       // newState["NewSpot"] = action.payload;
       return newState;
     case EDIT_SPOT:
-      return newState
+      return newState;
     case DELETE_SPOT:
       // delete newState["Spots"][action.payload.id];
       return newState;

@@ -16,7 +16,10 @@ const { handleValidationErrors } = require("../../utils/validation");
 const validateReview = [
   check("review")
     .exists({ checkFalsy: true })
-    .withMessage("Review text is required"),
+    .withMessage("Review text is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("Review must be 255 characters or less"),
   check("stars")
     .exists({ checkFalsy: true })
     .isInt({ min: 1, max: 5 })
@@ -122,8 +125,11 @@ router.post(
 
 //Edit a Review
 router.put(
-  "/:reviewId", requireAuth, requireAuthor, validateReview,
-  async (req, res) => {
+  "/:reviewId",
+  requireAuth,
+  requireAuthor,
+  validateReview,
+  async (req, res, next) => {
     const { review, stars } = req.body;
     const update = await Review.findByPk(req.params.reviewId);
     update.set({

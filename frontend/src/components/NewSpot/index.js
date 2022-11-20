@@ -7,6 +7,7 @@ export default function NewSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
+  // const spotsObj = useSelector((state) => state.spots);
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -62,7 +63,8 @@ export default function NewSpot() {
       )
     )
       .then(() => {
-        history.push("/"); //fix to redirect to new spot details page
+        history.push("/");
+        // history.push(`/spots/${spotsObj.NewSpot.id}`); //fix to redirect to new spot details page
       })
       .catch(async (res) => {
         const data = await res.json();
@@ -115,7 +117,7 @@ export default function NewSpot() {
         <label>Latitude</label>
         <input
           type="number"
-          min="0"
+          step="any"
           value={lat}
           onChange={(e) => setLat(e.target.value)}
           required
@@ -124,7 +126,7 @@ export default function NewSpot() {
         <label>Longitude</label>
         <input
           type="number"
-          min="0"
+          step="any"
           value={lng}
           onChange={(e) => setLng(e.target.value)}
           required

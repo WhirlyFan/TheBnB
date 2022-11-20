@@ -18,22 +18,44 @@ const { Op } = require("sequelize");
 const validateSpot = [
   check("address")
     .exists({ checkFalsy: true })
-    .withMessage("Street address is required"),
-  check("city").exists({ checkFalsy: true }).withMessage("City is required"),
-  check("state").exists({ checkFalsy: true }).withMessage("State is required"),
+    .withMessage("Street address is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("Address must be 255 characters or less"),
+  check("city")
+    .exists({ checkFalsy: true })
+    .withMessage("City is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("City name must be 255 characters or less"),
+  check("state")
+    .exists({ checkFalsy: true })
+    .withMessage("State is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("City name must be 255 characters or less"),
   check("lat")
     .exists({ checkFalsy: true })
-    .withMessage("Latitude is not valid"),
+    .withMessage("Latitude is not valid")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("Latitude must be 255 characters or less"),
   check("lng")
     .exists({ checkFalsy: true })
-    .withMessage("Longitude is not valid"),
+    .withMessage("Longitude is not valid")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("Longitude must be 255 characters or less"),
   check("name")
     .exists({ checkFalsy: true })
     .isLength({ max: 50 })
     .withMessage("Name must be less than 50 characters"),
   check("description")
     .exists({ checkFalsy: true })
-    .withMessage("Description is required"),
+    .withMessage("Description is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("Description must be 255 characters or less"),
   check("price")
     .exists({ checkFalsy: true })
     .withMessage("Price per day is required"),
@@ -310,6 +332,14 @@ router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
 
   const spot = await Spot.findByPk(spotId);
 
+  if (review.length > 255) {
+    const err = new Error("Review too long");
+    err.title = "Review too long";
+    err.errors = ["Review must be 255 characters or less"];
+    err.status = 403;
+    return next(err);
+  }
+
   if (!spot) {
     const err = new Error("Couldn't find a Spot with the specified id");
     err.title = "Couldn't find a Spot with the specified id";
@@ -343,6 +373,15 @@ router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
 router.post("/:spotId/images", requireAuthor, requireAuth, async (req, res) => {
   const { url, preview } = req.body;
   const { spotId } = req.params;
+
+  if (url.length > 255) {
+    const err = new Error("Image URL too long");
+    err.title = "Image URL too long";
+    err.errors = ["Image URL must be 255 characters or less"];
+    err.status = 403;
+    return next(err);
+  }
+
   const spotImage = await SpotImage.create({
     spotId,
     url,
