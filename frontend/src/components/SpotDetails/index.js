@@ -17,11 +17,15 @@ export default function SpotDetails() {
   const [stars, setStars] = useState("");
   const [errors, setErrors] = useState([]);
 
+  const [isLoaded, setIsLoaded] = useState(false);
   const [hasClicked, setHasClicked] = useState(false);
 
   useEffect(() => {
-    dispatch(spotsActions.getSpotDetailsThunk(spotId));
-    dispatch(reviewActions.getSpotReviewsThunk(spotId));
+    dispatch(spotsActions.getSpotDetailsThunk(spotId))
+      .then(() => {
+        dispatch(reviewActions.getSpotReviewsThunk(spotId));
+      })
+      .then(() => setIsLoaded(true));
     setReview("");
     setStars("");
   }, [dispatch, spotId, hasClicked, user]);
@@ -60,6 +64,8 @@ export default function SpotDetails() {
 
   let rating = spot.avgStarRating;
   rating = parseFloat(rating).toFixed(1);
+
+  if (!isLoaded) return null
 
   return (
     <div className="spot-details">

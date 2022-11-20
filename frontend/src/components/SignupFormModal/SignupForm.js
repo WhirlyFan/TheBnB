@@ -18,41 +18,43 @@ function SignupFormPage({ setShowModal }) {
 
   if (sessionUser) return <Redirect to="/" />;
 
+  // const validate = () => {
+  //   setErrors([])
+  //   const newErrors = [];
+  //   if (firstName.length > 20 || firstName.length < 3) {
+  //     newErrors.push("First name must be 3-20 characters long.");
+  //   }
+  //   if (lastName.length > 20 || lastName.length < 3) {
+  //     newErrors.push("Last name must be 3-20 characters long.");
+  //   }
+  //   if (password !== confirmPassword) {
+  //     newErrors.push(
+  //       "Confirm Password field must be the same as the Password field."
+  //     );
+  //   }
+  //   setErrors(newErrors);
+  //   if (errors.length) return true;
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      if (firstName.length <= 20 && firstName.length >= 3) {
-        if (lastName.length <= 20 && lastName.length >= 3) {
-          setErrors([]);
-          return dispatch(
-            sessionActions.signup({
-              firstName,
-              lastName,
-              email,
-              username,
-              password,
-            })
-          )
-            .then(() => setShowModal(false))
-            .catch(async (res) => {
-              const data = await res.json();
-              if (data && data.errors) setErrors(data.errors);
-            });
-        } else {
-          return setErrors([
-            "Last name must be between 3 and 20 characters long.",
-          ]);
-        }
-      } else {
-        return setErrors([
-          "First name must be between 3 and 20 characters long.",
-        ]);
-      }
-    } else {
-      return setErrors([
-        "Confirm Password field must be the same as the Password field.",
-      ]);
-    }
+    // let errorHandler = validate();
+    // if (errorHandler) return console.log('pass');
+    // return console.log('fail')
+    return dispatch(
+      sessionActions.signup({
+        firstName,
+        lastName,
+        email,
+        username,
+        password,
+      })
+    )
+      .then(() => setShowModal(false))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
   };
 
   return (

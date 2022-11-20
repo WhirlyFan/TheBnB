@@ -393,7 +393,7 @@ router.post(
     if (newEndTime <= newStartTime) {
       const err = new Error("Validation error");
       err.title = "Validation error";
-      err.errors = ["endDate cannot be on or before startDate"];
+      err.errors = ["End date cannot be on or before start date"];
       err.status = 400;
       return next(err);
     }
