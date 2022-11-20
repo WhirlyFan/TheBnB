@@ -22,29 +22,32 @@ export default function NewSpot() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(
-      spotsActions.createASpotThunk(
-        {
-          address,
-          city,
-          state,
-          country,
-          lat,
-          lng,
-          name,
-          description,
-          price,
-        },
-        { url: previewImage, preview: true }
+    // if (previewImage.length >= 255) {
+    //   setErrors([...errors, "Image URL must be 255 characters or less!"])
+    // }
+      return dispatch(
+        spotsActions.createASpotThunk(
+          {
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price,
+          },
+          { url: previewImage, preview: true }
+        )
       )
-    )
-      .then(() => {
-        history.push("/"); //fix to redirect to new spot details page
-      })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+        .then(() => {
+          history.push("/"); //fix to redirect to new spot details page
+        })
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        });
   };
 
   if (!sessionUser) return <Redirect to={"/"} />;
@@ -137,7 +140,9 @@ export default function NewSpot() {
           required
           placeholder="www.imageurl.com"
         />
-        <button type="submit">Create</button>
+        <button className="button" type="submit">
+          Create
+        </button>
       </form>
     </div>
   );

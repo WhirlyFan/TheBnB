@@ -40,8 +40,9 @@ module.exports = {
           country: "USA",
           lat: 323.69829373902616,
           lng: -16.26505036779902,
-          name: "test",
-          description: "test desc",
+          name: "Cozy Allendale Cabin",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
           price: 421,
         },
         {

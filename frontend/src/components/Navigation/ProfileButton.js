@@ -48,17 +48,20 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           <ul className="profile-dropdown">
             <li>{user.username}</li>
             <li>{user.email}</li>
-            <li>
-              <button onClick={profile}>Profile</button>
-            </li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+            <div className="button-div">
+              <button className="button-dropdown" onClick={profile}>
+                Profile
+              </button>
+              <button className="button-dropdown" onClick={logout}>
+                Log Out
+              </button>
+            </div>
           </ul>
         ) : (
           <ul className="profile-dropdown">
-            <li>
+            <div className="button-div">
               <button
+                className="button-dropdown"
                 onClick={() => {
                   setLogin(true);
                   setShowModal(true);
@@ -66,9 +69,8 @@ function ProfileButton({ user, setLogin, setShowModal }) {
               >
                 Log In
               </button>
-            </li>
-            <li>
               <button
+                className="button-dropdown"
                 onClick={() => {
                   setLogin(false);
                   setShowModal(true);
@@ -76,7 +78,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
               >
                 Sign Up
               </button>
-            </li>
+            </div>
           </ul>
         ))}
     </>

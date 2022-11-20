@@ -38,6 +38,11 @@
   background: white;
   cursor: pointer;
   border: 1px solid lightgrey;
+  transition: box-shadow 0.2s ease;
+}
+
+#profile-button:hover {
+  box-shadow: 0 2px 5px lightgray;
 }
 
 .profile-dropdown {
@@ -48,9 +53,29 @@
   border-radius: 5%;
   background-color: white;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
 }
 
-.profile-dropdown > * {
+.button-div {
+  width: 100%;
+}
+.button-dropdown {
+  margin: 0;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+}
+
+.button-dropdown:hover {
+  background-color: #f7f7f7;
+}
+
+.profile-dropdown > *:not(button) {
   margin: 0.5rem;
 }
 

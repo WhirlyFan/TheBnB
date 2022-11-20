@@ -3,7 +3,7 @@ import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import SpotCard from "../SpotCard";
-import "./Profile.css"
+import "./Profile.css";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -47,6 +47,7 @@ export default function Profile() {
               <SpotCard spot={spot} />
               <div className="edit-delete-buttons">
                 <button
+                  className="button"
                   onClick={() => {
                     clickEdit(spot);
                   }}
@@ -54,6 +55,7 @@ export default function Profile() {
                   Edit
                 </button>
                 <button
+                  className="button"
                   onClick={() => {
                     clickDelete(spot);
                   }}

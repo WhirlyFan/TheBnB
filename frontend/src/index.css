@@ -17,7 +17,7 @@ ul {
   padding: 0;
 }
 
-button:not(#profile-button, .create-spot) {
+.button {
   cursor: pointer;
   width: 7rem;
   height: 42px;
@@ -26,10 +26,11 @@ button:not(#profile-button, .create-spot) {
   background-color: #fe375b;
   color: white;
   border: none;
+  transition: box-shadow 0.2s ease;
 }
 
-button:hover:not(.create-spot) {
-  box-shadow: 0 0 3px gray;
+.button:hover {
+  box-shadow: 0 2px 5px lightgray;
 }
 
 .form {

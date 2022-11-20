@@ -4,14 +4,18 @@
   align-items: center;
 }
 
+.spot-info {
+  width: 60rem;
+  margin-bottom: 10rem;
+}
+
 .share-save > span{
   margin: 1rem;
 }
 
 .preview > img {
   object-fit: cover;
-  margin: 2rem 0;
-  width: 50rem;
+  width: 100%;
   height: 35rem;
   border-radius: 10px;
 }
@@ -51,7 +55,7 @@
 }
 
 .add-review > button {
-  margin-top: .5rem;
+  margin-top: 1rem;
 }
 
 .login-buttons > button{
@@ -60,4 +64,8 @@
 
 .air-cover {
   height: 2rem;
+}
+
+.reviews-address {
+  margin-bottom: 1rem;
 }

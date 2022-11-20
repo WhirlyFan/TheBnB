@@ -159,7 +159,7 @@ export default function EditSpot() {
             placeholder="www.imageurl.com"
           />
 
-        <button type="submit">Edit</button>
+        <button className='button' type="submit">Edit</button>
       </form>
     </div>
   );
