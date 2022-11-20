@@ -56,7 +56,9 @@ export default function NewSpot() {
       <form className="form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx} className="error">
+              {error}
+            </li>
           ))}
         </ul>
         <label>Address</label>
