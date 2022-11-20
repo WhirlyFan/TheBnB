@@ -1,13 +1,21 @@
 .profile {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .about-me {
-    margin: 0 2rem;
+  margin: 0 2rem;
 }
 .my-spots {
-    display: flex;
-    flex-direction: column;
-    margin: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+}
+
+.edit-delete-buttons {
+  display: flex;
+  justify-content: center;
+}
+.edit-delete-buttons > button {
+  margin: .75rem 1rem;
 }

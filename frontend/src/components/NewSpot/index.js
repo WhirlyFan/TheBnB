@@ -19,35 +19,55 @@ export default function NewSpot() {
   const [previewImage, setPreviewImage] = useState("");
   const [errors, setErrors] = useState([]);
 
+  // const validate = () => {
+  //   const newErrors = []
+  //   if (address.length >= 255) {
+  //    newErrors.push("Address must be 255 characters or less!");
+  //   }
+  //   if (city.length >= 255) {
+  //     newErrors.push("City name must be 255 characters or less!");
+  //   }
+  //   if (state.length >= 255) {
+  //     newErrors.push("State must be 255 characters or less!");
+  //   }
+  //   if (country.length >= 255) {
+  //     newErrors.push("Country name must be 255 characters or less!");
+  //   }
+  //   if (description.length >= 255) {
+  //     newErrors.push("Description must be 255 characters or less!");
+  //   }
+  //   setErrors(newErrors)
+  //   if (errors.length) return true;
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    // if (previewImage.length >= 255) {
-    //   setErrors([...errors, "Image URL must be 255 characters or less!"])
-    // }
-      return dispatch(
-        spotsActions.createASpotThunk(
-          {
-            address,
-            city,
-            state,
-            country,
-            lat,
-            lng,
-            name,
-            description,
-            price,
-          },
-          { url: previewImage, preview: true }
-        )
+    // let errorHandler = validate()
+    // if (errorHandler) return;
+    return dispatch(
+      spotsActions.createASpotThunk(
+        {
+          address,
+          city,
+          state,
+          country,
+          lat,
+          lng,
+          name,
+          description,
+          price,
+        },
+        { url: previewImage, preview: true }
       )
-        .then(() => {
-          history.push("/"); //fix to redirect to new spot details page
-        })
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+    )
+      .then(() => {
+        history.push("/"); //fix to redirect to new spot details page
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
   };
 
   if (!sessionUser) return <Redirect to={"/"} />;
@@ -94,7 +114,8 @@ export default function NewSpot() {
         />
         <label>Latitude</label>
         <input
-          type="text"
+          type="number"
+          min="0"
           value={lat}
           onChange={(e) => setLat(e.target.value)}
           required
@@ -102,7 +123,8 @@ export default function NewSpot() {
         />
         <label>Longitude</label>
         <input
-          type="text"
+          type="number"
+          min="0"
           value={lng}
           onChange={(e) => setLng(e.target.value)}
           required
@@ -126,7 +148,8 @@ export default function NewSpot() {
         />
         <label>Price</label>
         <input
-          type="text"
+          type="number"
+          min="0"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           required
