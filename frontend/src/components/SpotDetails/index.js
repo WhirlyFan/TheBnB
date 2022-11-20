@@ -65,7 +65,7 @@ export default function SpotDetails() {
     <div className="spot-details">
       <div className="spot-info">
         <h1>{spot.name}</h1>
-        <div>
+        <div className="reviews-address">
           <span>
             ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews}{" "}
             reviews · {spot.address}
@@ -90,7 +90,6 @@ export default function SpotDetails() {
           );
         })} */}
         </div>
-        <hr></hr>
         <h2>Spot hosted by {spot.Owner.firstName}</h2>
         <hr></hr>
         <div>
@@ -124,6 +123,7 @@ export default function SpotDetails() {
                       {user && user.id === review.userId && (
                         <div className={"my-buttons"}>
                           <button
+                            className="button"
                             onClick={() => {
                               clickEdit(review, spot.id);
                             }}
@@ -131,6 +131,7 @@ export default function SpotDetails() {
                             Edit
                           </button>
                           <button
+                            className="button"
                             onClick={() => {
                               clickDelete(review.id);
                             }}
@@ -172,7 +173,9 @@ export default function SpotDetails() {
                 required
                 placeholder="Rate your stay from 1-5 stars!"
               />
-              <button type="submit">Add Review</button>
+              <button className="button" type="submit">
+                Add Review
+              </button>
             </form>
           )}
         </div>

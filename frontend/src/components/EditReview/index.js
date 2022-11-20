@@ -59,7 +59,7 @@ export default function EditReview() {
           required
           placeholder="5"
         />
-        <button type="submit">Edit Review</button>
+        <button className='button' type="submit">Edit Review</button>
       </form>
     </div>
   );

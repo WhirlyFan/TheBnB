@@ -17,7 +17,7 @@ ul {
   padding: 0;
 }
 
-button:not(#profile-button, .create-spot) {
+.button {
   cursor: pointer;
   width: 7rem;
   height: 42px;
