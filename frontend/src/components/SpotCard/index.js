@@ -23,7 +23,6 @@ export default function SpotCard({ spot }) {
       <div>
         <h3>
           {spot.city}, {spot.state}
-          {/* broken on heroku needs refactoring to prevent NaN on spots without reviews */}
         </h3>
         <span>★ {!isNaN(rating) ? rating : "No Reviews"}</span>
       </div>
