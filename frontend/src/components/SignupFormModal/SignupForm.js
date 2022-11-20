@@ -18,29 +18,8 @@ function SignupFormPage({ setShowModal }) {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  // const validate = () => {
-  //   setErrors([])
-  //   const newErrors = [];
-  //   if (firstName.length > 20 || firstName.length < 3) {
-  //     newErrors.push("First name must be 3-20 characters long.");
-  //   }
-  //   if (lastName.length > 20 || lastName.length < 3) {
-  //     newErrors.push("Last name must be 3-20 characters long.");
-  //   }
-  //   if (password !== confirmPassword) {
-  //     newErrors.push(
-  //       "Confirm Password field must be the same as the Password field."
-  //     );
-  //   }
-  //   setErrors(newErrors);
-  //   if (errors.length) return true;
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // let errorHandler = validate();
-    // if (errorHandler) return console.log('pass');
-    // return console.log('fail')
     setErrors([]);
     return dispatch(
       sessionActions.signup({
