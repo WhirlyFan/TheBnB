@@ -19,6 +19,7 @@ export default function EditSpot() {
   const [price, setPrice] = useState("");
   const [previewImage, setPreviewImage] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     dispatch(spotsActions.getSpotDetailsThunk(spotId)).then((res) => {
@@ -31,8 +32,11 @@ export default function EditSpot() {
       setName(res.name)
       setDescription(res.description)
       setPrice(res.price)
+      setIsLoaded(true)
     })
   }, [dispatch, spotId])
+
+  if (!isLoaded) return null
 
   const handleSubmit = (e) => {
     e.preventDefault();

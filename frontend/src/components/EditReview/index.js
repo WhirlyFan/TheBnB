@@ -1,16 +1,29 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import * as reviewActions from "../../store/review";
 
 export default function EditReview() {
   const { spotId } = useParams();
   const { reviewId } = useParams();
-  const history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user); const history = useHistory();
   const [review, setReview] = useState("");
   const [stars, setStars] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(reviewActions.getSpotReviewsThunk(spotId))
+      .then((res) => {
+        let currReview = res.Reviews.find(review => review.id = reviewId)
+        setReview(currReview.review)
+        setStars(currReview.stars)
+        setIsLoaded(true)
+      })
+  }, [dispatch, spotId, reviewId]);
+
+  if (!isLoaded) return null
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +46,8 @@ export default function EditReview() {
       });
   };
 
+  if (!sessionUser) return <Redirect to={"/"} />;
+
   return (
     <div className="form-div">
       <form className="form" onSubmit={handleSubmit}>
@@ -48,9 +63,7 @@ export default function EditReview() {
           type="text"
           value={review}
           onChange={(e) => setReview(e.target.value)}
-          required
-          placeholder="This place was great!"
-        />
+          required />
         <label>Stars</label>
         <input
           type="number"
@@ -58,9 +71,7 @@ export default function EditReview() {
           max="5"
           value={stars}
           onChange={(e) => setStars(e.target.value)}
-          required
-          placeholder="5"
-        />
+          required />
         <button className="button" type="submit">
           Edit Review
         </button>
