@@ -56,13 +56,13 @@ export default function SpotDetails() {
         spot.id
       )
     )
+      .then(() => {
+        setHasClicked(!hasClicked);
+      })
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       })
-      .then(() => {
-        setHasClicked(!hasClicked);
-      });
   };
 
   let rating = spot.avgStarRating;
@@ -159,7 +159,7 @@ export default function SpotDetails() {
             <form className="add-review" onSubmit={handleSubmit}>
               <ul>
                 {errors.map((error, idx) => (
-                  <li key={idx}>{error}</li>
+                  <li key={idx} className='error'>{error}</li>
                 ))}
               </ul>
               <label>Review</label>

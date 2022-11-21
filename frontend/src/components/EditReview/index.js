@@ -38,7 +38,7 @@ export default function EditReview() {
       )
     )
       .then(() => {
-        if (!errors.length) history.push(`/spots/${spotId}`);
+        history.push(`/spots/${spotId}`);
       })
       .catch(async (res) => {
         const data = await res.json();
