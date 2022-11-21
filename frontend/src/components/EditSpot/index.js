@@ -41,7 +41,7 @@ export default function EditSpot() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    dispatch(
+    return dispatch(
       spotsActions.editSpotThunk(
         {
           address,
