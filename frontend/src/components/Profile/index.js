@@ -10,15 +10,17 @@ export default function Profile() {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const spots = useSelector((state) => state.spots.MySpots);
-
+  const [isLoaded, setIsLoaded] = useState(false);
   const [hasSubmit, setHasSubmit] = useState(false);
 
   useEffect(() => {
-    dispatch(spotsActions.getMySpotsThunk());
+    dispatch(spotsActions.getMySpotsThunk()).then(() => {
+      setIsLoaded(true);
+    });
   }, [dispatch, hasSubmit]);
 
   if (!sessionUser) return <Redirect to={"/"} />;
-
+  if (!isLoaded) return null;
   if (!spots) return null;
 
   const clickDelete = (spot) => {
