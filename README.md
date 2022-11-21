@@ -9,7 +9,8 @@
 - Postgresql - database storage
 
 ## Home Page
-[screencapture-thebnb-herokuapp-2022-11-20-22_20_11.pdf](https://github.com/WhirlyFan/AirBnB-Clone/files/10053936/screencapture-thebnb-herokuapp-2022-11-20-22_20_11.pdf)
+[Home Page](https://github.com/WhirlyFan/AirBnB-Clone/files/10053936/screencapture-thebnb-herokuapp-2022-11-20-22_20_11.pdf)
+
 The home page lists out all the spots that are available and users can choose to sign up, log in, and browse the site!
 
 ## Try it out!
