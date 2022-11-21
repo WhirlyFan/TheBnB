@@ -20,23 +20,27 @@ function SignupFormPage({ setShowModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
-    return dispatch(
-      sessionActions.signup({
-        firstName,
-        lastName,
-        email,
-        username,
-        password,
-      })
-    )
-      .then(() => setShowModal(false))
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+    if (password === confirmPassword) {
+      setErrors([]);
+      return dispatch(
+        sessionActions.signup({
+          firstName,
+          lastName,
+          email,
+          username,
+          password,
+        })
+      )
+        .then(() => setShowModal(false))
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        });
+    }
+    return setErrors([
+      "Confirm Password field must be the same as the Password field",
+    ]);
   };
-
   return (
     <form className="signup-form" onSubmit={handleSubmit}>
       <ul>
@@ -84,6 +88,7 @@ function SignupFormPage({ setShowModal }) {
       <label>Confirm Password</label>
       <input
         type="password"
+        minLength={'6'}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
         required
