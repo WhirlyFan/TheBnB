@@ -20,7 +20,7 @@ export default function SpotCard({ spot }) {
           alt={`spot-${spot.id}-preview`}
         ></img>
       </div>
-      <div>
+      <div className="spot-card-details">
         <h3>
           {spot.city}, {spot.state}
         </h3>
