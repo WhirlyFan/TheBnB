@@ -130,6 +130,7 @@ export default function NewSpot() {
         <input
           type="number"
           min="0"
+          max="1000000"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           required
