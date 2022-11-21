@@ -1,6 +1,6 @@
 .spot-card {
   display: inline-block;
-  margin: 0.5rem;
+  margin: 1rem;
   width: 17rem;
   cursor: pointer;
 }
