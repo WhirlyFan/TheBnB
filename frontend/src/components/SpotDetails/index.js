@@ -29,8 +29,12 @@ export default function SpotDetails() {
         setIsLoaded(true);
         setReview("");
         setStars("");
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) history.push("/");
       });
-  }, [dispatch, spotId, hasClicked, user]);
+  }, [dispatch, spotId, hasClicked, user, history]);
 
   if (!spot) return null;
   if (!isLoaded) return null;
@@ -62,7 +66,7 @@ export default function SpotDetails() {
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
-      })
+      });
   };
 
   let rating = spot.avgStarRating;
@@ -159,7 +163,9 @@ export default function SpotDetails() {
             <form className="add-review" onSubmit={handleSubmit}>
               <ul>
                 {errors.map((error, idx) => (
-                  <li key={idx} className='error'>{error}</li>
+                  <li key={idx} className="error">
+                    {error}
+                  </li>
                 ))}
               </ul>
               <label>Review</label>
