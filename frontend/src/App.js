@@ -26,7 +26,7 @@ function App() {
           <Route exact path={"/"}>
             <AllSpots />
           </Route>
-          <Route path={`/spots/new`}>
+          <Route exact path={`/spots/new`}>
             <NewSpot />
           </Route>
           <Route exact path={`/spots/:spotId`}>
@@ -38,7 +38,7 @@ function App() {
           <Route exact path={`/spots/:spotId/reviews/:reviewId/edit`}>
             <EditReview />
           </Route>
-          <Route path={`/:username/profile`}>
+          <Route exact path={`/:username/profile`}>
             <Profile />
           </Route>
           <Route path={"/"}>
