@@ -32,7 +32,7 @@ export default function SpotDetails() {
       })
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) history.push('/');
+        if (data && data.errors) history.push("/");
       });
   }, [dispatch, spotId, hasClicked, user, history]);
 
