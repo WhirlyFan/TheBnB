@@ -49,8 +49,10 @@ ul {
 }
 
 .form > textarea {
-  resize: vertical;
-  min-height: 6rem;
+  resize: none;
+  height: 5rem;
+  /* min-height: 3rem;
+  max-height: 5rem; */
 }
 
 .error {

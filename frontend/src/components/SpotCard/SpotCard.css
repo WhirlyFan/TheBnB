@@ -1,13 +1,21 @@
 .spot-card {
   display: inline-block;
   margin: 0.5rem;
+  width: 17rem;
   cursor: pointer;
 }
 .spot-card-image {
-  width: 17rem;
+  width: 100%;
   height: 17rem;
   object-fit: cover;
   border-radius: 5%;
+}
+
+.spot-card-details > * {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .spot-card > div {

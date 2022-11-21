@@ -124,7 +124,7 @@ export default function SpotDetails() {
                     <div className={"review"} key={`review-${review.id}`}>
                       <div>
                         {review.User.firstName}{" "}
-                        {review.User.lastName.slice(0, 1)}
+                        {review.User.lastName.slice(0, 1)} · ★{review.stars}
                       </div>
                       <li>{review.review}</li>
                       {user && user.id === review.userId && (

@@ -7,6 +7,9 @@
 .spot-info {
   width: 60rem;
   margin-bottom: 5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .share-save > span{
@@ -50,8 +53,10 @@
 }
 
 .add-review > textarea {
-  resize: vertical;
-  min-height: 3rem;
+  resize: none;
+  height: 5rem;
+  /* min-height: 3rem;
+  max-height: 5rem; */
 }
 
 .add-review > button {
