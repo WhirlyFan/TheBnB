@@ -33,7 +33,7 @@ const validateSpot = [
     .withMessage("State is required")
     .isLength({ min: 0 })
     .isLength({ max: 80 })
-    .withMessage("City name must be 80 characters or less"),
+    .withMessage("State name must be 80 characters or less"),
   check("lat")
     .exists({ checkFalsy: true })
     .withMessage("Latitude is not valid")
