@@ -17,10 +17,16 @@ const validateLogin = [
   check("credential")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Please provide a valid email or username."),
+    .withMessage("Please provide a valid email or username.")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("Credential must be 255 characters or less"),
   check("password")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide a password."),
+    .withMessage("Please provide a password.")
+    .isLength({ min: 0 })
+    .isLength({ max: 255 })
+    .withMessage("Password must be 255 characters or less"),
   handleValidationErrors,
 ];
 
