@@ -12,10 +12,14 @@
 }
 
 .spot-card-details > * {
-  width: 100%;
+  width: 60%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.spot-card-details > span {
+  width: fit-content;
 }
 
 .spot-card > div {
@@ -32,6 +36,13 @@ h3 {
 .name-price {
   display: flex;
   flex-direction: column;
+}
+
+.name-price > * {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .spot-price {
