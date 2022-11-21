@@ -16,7 +16,7 @@ export default function EditReview() {
   useEffect(() => {
     dispatch(reviewActions.getSpotReviewsThunk(spotId))
       .then((res) => {
-        let currReview = res.Reviews.find(review => review.id = reviewId)
+        let currReview = res.Reviews.find(review => review.id === Number(reviewId))
         setReview(currReview.review)
         setStars(currReview.stars)
         setIsLoaded(true)
