@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
@@ -19,6 +19,20 @@ export default function EditSpot() {
   const [price, setPrice] = useState("");
   const [previewImage, setPreviewImage] = useState("");
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    dispatch(spotsActions.getSpotDetailsThunk(spotId)).then((res) => {
+      setAddress(res.address)
+      setCity(res.city)
+      setState(res.state)
+      setCountry(res.country)
+      setLat(res.lat)
+      setLng(res.lng)
+      setName(res.name)
+      setDescription(res.description)
+      setPrice(res.price)
+    })
+  }, [dispatch, spotId])
 
   const handleSubmit = (e) => {
     e.preventDefault();

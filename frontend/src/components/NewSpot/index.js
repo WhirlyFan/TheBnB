@@ -110,7 +110,7 @@ export default function NewSpot() {
           required
           placeholder="-122.4730327"
         />
-        <label>Name</label>
+        <label>Name of location</label>
         <input
           type="text"
           value={name}
@@ -126,7 +126,7 @@ export default function NewSpot() {
           required
           placeholder="Place where web developers are created"
         />
-        <label>Price</label>
+        <label>Price for a night</label>
         <input
           type="number"
           min="0"
