@@ -128,8 +128,8 @@ router.get("/", async (req, res, next) => {
   whereObj = {};
 
   if (minLat) {
-    console.log(minLat);
-    console.log(parseFloat(minLat) - ~~minLat);
+    // console.log(minLat);
+    // console.log(parseFloat(minLat) - ~~minLat);
     if (parseFloat(minLat) - ~~minLat) {
       whereObj.lat = { [Op.gte]: minLat };
     } else {
@@ -146,8 +146,8 @@ router.get("/", async (req, res, next) => {
   }
 
   if (minLng) {
-    console.log(minLng);
-    console.log(parseFloat(minLng) - ~~minLng);
+    // console.log(minLng);
+    // console.log(parseFloat(minLng) - ~~minLng);
     if (parseFloat(minLng) - ~~minLng) {
       whereObj.lng = { [Op.gte]: minLng };
     } else {
