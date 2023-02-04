@@ -53,7 +53,7 @@ export const createBookingThunk = (booking, spotId) => async (dispatch) => {
 };
 
 export const editBookingThunk = (booking, bookingId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/booking/${bookingId}`, {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
     method: "PUT",
     body: JSON.stringify(booking),
   });
@@ -65,7 +65,7 @@ export const editBookingThunk = (booking, bookingId) => async (dispatch) => {
 };
 
 export const deleteBookingThunk = (bookingId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/booking/${bookingId}`, {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
     method: "DELETE",
   });
   if (response.ok) {
