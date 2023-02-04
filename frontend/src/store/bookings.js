@@ -20,6 +20,7 @@ export const getUserBookings = (payload) => {
 };
 
 //thunks
+
 export const getSpotBookingsThunk = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
   if (response.ok) {
@@ -38,16 +39,52 @@ export const getUserBookingsThunk = () => async (dispatch) => {
   }
 };
 
+export const createBookingThunk = (booking, spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
+    method: "POST",
+    body: JSON.stringify(booking),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  } else {
+    throw response;
+  }
+};
+
+export const editBookingThunk = (booking, bookingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/booking/${bookingId}`, {
+    method: "PUT",
+    body: JSON.stringify(booking),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    //find a way to refresh the store. maybe just dispatch a thunk again?
+    return data;
+  }
+};
+
+export const deleteBookingThunk = (bookingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/booking/${bookingId}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    const data = await response.json();
+    //find a way to refresh the store. maybe just dispatch a thunk again?
+    return data;
+  }
+};
+
 //reducer
-
-const initialState = {};
-
-export default function bookingReducer(state = initialState, action) {
+// const initialState = {
+//   Bookings: null,
+// };
+export default function bookingReducer(state = {}, action) {
   switch (action.type) {
     case GET_SPOT_BOOKINGS:
       return { ...state, ...action.payload };
     case GET_USER_BOOKINGS:
-        return {...state, ...action.payload}
+      return { ...state, ...action.payload };
     default:
       return state;
   }
