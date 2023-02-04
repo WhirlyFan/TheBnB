@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
+import Calendar from "./Calendar";
 
-export default function Bookings() {
-    return <div>test</div>
+export default function Bookings({ spot }) {
+  return (
+    <div>
+      <Calendar />
+    </div>
+  );
 }

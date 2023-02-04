@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as reviewActions from "../../store/review";
 import "./SpotDetails.css";
+import Bookings from "../Bookings";
 
 export default function SpotDetails() {
   const spot = useSelector((state) => state.spots.SpotDetails);
@@ -120,6 +121,7 @@ export default function SpotDetails() {
             <p>{spot.description}</p>
             <hr></hr>
           </div>
+          <Bookings spot={spot} />
           {/* <div>{console.log(spot)}put bookings here</div> */}
         </div>
         <div className="spot-reviews">
