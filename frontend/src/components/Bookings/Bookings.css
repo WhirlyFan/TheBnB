@@ -1,0 +1,58 @@
+.bookings {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 10px 0;
+    box-shadow: 0 0 3px #ccc;
+    width: fit-content;
+}
+
+.bookings_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.bookings_button_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.bookings_button {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fe375b;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 100%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+input.inputBox {
+    font-size: 16px;
+    text-align: center;
+    padding: 5px 8px 4px 8px;
+    border-radius: 3px;
+    border: 1px solid #666;
+  }
+
+  .calendarWrap {
+    display: inline-block;
+    position: relative;
+  }
+
+  .calendarElement {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    border: 1px solid #ccc;
+    z-index: 999;
+  }

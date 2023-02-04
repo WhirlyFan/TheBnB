@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as reviewActions from "../../store/review";
 import "./SpotDetails.css";
+import Bookings from "../Bookings";
 
 export default function SpotDetails() {
   const spot = useSelector((state) => state.spots.SpotDetails);
@@ -101,23 +102,28 @@ export default function SpotDetails() {
           );
         })} */}
         </div>
-        <h2>Spot hosted by {spot.Owner.firstName}</h2>
-        <hr></hr>
-        <div>
-          <img
-            className="air-cover"
-            src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
-            alt="aircover"
-          ></img>
-          <p>
-            Every booking includes free protection from Host cancellations,
-            listing inaccuracies, and other issues like trouble checking in.
-          </p>
+        <div className="spot-details-main">
+          <div>
+            <h2>Spot hosted by {spot.Owner.firstName}</h2>
+            <hr></hr>
+            <div>
+              <img
+                className="air-cover"
+                src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
+                alt="aircover"
+              ></img>
+              <p>
+                Every booking includes free protection from Host cancellations,
+                listing inaccuracies, and other issues like trouble checking in.
+              </p>
+            </div>
+            <hr></hr>
+            <p>{spot.description}</p>
+            <hr></hr>
+          </div>
+          <Bookings spot={spot} />
+          {/* <div>{console.log(spot)}put bookings here</div> */}
         </div>
-        <hr></hr>
-        <p>{spot.description}</p>
-        <hr></hr>
-
         <div className="spot-reviews">
           {reviews && Object.values(reviews).length > 0 ? (
             <>
