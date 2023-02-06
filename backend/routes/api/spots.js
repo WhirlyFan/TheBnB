@@ -419,7 +419,7 @@ router.post("/", validateSpot, requireAuth, async (req, res) => {
 router.post(
   "/:spotId/bookings",
   requireAuth,
-  notOwner,
+  // notOwner
   async (req, res, next) => {
     const { startDate, endDate } = req.body;
     let newStartTime = new Date(startDate);
