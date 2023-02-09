@@ -27,8 +27,6 @@ export default function Bookings({ spot }) {
   rating = parseFloat(rating).toFixed(1);
 
   const handleSubmit = (booking, spotId) => {
-    console.log(booking);
-    console.log(spotId);
     dispatch(createBookingThunk(booking, spotId))
       .then(async (data) => {
         console.log(data)

@@ -4,14 +4,20 @@
   align-items: center;
 }
 
-/* .spot-details-main {
+.spot-details-main {
+  width: 100%;
+}
 
-} */
+.spot-details-overflow {
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
 
 .spot-info {
   width: 60rem;
   margin-bottom: 5rem;
-  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import SpotCard from "../SpotCard";
 import "./Profile.css";
+// import {getUserBookingsThunk} from "../../store/booking";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(spotsActions.getMySpotsThunk()).then(() => {
+      // dispatch(getUserBookingsThunk());
       setIsLoaded(true);
     });
   }, [dispatch, hasSubmit]);
@@ -68,6 +70,9 @@ export default function Profile() {
             </div>
           );
         })}
+      </div>
+      <div className="profile-bookings">
+        <h1>Your Bookings</h1>
       </div>
     </div>
   );

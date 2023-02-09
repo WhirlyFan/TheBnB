@@ -112,18 +112,17 @@ export default function SpotDetails() {
                 src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
                 alt="aircover"
               ></img>
-              <p>
+              <p className="spot-details-overflow">
                 Every booking includes free protection from Host cancellations,
-                listing inaccuracies, and other issues like trouble checking in.
+                listing inaccuracies, and other issues like trouble checking in.sssssssssssssssssssss
               </p>
             </div>
             <hr></hr>
-            <p>{spot.description}</p>
+            <p className="spot-details-overflow">{spot.description}</p>
             <hr></hr>
           </div>
-          <Bookings spot={spot} />
-          {/* <div>{console.log(spot)}put bookings here</div> */}
         </div>
+          <Bookings spot={spot} />
         <div className="spot-reviews">
           {reviews && Object.values(reviews).length > 0 ? (
             <>
