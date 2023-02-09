@@ -37,24 +37,26 @@ export default function SpotDetails() {
   rating = parseFloat(rating).toFixed(1);
 
   return (
-    <div className="spot-details">
-      <div className="spot-details-header">
-        <h1>{spot.name}</h1>
-        <div className="spot-details-sub-header">
-          <span>
-            ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews}{" "}
-            reviews · {spot.address}
-          </span>
+    <div className="spot-details-1">
+      <div className="spot-details-2">
+        <div className="spot-details-header">
+          <h1>{spot.name}</h1>
+          <div className="spot-details-sub-header">
+            <span>
+              ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews}{" "}
+              reviews · {spot.address}
+            </span>
+          </div>
         </div>
+        <SpotImages spot={spot} />
+        <SpotInfo spot={spot} />
+        <Bookings spot={spot} />
+        <Reviews
+          spot={spot}
+          setHasClicked={setHasClicked}
+          hasClicked={hasClicked}
+        />
       </div>
-      <SpotImages spot={spot} />
-      <SpotInfo spot={spot} />
-      <Bookings spot={spot} />
-      <Reviews
-        spot={spot}
-        setHasClicked={setHasClicked}
-        hasClicked={hasClicked}
-      />
     </div>
   );
 }

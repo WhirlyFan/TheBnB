@@ -14,7 +14,7 @@ export default function SpotInfo({ spot }) {
             <p className="spot-details-overflow">
               Every booking includes free protection from Host cancellations,
               listing inaccuracies, and other issues like trouble checking
-              in.sssssssssssssssssssss
+              in.
             </p>
           </div>
           <hr></hr>

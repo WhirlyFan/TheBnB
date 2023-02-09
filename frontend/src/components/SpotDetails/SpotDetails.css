@@ -1,6 +1,11 @@
-.spot-details-main {
-  width: 100%;
+.spot-details-1 {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spot-details-2 {
+  width: 60vw;
 }
 
 .air-cover {
