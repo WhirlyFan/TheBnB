@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+// import { getSpotDetailsThunk } from "./spots";
 
 //action creators
 const GET_SPOT_IMAGES = "spotImages/GET_SPOT_IMAGES";
@@ -24,6 +25,7 @@ export const createSpotImageThunk = (image, spotId) => async (dispatch) => {
     body: JSON.stringify(image),
   });
   const data = await response.json();
+//   dispatch(getSpotDetailsThunk(data.id));
   return data;
 };
 
@@ -33,6 +35,7 @@ export const editSpotImageThunk = (image, imageId) => async (dispatch) => {
     body: JSON.stringify(image),
   });
   const data = await response.json();
+//   dispatch(getSpotDetailsThunk(data.id));
   return data;
 };
 
@@ -41,19 +44,20 @@ export const deleteSpotImageThunk = (imageId) => async (dispatch) => {
     method: "DELETE",
   });
   const data = await response.json();
+//   dispatch(getSpotDetailsThunk(data.id));
   return data;
 };
 
 //reducer
 const initialState = {};
 
-export default function spotImagesReducer (state = initialState, action) {
-    let newState;
-    switch (action.type) {
-        case GET_SPOT_IMAGES:
-        newState = { ...action.payload };
-        return newState;
-        default:
-        return state;
-    }
+export default function spotImagesReducer(state = initialState, action) {
+  let newState;
+  switch (action.type) {
+    case GET_SPOT_IMAGES:
+      newState = { ...action.payload };
+      return newState;
+    default:
+      return state;
+  }
 }
