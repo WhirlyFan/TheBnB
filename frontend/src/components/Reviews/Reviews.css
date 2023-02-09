@@ -25,6 +25,10 @@
     margin-top: 1rem;
   }
 
-  .reviews-address {
-    margin-bottom: 1rem;
+  .review-buttons {
+    margin-top: .5rem;
+  }
+
+  .review-buttons > button {
+    margin: .5rem;
   }

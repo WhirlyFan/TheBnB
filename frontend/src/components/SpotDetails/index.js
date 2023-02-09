@@ -38,27 +38,23 @@ export default function SpotDetails() {
 
   return (
     <div className="spot-details">
-      <div className="spot-info">
+      <div className="spot-details-header">
         <h1>{spot.name}</h1>
-        <div className="reviews-address">
+        <div className="spot-details-sub-header">
           <span>
             ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews}{" "}
             reviews · {spot.address}
           </span>
-          {/* <div className="share-save">
-          <span>Share</span>
-          <span>Save</span>
-        </div> */}
         </div>
-        <SpotImages spot={spot} />
-        <SpotInfo spot={spot} />
-        <Bookings spot={spot} />
-        <Reviews
-          spot={spot}
-          setHasClicked={setHasClicked}
-          hasClicked={hasClicked}
-        />
       </div>
+      <SpotImages spot={spot} />
+      <SpotInfo spot={spot} />
+      <Bookings spot={spot} />
+      <Reviews
+        spot={spot}
+        setHasClicked={setHasClicked}
+        hasClicked={hasClicked}
+      />
     </div>
   );
 }

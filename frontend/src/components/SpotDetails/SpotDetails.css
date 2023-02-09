@@ -1,44 +1,12 @@
-.spot-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .spot-details-main {
   width: 100%;
   display: flex;
 }
 
-.spot-details-overflow {
-  width: 100%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-.spot-info {
-  width: 60rem;
-  margin-bottom: 5rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.share-save > span{
-  margin: 1rem;
-}
-
-.my-buttons {
-  margin-top: .5rem;
-}
-
-.my-buttons > button {
-  margin: .5rem;
-}
-
-.login-buttons > button{
-  margin: .5rem .5rem;
-}
-
 .air-cover {
   height: 2rem;
+}
+
+.spot-details-header {
+  margin: 0 0 1rem 0;
 }

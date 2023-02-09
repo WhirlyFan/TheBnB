@@ -9,3 +9,7 @@
 .login-buttons {
     margin-bottom: 0;
 }
+
+.login-buttons > button{
+    margin: .5rem .5rem;
+  }

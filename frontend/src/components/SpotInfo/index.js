@@ -1,6 +1,6 @@
 export default function SpotInfo({ spot }) {
   return (
-    <div className="spot-details-main">
+    <div className="spot-info">
       <div>
         <div>
           <h2>Spot hosted by {spot.Owner.firstName}</h2>

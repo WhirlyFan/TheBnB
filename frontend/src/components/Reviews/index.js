@@ -67,7 +67,7 @@ export default function Reviews({ spot, hasClicked, setHasClicked }) {
                   </div>
                   <li>{review.review}</li>
                   {user && user.id === review.userId && (
-                    <div className="my-buttons">
+                    <div className="review-buttons">
                       <button
                         className="button"
                         onClick={() => {
