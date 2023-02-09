@@ -1,0 +1,30 @@
+.review {
+    margin: 1rem;
+    inline-size: 50rem;
+    overflow-wrap: break-word;
+    hyphens: manual;
+  }
+
+  .review > div{
+    font-weight: bold;
+  }
+
+  .add-review {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .add-review > textarea {
+    resize: none;
+    height: 5rem;
+    /* min-height: 3rem;
+    max-height: 5rem; */
+  }
+
+  .add-review > button {
+    margin-top: 1rem;
+  }
+
+  .reviews-address {
+    margin-bottom: 1rem;
+  }
