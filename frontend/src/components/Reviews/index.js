@@ -4,10 +4,11 @@ import { useHistory } from "react-router-dom";
 import * as reviewActions from "../../store/review";
 import "./Reviews.css";
 
-export default function Reviews({ spot, user, hasClicked, setHasClicked }) {
+export default function Reviews({ spot, hasClicked, setHasClicked }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => state.review.Reviews);
 
   const [review, setReview] = useState("");

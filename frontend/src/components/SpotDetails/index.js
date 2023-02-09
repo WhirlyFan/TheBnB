@@ -6,6 +6,7 @@ import "./SpotDetails.css";
 import Bookings from "../Bookings";
 import Reviews from "../Reviews";
 import SpotImages from "../SpotImages";
+import SpotInfo from "../SpotInfo";
 
 export default function SpotDetails() {
   const spot = useSelector((state) => state.spots.SpotDetails);
@@ -20,7 +21,7 @@ export default function SpotDetails() {
   useEffect(() => {
     dispatch(spotsActions.getSpotDetailsThunk(spotId))
       .then((data) => {
-        console.log(data)
+        console.log(data);
         setIsLoaded(true);
       })
       .catch(async (res) => {
@@ -50,35 +51,12 @@ export default function SpotDetails() {
         </div> */}
         </div>
         <SpotImages spot={spot} />
-        <div className="spot-details-main">
-          <div>
-            <div>
-              <h2>Spot hosted by {spot.Owner.firstName}</h2>
-              <hr></hr>
-              <div>
-                <img
-                  className="air-cover"
-                  src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
-                  alt="aircover"
-                ></img>
-                <p className="spot-details-overflow">
-                  Every booking includes free protection from Host
-                  cancellations, listing inaccuracies, and other issues like
-                  trouble checking in.sssssssssssssssssssss
-                </p>
-              </div>
-              <hr></hr>
-              <p className="spot-details-overflow">{spot.description}</p>
-              <hr></hr>
-            </div>
-          </div>
-          <Bookings spot={spot} />
-        </div>
+        <SpotInfo spot={spot} />
+        <Bookings spot={spot} />
         <Reviews
           spot={spot}
           setHasClicked={setHasClicked}
           hasClicked={hasClicked}
-          user={user}
         />
       </div>
     </div>
