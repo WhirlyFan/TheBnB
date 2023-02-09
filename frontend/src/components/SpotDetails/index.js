@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import "./SpotDetails.css";
 import Bookings from "../Bookings";
 import Reviews from "../Reviews";
+import SpotImages from "../SpotImages";
 
 export default function SpotDetails() {
   const spot = useSelector((state) => state.spots.SpotDetails);
@@ -18,7 +19,8 @@ export default function SpotDetails() {
 
   useEffect(() => {
     dispatch(spotsActions.getSpotDetailsThunk(spotId))
-      .then(() => {
+      .then((data) => {
+        console.log(data)
         setIsLoaded(true);
       })
       .catch(async (res) => {
@@ -47,21 +49,7 @@ export default function SpotDetails() {
           <span>Save</span>
         </div> */}
         </div>
-        <div>
-          <div className="preview">
-            <img src={spot.SpotImages[0].url} alt="spot-preview"></img>
-          </div>
-          {/* {spot.SpotImages.map((spot) => {
-          return (
-            <img
-              key={`spot-${spot.id}`}
-              className="spot-details-images"
-              src={spot.url}
-              alt={`spot-${spot.id}`}
-            ></img>
-          );
-        })} */}
-        </div>
+        <SpotImages spot={spot} />
         <div className="spot-details-main">
           <div>
             <div>

@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getSpotImages } from "../../store/spotImages";
+import React, { useState } from "react";
 import "./SpotImages.css";
 
-export default function SpotImages() {
-  const dispatch = useDispatch();
-  const { spotId } = useParams();
-  const spotImages = useSelector((state) => state.spotImages);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    dispatch(getSpotImages(spotId)).then(() => setLoaded(true));
-  }, [dispatch, spotId]);
-
+export default function SpotImages({ spot }) {
   return (
-    <div className="spot-images-container">
-      {loaded &&
-        spotImages.map((image) => (
+    <div>
+      <div className="preview">
+        <img src={spot.SpotImages[0].url} alt="spot-preview"></img>
+      </div>
+      {/* {spot.SpotImages.map((spot) => {
+        console.log(spot)
+        return (
           <img
-            className="spot-image"
-            key={image.id}
-            src={image.image_url}
-            alt="Spot"
-          />
-        ))}
+            key={`spot-${spot.id}`}
+            className="spot-details-images"
+            src={spot.url}
+            alt={`spot-${spot.id}`}
+          ></img>
+        );
+      })} */}
     </div>
   );
 }

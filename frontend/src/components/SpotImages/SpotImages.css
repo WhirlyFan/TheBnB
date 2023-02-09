@@ -1,0 +1,11 @@
+.preview > img {
+    object-fit: cover;
+    width: 100%;
+    height: 35rem;
+    border-radius: 10px;
+  }
+
+  .preview {
+    display: flex;
+    justify-content: center;
+  }
