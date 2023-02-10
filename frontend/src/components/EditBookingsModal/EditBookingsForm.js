@@ -20,24 +20,23 @@ export default function EditBookingsForm({
       key: "selection",
     },
   ]);
-  const [oldRange, setOldRange] = useState([
-    {
-      startDate: new Date(booking.startDate),
-      endDate: new Date(booking.endDate),
-    },
-  ]);
-  const [disabled, setDisabled] = useState(false);
+
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
+    const oldDate = {
+      startDate: new Date(booking.startDate),
+      endDate: new Date(booking.endDate),
+    };
     if (
-      range[0].startDate.getTime() === oldRange[0].startDate.getTime() &&
-      range[0].endDate.getTime() === oldRange[0].endDate.getTime()
+      range[0].startDate.getTime() === oldDate.startDate.getTime() &&
+      range[0].endDate.getTime() === oldDate.endDate.getTime()
     ) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-  }, [range, oldRange]);
+  }, [range, booking]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
