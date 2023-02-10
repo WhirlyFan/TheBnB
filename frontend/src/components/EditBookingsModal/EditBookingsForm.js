@@ -44,7 +44,9 @@ export default function EditBookingsForm({
     // console.log("range", range[0]);
     if (
       window.confirm(
-        `Are you sure you want to change this booking to ${formatDate(
+        `Are you sure you want to change this booking from ${formatDate(
+          booking.startDate
+        )} - ${formatDate(booking.endDate)} to ${formatDate(
           range[0].startDate
         )} - ${formatDate(range[0].endDate)}?`
       )

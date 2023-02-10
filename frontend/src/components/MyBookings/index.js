@@ -34,7 +34,7 @@ export default function Trips() {
 
   return (
     <div className="my-bookings">
-      <h1>Your Trips</h1>
+      <h1>Your Bookings</h1>
       <div className="bookings-body">
         {!bookings.length && <div>You have no bookings.</div>}
         {bookings.map((booking) => {

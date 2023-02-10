@@ -437,8 +437,25 @@ router.post(
       return next(err);
     }
 
+    if (newStartTime < new Date().getTime()) {
+      const err = new Error("Validation error");
+      err.title = "Validation error";
+      err.errors = ["Start date cannot be in the past"];
+      err.status = 400;
+      return next(err);
+    }
+
+    if (newEndTime < new Date().getTime()) {
+      const err = new Error("Validation error");
+      err.title = "Validation error";
+      err.errors = ["End date cannot be in the past"];
+      err.status = 400;
+      return next(err);
+    }
+
     const bookings = await Booking.findAll({
       attributes: ["startDate", "endDate"],
+      where: { spotId },
     });
     for (let i = 0; i < bookings.length; i++) {
       let booking = bookings[i];

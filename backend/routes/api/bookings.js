@@ -56,21 +56,29 @@ router.put(
   requireAuth,
   requireAuthor,
   async (req, res, next) => {
-    const { endDate, startDate } = req.body;
-    if (endDate <= startDate) {
-      const err = new Error("Validation error");
-      err.title = "Validation error";
-      err.errors = ["endDate cannot be on or before startDate"];
-      err.status = 400;
+    const booking = await Booking.findByPk(req.params.bookingId);
+    let startDate = booking.dataValues.startDate.getTime();
+    let endDate = booking.dataValues.endDate.getTime();
+    let currentDate = new Date();
+    currentDate = new Date(currentDate.toDateString()).getTime();
+
+    if (!(currentDate > startDate && currentDate < endDate)) {
+      const { startDate, endDate, guests } = req.body;
+      const updatedBooking = await booking.update({
+        startDate,
+        endDate,
+        guests,
+      });
+      return res.json(updatedBooking);
+    } else {
+      const err = new Error(
+        "Bookings that have been started can't be modified"
+      );
+      err.title = "Bookings that have been started can't be modified";
+      err.errors = ["Bookings that have been started can't be modified"];
+      err.status = 403;
       return next(err);
     }
-    const booking = await Booking.findByPk(req.params.bookingId);
-    booking.set({
-      startDate,
-      endDate,
-    });
-    booking.save();
-    return res.json(booking);
   }
 );
 
