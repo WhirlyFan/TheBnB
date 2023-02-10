@@ -77,7 +77,7 @@ export default function Calendar({ range, setRange }) {
                 : [
                     {
                       startDate: new Date(),
-                      endDate: addDays(new Date(), 1),
+                      endDate: addDays((new Date()), 1),
                       key: "selection",
                     },
                   ]

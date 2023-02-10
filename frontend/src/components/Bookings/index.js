@@ -38,6 +38,7 @@ export default function Bookings({ spot }) {
         );
       })
       .catch(async (res) => {
+        console.log(res) //fix this
         const data = await res.json();
         setErrors(data.errors);
       });
