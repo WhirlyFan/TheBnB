@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "../Bookings/Calendar";
 import { formatDate } from "../Bookings";
 import { useDispatch } from "react-redux";
@@ -20,6 +20,25 @@ export default function EditBookingsForm({
       key: "selection",
     },
   ]);
+  const [oldRange, setOldRange] = useState([
+    {
+      startDate: new Date(booking.startDate),
+      endDate: new Date(booking.endDate),
+    },
+  ]);
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    if (
+      range[0].startDate.getTime() === oldRange[0].startDate.getTime() &&
+      range[0].endDate.getTime() === oldRange[0].endDate.getTime()
+    ) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [range, oldRange]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
@@ -54,7 +73,7 @@ export default function EditBookingsForm({
         ))}
       </ul>
       <Calendar range={range} setRange={setRange} />
-      <button type="submit" className="bookings_button">
+      <button type="submit" className="bookings_button" disabled={disabled}>
         Change Booking
       </button>
     </form>
