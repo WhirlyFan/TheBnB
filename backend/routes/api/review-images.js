@@ -13,7 +13,6 @@ const requireAuthor = async function (req, _res, next) {
     const review = await Review.findByPk(reviewImage.toJSON().reviewId, {
       attributes: ["userId"],
     });
-    console.log(review);
     if (req.user.id === review.toJSON().userId) return next();
     else {
       const err = new Error("Forbidden");

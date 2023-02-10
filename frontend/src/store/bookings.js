@@ -20,14 +20,11 @@ export const getUserBookings = (payload) => {
 };
 
 //thunks
-
 export const getSpotBookingsThunk = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(getSpotBookings(data));
-    return data;
-  }
+  const data = await response.json();
+  dispatch(getSpotBookings(data));
+  return data;
 };
 
 export const getUserBookingsThunk = () => async (dispatch) => {
@@ -44,12 +41,8 @@ export const createBookingThunk = (booking, spotId) => async (dispatch) => {
     method: "POST",
     body: JSON.stringify(booking),
   });
-  if (response.ok) {
-    const data = await response.json();
-    return data;
-  } else {
-    throw response;
-  }
+  const data = await response.json();
+  return data;
 };
 
 export const editBookingThunk = (booking, bookingId) => async (dispatch) => {
@@ -57,22 +50,18 @@ export const editBookingThunk = (booking, bookingId) => async (dispatch) => {
     method: "PUT",
     body: JSON.stringify(booking),
   });
-  if (response.ok) {
-    const data = await response.json();
-    //find a way to refresh the store. maybe just dispatch a thunk again?
-    return data;
-  }
+  const data = await response.json();
+  //find a way to refresh the store. maybe just dispatch a thunk again?
+  return data;
 };
 
 export const deleteBookingThunk = (bookingId) => async (dispatch) => {
   const response = await csrfFetch(`/api/bookings/${bookingId}`, {
     method: "DELETE",
   });
-  if (response.ok) {
-    const data = await response.json();
-    //find a way to refresh the store. maybe just dispatch a thunk again?
-    return data;
-  }
+  const data = await response.json();
+  //find a way to refresh the store. maybe just dispatch a thunk again?
+  return data;
 };
 
 //reducer

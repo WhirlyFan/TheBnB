@@ -19,7 +19,7 @@ module.exports = {
         {
           spotId: 2,
           url: "https://blogs-images.forbes.com/games/files/2017/04/Wuhu-Town.jpeg",
-          preview: true,
+          preview: false,
         },
         {
           spotId: 3,
@@ -80,6 +80,26 @@ module.exports = {
           spotId: 14,
           url: "https://a0.muscache.com/im/pictures/miso/Hosting-700029576007934799/original/58d4be6d-35d7-470b-8a01-d133b4f2ce7a.jpeg?im_w=720",
           preview: true,
+        },
+        {
+          spotId: 1,
+          url: "https://a0.muscache.com/im/pictures/miso/Hosting-700029576007934799/original/58d4be6d-35d7-470b-8a01-d133b4f2ce7a.jpeg?im_w=720",
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: "https://a0.muscache.com/im/pictures/miso/Hosting-714635079698390598/original/3e4bd61e-3ce3-4b19-8089-1492f3443c12.jpeg?im_w=720",
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: "https://a0.muscache.com/im/pictures/miso/Hosting-728091517814307485/original/c50089d5-c449-439a-8f19-46e959bf883a.jpeg?im_w=720",
+          preview: false,
+        },
+        {
+          spotId: 1,
+          url: "https://a0.muscache.com/im/pictures/miso/Hosting-43425222/original/f3dfdfad-00e0-4b81-93bf-50cc2167dd9a.png?im_w=720",
+          preview: false,
         },
       ],
       {}

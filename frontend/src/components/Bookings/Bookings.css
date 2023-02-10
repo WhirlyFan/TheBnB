@@ -5,6 +5,9 @@
     margin: 10px 0;
     box-shadow: 0 0 3px #ccc;
     width: fit-content;
+    height: fit-content;
+    position: sticky;
+    top: 1rem;
 }
 
 .bookings_header {
@@ -21,6 +24,15 @@
     width: 100%;
 }
 
+/* .bookings_inputs {
+    border: 1px solid black;
+} */
+
+.add_guests {
+  box-sizing: border-box;
+  width: 100%;
+}
+
 .bookings_button {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -32,11 +44,16 @@
     color: #fff;
     font-weight: bold;
     font-size: 16px;
-    margin-top: 5px;
+    margin-top: .75rem;
+}
+
+.bookings_button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 input.inputBox {
-    font-size: 16px;
+    /* font-size: 16px; */
     text-align: center;
     padding: 5px 8px 4px 8px;
     border-radius: 3px;
@@ -46,6 +63,7 @@ input.inputBox {
   .calendarWrap {
     display: inline-block;
     position: relative;
+    width: fit-content;
   }
 
   .calendarElement {
