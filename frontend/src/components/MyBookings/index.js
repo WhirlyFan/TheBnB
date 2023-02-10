@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserBookingsThunk, deleteBookingThunk, editBookingThunk } from "../../store/bookings";
+import { useHistory } from "react-router-dom";
+import { getUserBookingsThunk, deleteBookingThunk } from "../../store/bookings";
 import "./MyBookings.css";
 import { formatDate } from "../Bookings/index";
 import SpotCard from "../SpotCard";
+import EditBookingsModal from "../EditBookingsModal";
 
 export default function Trips() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.booking?.Bookings);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -14,22 +17,20 @@ export default function Trips() {
 
   //change backend route to include user information
   useEffect(() => {
-    dispatch(getUserBookingsThunk(user.id)).then(() => {
-      setIsLoaded(true);
-    });
-  }, [dispatch, user.id, hasClicked]);
+    if (user) {
+      dispatch(getUserBookingsThunk(user.id)).then(() => {
+        setIsLoaded(true);
+      });
+    }
+  }, [dispatch, user, hasClicked]);
 
   if (!isLoaded) {
     return null;
   }
 
-  const clickEdit = (booking) => {
-    if (window.confirm("Are you sure you want to edit this booking?")) {
-      // dispatch(editBookingThunk(booking.id)).then(() => {
-      //   setHasClicked(!hasClicked);
-      // });
-    }
-  };
+  if (!user) {
+    history.push("/");
+  }
 
   const clickDelete = (booking) => {
     if (window.confirm("Are you sure you want to delete this booking?")) {
@@ -41,7 +42,7 @@ export default function Trips() {
 
   return (
     <div className="my-bookings">
-      <h1>Your Trips</h1>
+      <h1>Your Bookings</h1>
       <div className="bookings-body">
         {!bookings.length && <div>You have no bookings.</div>}
         {bookings.map((booking) => {
@@ -53,14 +54,11 @@ export default function Trips() {
               </strong>
               <SpotCard spot={booking.Spot} />
               <div className="edit-delete-buttons">
-                <button
-                  className="button"
-                  onClick={() => {
-                    clickEdit(booking);
-                  }}
-                >
-                  Edit
-                </button>
+                <EditBookingsModal
+                  booking={booking}
+                  hasClicked={hasClicked}
+                  setHasClicked={setHasClicked}
+                />
                 <button
                   className="button"
                   onClick={() => {
