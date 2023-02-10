@@ -27,9 +27,9 @@ export default function Bookings({ spot }) {
   rating = parseFloat(rating).toFixed(1);
 
   const handleSubmit = (booking, spotId) => {
+    setErrors([]);
     dispatch(createBookingThunk(booking, spotId))
-      .then(async (data) => {
-        console.log(data)
+      .then((data) => {
         alert(
           `Successfully created a booking at ${format(
             data.startDate,

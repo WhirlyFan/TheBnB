@@ -10,15 +10,6 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 export default function Calendar({ range, setRange }) {
-  // date state
-  // const [range, setRange] = useState([
-  //   {
-  //     startDate: null,
-  //     endDate: null,
-  //     key: "selection",
-  //   },
-  // ]);
-
   // open close
   const [open, setOpen] = useState(false);
 

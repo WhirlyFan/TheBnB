@@ -71,9 +71,6 @@ export default function Profile() {
           );
         })}
       </div>
-      <div className="profile-bookings">
-        <h1>Your Bookings</h1>
-      </div>
     </div>
   );
 }

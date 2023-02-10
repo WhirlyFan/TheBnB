@@ -7,7 +7,7 @@
     width: fit-content;
     height: fit-content;
     position: sticky;
-    top: 0;
+    top: 1rem;
 }
 
 .bookings_header {

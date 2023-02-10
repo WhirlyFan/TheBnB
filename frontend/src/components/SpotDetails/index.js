@@ -20,8 +20,7 @@ export default function SpotDetails() {
 
   useEffect(() => {
     dispatch(spotsActions.getSpotDetailsThunk(spotId))
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         setIsLoaded(true);
       })
       .catch(async (res) => {
@@ -50,9 +49,10 @@ export default function SpotDetails() {
         </div>
         <SpotImages spot={spot} />
         <div className="spot-info-bookings">
-          <SpotInfo spot={spot} className="spot-info"/>
+          <SpotInfo spot={spot} className="spot-info" />
           <Bookings spot={spot} />
         </div>
+        <hr></hr>
         <Reviews
           spot={spot}
           setHasClicked={setHasClicked}

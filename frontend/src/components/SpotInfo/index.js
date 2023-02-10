@@ -11,15 +11,13 @@ export default function SpotInfo({ spot }) {
               src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
               alt="aircover"
             ></img>
-            <p className="spot-details-overflow">
+            <p>
               Every booking includes free protection from Host cancellations,
-              listing inaccuracies, and other issues like trouble checking
-              in.
+              listing inaccuracies, and other issues like trouble checking in.
             </p>
           </div>
           <hr></hr>
-          <p className="spot-details-overflow">{spot.description}</p>
-          <hr></hr>
+          <p>{spot.description}</p>
         </div>
       </div>
     </div>

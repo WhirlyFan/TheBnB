@@ -142,7 +142,7 @@ export default function NewSpot() {
           value={previewImage}
           onChange={(e) => setPreviewImage(e.target.value)}
           required
-          placeholder="www.imageurl.com"
+          placeholder="https://www.imageurl.com/image.jpg"
         />
         <button className="button" type="submit">
           Create
