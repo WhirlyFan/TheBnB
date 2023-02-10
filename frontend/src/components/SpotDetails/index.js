@@ -49,8 +49,10 @@ export default function SpotDetails() {
           </div>
         </div>
         <SpotImages spot={spot} />
-        <SpotInfo spot={spot} />
-        <Bookings spot={spot} />
+        <div className="spot-info-bookings">
+          <SpotInfo spot={spot} className="spot-info"/>
+          <Bookings spot={spot} />
+        </div>
         <Reviews
           spot={spot}
           setHasClicked={setHasClicked}

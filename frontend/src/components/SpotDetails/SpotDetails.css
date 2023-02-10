@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .spot-details-2 {
   width: 60vw;
+  margin: 0 0 5rem 0;
 }
 
 .air-cover {
@@ -13,5 +15,15 @@
 }
 
 .spot-details-header {
+  margin: 0 0 1rem 0;
+}
+
+.spot-info {
+  width: 50%;
+}
+
+.spot-info-bookings {
+  display: flex;
+  justify-content: space-between;
   margin: 0 0 1rem 0;
 }

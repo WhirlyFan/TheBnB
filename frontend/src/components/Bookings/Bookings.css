@@ -5,6 +5,9 @@
     margin: 10px 0;
     box-shadow: 0 0 3px #ccc;
     width: fit-content;
+    height: fit-content;
+    position: sticky;
+    top: 0;
 }
 
 .bookings_header {
