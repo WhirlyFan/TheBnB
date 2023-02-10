@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUserBookingsThunk,
-  deleteBookingThunk,
-  editBookingThunk,
-} from "../../store/bookings";
+import { getUserBookingsThunk, deleteBookingThunk } from "../../store/bookings";
 import "./MyBookings.css";
 import { formatDate } from "../Bookings/index";
 import SpotCard from "../SpotCard";
@@ -28,14 +24,6 @@ export default function Trips() {
     return null;
   }
 
-  const clickEdit = (booking) => {
-    if (window.confirm("Are you sure you want to edit this booking?")) {
-      // dispatch(editBookingThunk(booking.id)).then(() => {
-      //   setHasClicked(!hasClicked);
-      // });
-    }
-  };
-
   const clickDelete = (booking) => {
     if (window.confirm("Are you sure you want to delete this booking?")) {
       dispatch(deleteBookingThunk(booking.id)).then(() => {
@@ -58,15 +46,11 @@ export default function Trips() {
               </strong>
               <SpotCard spot={booking.Spot} />
               <div className="edit-delete-buttons">
-                <EditBookingsModal booking={booking} />
-                {/* <button
-                  className="button"
-                  onClick={() => {
-                    clickEdit(booking);
-                  }}
-                >
-                  Edit
-                </button> */}
+                <EditBookingsModal
+                  booking={booking}
+                  hasClicked={hasClicked}
+                  setHasClicked={setHasClicked}
+                />
                 <button
                   className="button"
                   onClick={() => {

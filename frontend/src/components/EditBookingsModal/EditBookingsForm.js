@@ -5,7 +5,12 @@ import { useDispatch } from "react-redux";
 import { editBookingThunk } from "../../store/bookings";
 import "./EditBookingsForm.css";
 
-export default function EditBookingsForm({ booking }) {
+export default function EditBookingsForm({
+  booking,
+  hasClicked,
+  setHasClicked,
+  setShowModal,
+}) {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
   const [range, setRange] = useState([
@@ -26,9 +31,15 @@ export default function EditBookingsForm({ booking }) {
         )} - ${formatDate(range[0].endDate)}?`
       )
     ) {
-      dispatch(editBookingThunk(booking.id, range[0])).then((data) => {
-        console.log("booking", data);
-      });
+      dispatch(editBookingThunk(booking.id, range[0]))
+        .then((data) => {
+          console.log("booking", data);
+          setHasClicked(!hasClicked);
+          setShowModal(false);
+        })
+        .catch((res) => {
+          console.log(res);
+        });
     }
   };
 
@@ -44,7 +55,7 @@ export default function EditBookingsForm({ booking }) {
       </ul>
       <Calendar range={range} setRange={setRange} />
       <button type="submit" className="bookings_button">
-        Submit
+        Change Booking
       </button>
     </form>
   );
