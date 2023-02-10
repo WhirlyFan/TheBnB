@@ -26,10 +26,11 @@ export default function Profile() {
   if (!spots) return null;
 
   const clickDelete = (spot) => {
-    dispatch(spotsActions.deleteSpotThunk(spot.id)).then(() => {
-      setHasSubmit(!hasSubmit);
-      return;
-    });
+    if (window.confirm("Are you sure you want to delete this spot?")) {
+      dispatch(spotsActions.deleteSpotThunk(spot.id)).then(() => {
+        setHasSubmit(!hasSubmit);
+      });
+    }
   };
 
   const clickEdit = (spot) => {

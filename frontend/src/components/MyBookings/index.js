@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserBookingsThunk } from "../../store/bookings";
+import { getUserBookingsThunk, deleteBookingThunk, editBookingThunk } from "../../store/bookings";
 import "./MyBookings.css";
 import { formatDate } from "../Bookings/index";
 import SpotCard from "../SpotCard";
@@ -10,21 +10,34 @@ export default function Trips() {
   const user = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.booking?.Bookings);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasClicked, setHasClicked] = useState(false);
 
   //change backend route to include user information
   useEffect(() => {
     dispatch(getUserBookingsThunk(user.id)).then(() => {
       setIsLoaded(true);
     });
-  }, [dispatch, user.id]);
+  }, [dispatch, user.id, hasClicked]);
 
   if (!isLoaded) {
     return null;
   }
 
-  const clickDelete = (spot) => {};
+  const clickEdit = (booking) => {
+    if (window.confirm("Are you sure you want to edit this booking?")) {
+      // dispatch(editBookingThunk(booking.id)).then(() => {
+      //   setHasClicked(!hasClicked);
+      // });
+    }
+  };
 
-  const clickEdit = (spot) => {};
+  const clickDelete = (booking) => {
+    if (window.confirm("Are you sure you want to delete this booking?")) {
+      dispatch(deleteBookingThunk(booking.id)).then(() => {
+        setHasClicked(!hasClicked);
+      });
+    }
+  };
 
   return (
     <div className="my-bookings">

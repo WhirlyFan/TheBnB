@@ -26,9 +26,11 @@ export default function Reviews({ spot, hasClicked, setHasClicked }) {
     history.push(`/spots/${spotId}/reviews/${review.id}/edit`);
   };
   const clickDelete = (reviewId) => {
-    dispatch(reviewActions.deleteSpotReviewThunk(reviewId)).then(() => {
-      setHasClicked(!hasClicked);
-    });
+    if (window.confirm("Are you sure you want to delete this review?")) {
+      dispatch(reviewActions.deleteSpotReviewThunk(reviewId)).then(() => {
+        setHasClicked(!hasClicked);
+      });
+    }
   };
 
   const handleSubmit = (e) => {
