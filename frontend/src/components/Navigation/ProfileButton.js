@@ -64,7 +64,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
                 Profile
               </button>
               <button className="button-dropdown" onClick={trips}>
-                Trips
+                Bookings
               </button>
               <button className="button-dropdown" onClick={logout}>
                 Log Out

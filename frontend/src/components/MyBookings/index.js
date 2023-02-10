@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserBookingsThunk } from "../../store/bookings";
-import "./Trips.css";
+import "./MyBookings.css";
 import { formatDate } from "../Bookings/index";
 
 export default function Trips() {
@@ -22,7 +22,8 @@ export default function Trips() {
 
   return (
     <div className="my-bookings">
-      <h1>Trips</h1>
+      <h1>Bookings</h1>
+      {!bookings.length && <div>You have no bookings.</div>}
       {bookings.map((booking) => {
         return (
           <div key={booking.id} className="booking">

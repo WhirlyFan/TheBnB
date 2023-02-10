@@ -10,7 +10,7 @@ import Profile from "./components/Profile";
 import NewSpot from "./components/NewSpot";
 import EditSpot from "./components/EditSpot";
 import EditReview from "./components/EditReview";
-import Trips from "./components/Trips";
+import MyBookings from "./components/MyBookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ function App() {
             <Profile />
           </Route>
           <Route exact path={`/:username/trips`}>
-            <Trips />
+            <MyBookings />
           </Route>
           <Route path={"/"}>
             <Redirect to={"/"} />
