@@ -56,21 +56,15 @@ router.put(
   requireAuth,
   requireAuthor,
   async (req, res, next) => {
+    const { startDate, endDate } = req.body;
     const booking = await Booking.findByPk(req.params.bookingId);
-    let startDate = booking.dataValues.startDate.getTime();
-    let endDate = booking.dataValues.endDate.getTime();
+    const spotId = booking.dataValues.spotId;
+    const newStartTime = new Date(startDate).getTime();
+    const newEndTime = new Date(endDate).getTime();
     let currentDate = new Date();
     currentDate = new Date(currentDate.toDateString()).getTime();
 
-    if (!(currentDate > startDate && currentDate < endDate)) {
-      const { startDate, endDate, guests } = req.body;
-      const updatedBooking = await booking.update({
-        startDate,
-        endDate,
-        guests,
-      });
-      return res.json(updatedBooking);
-    } else {
+    if (currentDate > startDate && currentDate < endDate) {
       const err = new Error(
         "Bookings that have been started can't be modified"
       );
@@ -79,6 +73,40 @@ router.put(
       err.status = 403;
       return next(err);
     }
+
+    const bookings = await Booking.findAll({
+      attributes: ["startDate", "endDate"],
+      where: { spotId },
+    });
+    for (let i = 0; i < bookings.length; i++) {
+      let booking = bookings[i];
+
+      let { startDate, endDate } = booking;
+      startDate = new Date(startDate.toDateString()).getTime();
+      endDate = new Date(endDate.toDateString()).getTime();
+
+      if (newStartTime >= startDate && newStartTime <= endDate) {
+        const err = new Error(
+          "Sorry, this spot is already booked for the specified dates"
+        );
+        err.title = " Booking conflict";
+        err.errors = ["Start date conflicts with an existing booking"];
+        err.status = 403;
+        return next(err);
+      }
+
+      if (newEndTime >= startDate && newEndTime <= endDate) {
+        const err = new Error(
+          "Sorry, this spot is already booked for the specified dates"
+        );
+        err.title = " Booking conflict";
+        err.errors = ["End date conflicts with an existing booking"];
+        err.status = 403;
+        return next(err);
+      }
+    }
+    const newBooking = await booking.update({ startDate, endDate });
+    return res.json( newBooking );
   }
 );
 
