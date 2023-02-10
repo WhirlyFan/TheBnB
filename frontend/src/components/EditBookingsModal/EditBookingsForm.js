@@ -72,7 +72,7 @@ export default function EditBookingsForm({
           </li>
         ))}
       </ul>
-      <Calendar range={range} setRange={setRange} />
+      <Calendar range={range} setRange={setRange} editBooking={true} />
       <button type="submit" className="bookings_button" disabled={disabled}>
         Change Booking
       </button>

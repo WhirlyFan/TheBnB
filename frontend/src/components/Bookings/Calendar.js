@@ -9,18 +9,22 @@ import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
-export default function Calendar({ range, setRange }) {
+export default function Calendar({ range, setRange, editBooking }) {
   // open close
   const [open, setOpen] = useState(false);
+  const [calendarClass, setCalendarClass] = useState("calendarElement");
 
   // get the target element to toggle
   const refOne = useRef(null);
 
   useEffect(() => {
+    if (editBooking) {
+      setCalendarClass("calendarElementEdit");
+    }
     // event listeners
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
-  }, []);
+  }, [editBooking]);
 
   // hide dropdown on ESC press
   const hideOnEscape = (e) => {
@@ -84,7 +88,7 @@ export default function Calendar({ range, setRange }) {
             }
             months={1}
             direction="horizontal"
-            className="calendarElement"
+            className={calendarClass}
             rangeColors={["#f33e5b", "#3ecf8e", "#fed14c"]}
           />
         )}
