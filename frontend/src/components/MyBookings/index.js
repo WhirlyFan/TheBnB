@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getUserBookingsThunk, deleteBookingThunk } from "../../store/bookings";
 import "./MyBookings.css";
 import { formatDate } from "../Bookings/index";
@@ -8,6 +9,7 @@ import EditBookingsModal from "../EditBookingsModal";
 
 export default function Trips() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.booking?.Bookings);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -15,13 +17,19 @@ export default function Trips() {
 
   //change backend route to include user information
   useEffect(() => {
-    dispatch(getUserBookingsThunk(user.id)).then(() => {
-      setIsLoaded(true);
-    });
-  }, [dispatch, user.id, hasClicked]);
+    if (user) {
+      dispatch(getUserBookingsThunk(user.id)).then(() => {
+        setIsLoaded(true);
+      });
+    }
+  }, [dispatch, user, hasClicked]);
 
   if (!isLoaded) {
     return null;
+  }
+
+  if (!user) {
+    history.push("/");
   }
 
   const clickDelete = (booking) => {

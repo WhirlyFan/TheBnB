@@ -444,7 +444,7 @@ router.post(
       err.status = 400;
       return next(err);
     }
-
+    // this conditional should never run because of the validation above
     if (newEndTime < new Date().getTime()) {
       const err = new Error("Validation error");
       err.title = "Validation error";
