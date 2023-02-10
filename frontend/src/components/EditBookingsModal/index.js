@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import EditBookingsForm from "./EditBookingsForm";
 
-export default function ChannelModel() {
+export default function ChannelModel({ booking }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ export default function ChannelModel() {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditBookingsForm setShowModal={setShowModal} />
+          <EditBookingsForm setShowModal={setShowModal} booking={booking} />
         </Modal>
       )}
     </>

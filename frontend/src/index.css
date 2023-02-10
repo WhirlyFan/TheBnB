@@ -33,6 +33,10 @@ ul {
   box-shadow: 0 2px 5px lightgray;
 }
 
+.button:active {
+  transform: translateY(2px);
+}
+
 .form {
   display: flex;
   flex-direction: column;

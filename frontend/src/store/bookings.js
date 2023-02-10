@@ -45,7 +45,7 @@ export const createBookingThunk = (booking, spotId) => async (dispatch) => {
   return data;
 };
 
-export const editBookingThunk = (booking, bookingId) => async (dispatch) => {
+export const editBookingThunk = (bookingId, booking) => async (dispatch) => {
   const response = await csrfFetch(`/api/bookings/${bookingId}`, {
     method: "PUT",
     body: JSON.stringify(booking),
