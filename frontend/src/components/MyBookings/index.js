@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserBookingsThunk, deleteBookingThunk, editBookingThunk } from "../../store/bookings";
+import {
+  getUserBookingsThunk,
+  deleteBookingThunk,
+  editBookingThunk,
+} from "../../store/bookings";
 import "./MyBookings.css";
 import { formatDate } from "../Bookings/index";
 import SpotCard from "../SpotCard";
+import EditBookingsModal from "../EditBookingsModal";
 
 export default function Trips() {
   const dispatch = useDispatch();
@@ -53,14 +58,15 @@ export default function Trips() {
               </strong>
               <SpotCard spot={booking.Spot} />
               <div className="edit-delete-buttons">
-                <button
+                <EditBookingsModal booking={booking} />
+                {/* <button
                   className="button"
                   onClick={() => {
                     clickEdit(booking);
                   }}
                 >
                   Edit
-                </button>
+                </button> */}
                 <button
                   className="button"
                   onClick={() => {

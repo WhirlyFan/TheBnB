@@ -45,6 +45,7 @@ export default function SpotDetails() {
               ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews}{" "}
               reviews · {spot.address}
             </span>
+            {/* <button>Edit Photos</button> */}
           </div>
         </div>
         <SpotImages spot={spot} />
