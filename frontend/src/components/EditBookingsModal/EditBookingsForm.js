@@ -41,7 +41,6 @@ export default function EditBookingsForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    // console.log("range", range[0]);
     if (
       window.confirm(
         `Are you sure you want to change this booking from ${formatDate(
@@ -52,13 +51,13 @@ export default function EditBookingsForm({
       )
     ) {
       dispatch(editBookingThunk(booking.id, range[0]))
-        .then((data) => {
-          console.log("booking", data);
+        .then(() => {
           setHasClicked(!hasClicked);
           setShowModal(false);
         })
-        .catch((res) => {
-          console.log(res);
+        .catch(async (res) => {
+          const data = await res.json();
+          setErrors(data.errors);
         });
     }
   };
