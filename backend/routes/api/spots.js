@@ -565,6 +565,15 @@ router.post("/:spotId/preview", requireAuth, async (req, res, next) => {
   }
 
   const { url } = req.body;
+
+  if (url.length > 255) {
+    const err = new Error("Image url is too long");
+    err.title = "Image url is too long";
+    err.errors = ["Image url must be less than 255 characters"];
+    err.status = 400;
+    return next(err);
+  }
+
   const spotImage = await SpotImage.create({
     spotId,
     url,
@@ -641,9 +650,18 @@ router.put("/:spotId/preview", requireAuth, async (req, res, next) => {
 
   const spotImage = spotImages[0];
   const { url } = req.body;
+
+  if (url.length > 255) {
+    const err = new Error("Image url is too long");
+    err.title = "Image url is too long";
+    err.errors = ["Image url must be less than 255 characters"];
+    err.status = 400;
+    return next(err);
+  }
+
   spotImage.set({ url });
   await spotImage.save();
   return res.json(spotImage);
-})
+});
 
 module.exports = router;
