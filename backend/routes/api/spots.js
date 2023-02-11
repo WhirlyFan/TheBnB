@@ -615,4 +615,35 @@ router.delete(
   }
 );
 
+// edit a preview spot image by id
+router.put("/:spotId/preview", requireAuth, async (req, res, next) => {
+  const { spotId } = req.params;
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    const err = new Error("Couldn't find a Spot with the specified id");
+    err.title = "Couldn't find a Spot with the specified id";
+    err.errors = ["Spot couldn't be found"];
+    err.status = 404;
+    return next(err);
+  }
+  const spotImages = await SpotImage.findAll({
+    where: { spotId, preview: true },
+  });
+
+  if (spotImages.length === 0) {
+    const err = new Error("You don't have a preview image for this spot");
+    err.title = "You don't have a preview image for this spot";
+    err.errors = ["You don't have a preview image for this spot"];
+    err.status = 403;
+    return next(err);
+  }
+
+  const spotImage = spotImages[0];
+  const { url } = req.body;
+  spotImage.set({ url });
+  await spotImage.save();
+  return res.json(spotImage);
+})
+
 module.exports = router;
