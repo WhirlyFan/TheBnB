@@ -57,7 +57,7 @@ export default function EditBookingsForm({
         })
         .catch(async (res) => {
           const data = await res.json();
-          setErrors(data.errors);
+          if (data && data.errors) setErrors(data.errors);
         });
     }
   };

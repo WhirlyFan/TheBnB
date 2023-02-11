@@ -58,9 +58,8 @@ export default function Bookings({ spot }) {
         history.push(`/${user.username}/trips`);
       })
       .catch(async (res) => {
-        console.log(res); //fix this
         const data = await res.json();
-        setErrors(data.errors);
+        if (data && data.errors) setErrors(data.errors);
       });
   };
 
