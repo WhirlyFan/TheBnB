@@ -540,4 +540,79 @@ router.delete("/:spotId", requireAuth, requireAuthor, async (req, res) => {
   });
 });
 
+//create a preview spot image
+router.post("/:spotId/preview", requireAuth, async (req, res, next) => {
+  const { spotId } = req.params;
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    const err = new Error("Couldn't find a Spot with the specified id");
+    err.title = "Couldn't find a Spot with the specified id";
+    err.errors = ["Spot couldn't be found"];
+    err.status = 404;
+    return next(err);
+  }
+  const spotImages = await SpotImage.findAll({
+    where: { spotId, preview: true },
+  });
+
+  if (spotImages.length > 0) {
+    const err = new Error("You already have a preview image for this spot");
+    err.title = "You already have a preview image for this spot";
+    err.errors = ["You already have a preview image for this spot"];
+    err.status = 403;
+    return next(err);
+  }
+
+  const { url } = req.body;
+  const spotImage = await SpotImage.create({
+    spotId,
+    url,
+    preview: true,
+  });
+  const image = spotImage.toJSON();
+  return res.json({
+    id: image.id,
+    url: image.url,
+    preview: image.preview,
+  });
+});
+
+// delete a preview spot image by id
+router.delete(
+  "/:spotId/preview",
+  requireAuth,
+  requireAuthor,
+  async (req, res, next) => {
+    const { spotId } = req.params;
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      const err = new Error("Couldn't find a Spot with the specified id");
+      err.title = "Couldn't find a Spot with the specified id";
+      err.errors = ["Spot couldn't be found"];
+      err.status = 404;
+      return next(err);
+    }
+    const spotImages = await SpotImage.findAll({
+      where: { spotId, preview: true },
+    });
+
+    if (spotImages.length === 0) {
+      const err = new Error("You don't have a preview image for this spot");
+      err.title = "You don't have a preview image for this spot";
+      err.errors = ["You don't have a preview image for this spot"];
+      err.status = 403;
+      return next(err);
+    }
+
+    const spotImage = spotImages[0];
+    spotImage.destroy();
+    return res.json({
+      message: "Successfully deleted",
+      statusCode: res.statusCode,
+    });
+  }
+);
+
 module.exports = router;

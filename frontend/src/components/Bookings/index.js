@@ -68,7 +68,7 @@ export default function Bookings({ spot }) {
       <div className="bookings_header">
         <div>${spot.price} night</div>
         <div>
-          ★{rating} · {spot.numReviews} reviews
+          ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews} reviews
         </div>
       </div>
       <div className="bookings_inputs">

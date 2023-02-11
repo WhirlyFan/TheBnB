@@ -39,4 +39,9 @@ router.delete("/:imageId", requireAuth, requireAuthor, async (req, res) => {
   });
 });
 
+//delete a preview spot image
+router.delete("/preview/:imageId", requireAuth, requireAuthor, async (req, res) => {
+  
+})
+
 module.exports = router;

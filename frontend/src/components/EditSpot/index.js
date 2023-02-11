@@ -32,6 +32,7 @@ export default function EditSpot() {
       setName(res.name)
       setDescription(res.description)
       setPrice(res.price)
+      setPreviewImage(res.SpotImages.find((image) => image.preview).url)
       setIsLoaded(true)
     })
   }, [dispatch, spotId])
