@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
+import "./NewSpot.css";
 
 export default function NewSpot() {
   const dispatch = useDispatch();
@@ -144,6 +145,28 @@ export default function NewSpot() {
           required
           placeholder="https://www.imageurl.com/image.jpg"
         />
+        <div className="preview-image-container-1">
+          {previewImage.length > 0 && (
+            <div className="preview-image-container-2">
+              <img
+                src={previewImage}
+                alt="preview"
+                className="preview-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    "https://static.vecteezy.com/system/resources/previews/004/141/669/original/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
+                }}
+              />
+              <i
+                className={`fas fa-remove fa-lg remove-icon`}
+                onClick={() => setPreviewImage("")}
+              ></i>
+            </div>
+          )}
+        </div>
+        {/* <label>Other Image Urls</label>
+        <input type="url" placeholder="https://www.imageurl.com/image.jpg" /> */}
         <button className="button" type="submit">
           Create
         </button>

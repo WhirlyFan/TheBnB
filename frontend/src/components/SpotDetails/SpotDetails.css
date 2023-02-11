@@ -14,10 +14,6 @@
   height: 2rem;
 }
 
-.spot-details-header {
-  margin: 0 0 1rem 0;
-}
-
 .spot-info {
   width: 55%;
 }
@@ -26,4 +22,10 @@
   display: flex;
   justify-content: space-between;
   margin: 0 0 1rem 0;
+}
+
+.spot-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
