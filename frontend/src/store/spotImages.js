@@ -25,26 +25,26 @@ export const createSpotImageThunk = (image, spotId) => async (dispatch) => {
     body: JSON.stringify(image),
   });
   const data = await response.json();
-//   dispatch(getSpotDetailsThunk(data.id));
+  //   dispatch(getSpotDetailsThunk(data.id));
   return data;
 };
 
-export const editSpotImageThunk = (image, imageId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/images/${imageId}`, {
+export const editSpotPreviewImageThunk = (url, spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/preview`, {
     method: "PUT",
-    body: JSON.stringify(image),
+    body: JSON.stringify(url),
   });
   const data = await response.json();
-//   dispatch(getSpotDetailsThunk(data.id));
+  //   dispatch(getSpotDetailsThunk(data.id));
   return data;
 };
 
 export const deleteSpotImageThunk = (imageId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/images/${imageId}`, {
+  const response = await csrfFetch(`/api/spot-images/${imageId}`, {
     method: "DELETE",
   });
   const data = await response.json();
-//   dispatch(getSpotDetailsThunk(data.id));
+  //   dispatch(getSpotDetailsThunk(data.id));
   return data;
 };
 

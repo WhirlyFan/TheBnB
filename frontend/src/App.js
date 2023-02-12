@@ -11,6 +11,7 @@ import NewSpot from "./components/NewSpot";
 import EditSpot from "./components/EditSpot";
 import EditReview from "./components/EditReview";
 import MyBookings from "./components/MyBookings";
+import EditSpotImages from "./components/EditSpotImages";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path={`/spots/:spotId/edit`}>
             <EditSpot />
+          </Route>
+          <Route exact path={`/spots/:spotId/images/edit`}>
+            <EditSpotImages />
           </Route>
           <Route exact path={`/spots/:spotId/reviews/:reviewId/edit`}>
             <EditReview />

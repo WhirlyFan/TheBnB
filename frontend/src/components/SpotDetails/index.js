@@ -42,12 +42,18 @@ export default function SpotDetails() {
           <div className="spot-details-header">
             <h1>{spot.name}</h1>
             {user.id === spot.ownerId && (
-              <div>
+              <div className="spot-details-edit-buttons">
                 <button
                   className="button"
                   onClick={() => history.push(`/spots/${spot.id}/edit`)}
                 >
                   Edit Spot
+                </button>
+                <button
+                  className="button"
+                  onClick={() => history.push(`/spots/${spot.id}/images/edit`)}
+                >
+                  Edit Spot Images
                 </button>
               </div>
             )}

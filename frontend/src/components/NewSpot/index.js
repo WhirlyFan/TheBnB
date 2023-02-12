@@ -145,13 +145,13 @@ export default function NewSpot() {
           required
           placeholder="https://www.imageurl.com/image.jpg"
         />
-        <div className="preview-image-container-1">
+        <div className="image-container-1">
           {previewImage.length > 0 && (
-            <div className="preview-image-container-2">
+            <div className="image-container-2">
               <img
                 src={previewImage}
                 alt="preview"
-                className="preview-image"
+                className="spot-image"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src =
