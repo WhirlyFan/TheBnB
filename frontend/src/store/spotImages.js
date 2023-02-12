@@ -40,7 +40,7 @@ export const editSpotPreviewImageThunk = (url, spotId) => async (dispatch) => {
 };
 
 export const deleteSpotImageThunk = (imageId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spot-image/${imageId}`, {
+  const response = await csrfFetch(`/api/spot-images/${imageId}`, {
     method: "DELETE",
   });
   const data = await response.json();

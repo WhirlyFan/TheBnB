@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { editSpotPreviewImageThunk } from "../../store/spotImages";
 import "./EditSpotImages.css";
+import {
+  deleteSpotImageThunk,
+  createSpotImageThunk,
+} from "../../store/spotImages";
 
 export default function EditSpotImages() {
   const dispatch = useDispatch();
@@ -14,7 +18,10 @@ export default function EditSpotImages() {
   const [isLoaded, setIsLoaded] = useState(false);
   //   const [hasClicked, setHasClicked] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
+  const [newImage, setNewImage] = useState("");
   const [images, setImages] = useState([]);
+  const [errors, setErrors] = useState([]);
+  const [otherErrors, setOtherErrors] = useState([]);
 
   useEffect(() => {
     dispatch(spotsActions.getSpotDetailsThunk(spotId))
@@ -25,23 +32,59 @@ export default function EditSpotImages() {
       })
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) history.push("/");
+        if (data && data.errors) setErrors(data.errors);
       });
   }, [dispatch, spotId, user, history]);
 
   if (!spot || !isLoaded) return null;
 
-  const editPreviewImage = async (e) => {
+  const editPreviewImage = (e) => {
     e.preventDefault();
-    const data = await dispatch(
-      editSpotPreviewImageThunk({ url: previewImage }, spotId)
-    );
-    if (data) {
-      setPreviewImage(data.url);
-      alert("Preview image has been updated.");
-    } else {
-      setPreviewImage("");
+    dispatch(editSpotPreviewImageThunk({ url: previewImage }, spotId))
+      .then((data) => {
+        if (data) {
+          setPreviewImage(data.url);
+          alert("Preview image has been updated.");
+        } else {
+          setPreviewImage("");
+        }
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
+  };
+
+  const deleteImage = (imageId) => {
+    if (window.confirm("Are you sure you want to delete this image?")) {
     }
+    dispatch(deleteSpotImageThunk(imageId))
+      .then(() => {
+        setImages(images.filter((image) => image.id !== imageId));
+        alert("Image has been deleted.");
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) otherErrors(data.errors);
+      });
+  };
+
+  const addImage = (e) => {
+    e.preventDefault();
+    dispatch(createSpotImageThunk({ url: newImage }, spotId))
+      .then((data) => {
+        if (data) {
+          setImages([...images, data]);
+          setNewImage("");
+          alert("Image has been added.");
+        } else {
+          setNewImage("");
+        }
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setOtherErrors(data.errors);
+      });
   };
 
   return (
@@ -49,6 +92,13 @@ export default function EditSpotImages() {
       <div className="edit-preview-image">
         <h1>Edit Spot Images</h1>
         <form onSubmit={editPreviewImage}>
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx} className="error">
+                {error}
+              </li>
+            ))}
+          </ul>
           <div>
             <label>Preview Image</label>
             <input
@@ -85,13 +135,39 @@ export default function EditSpotImages() {
           </button>
         </form>
       </div>
-        <h2>Spot Images</h2>
+      <div className="edit-preview-image">
+        <form onSubmit={addImage}>
+          <ul>
+            {otherErrors.map((error, idx) => (
+              <li key={idx} className="error">
+                {error}
+              </li>
+            ))}
+          </ul>
+          <label>{"Add Additional Images (max: 4)"}</label>
+          <input
+            type="url"
+            value={newImage}
+            onChange={(e) => setNewImage(e.target.value)}
+            placeholder="https://www.imageurl.com/image.jpg"
+            required
+            className="edit-spot-images-input"
+          />
+          <button type="submit" className="button">
+            Save
+          </button>
+        </form>
+      </div>
+      <h2>Spot Images</h2>
       <div className="edit-spot-images">
         {images.length > 0 && (
           <div className="edit-spot-images">
             {images.map((image) => {
               return (
-                <div className="spot-image-container-1">
+                <div
+                  key={`image-${image.id}`}
+                  className="spot-image-container-1"
+                >
                   <div className="spot-image-container-2">
                     <img
                       src={image.url}
@@ -105,7 +181,7 @@ export default function EditSpotImages() {
                     />
                     <i
                       className={`fas fa-remove fa-lg remove-icon`}
-                      onClick={() => setPreviewImage("")}
+                      onClick={() => deleteImage(image.id)}
                     ></i>
                   </div>
                 </div>
