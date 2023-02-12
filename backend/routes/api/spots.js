@@ -369,31 +369,62 @@ router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
   return res.status(201).json(newReview);
 });
 
-//Add an Image to a Spot based on the Spot's id
-router.post("/:spotId/images", requireAuthor, requireAuth, async (req, res) => {
-  const { url, preview } = req.body;
-  const { spotId } = req.params;
+//Add an Image to a Spot based on the Spot's id if it's not a preview image and there are less than 5 images
+router.post(
+  "/:spotId/images",
+  requireAuthor,
+  requireAuth,
+  async (req, res, next) => {
+    const { spotId } = req.params;
+    const { url, preview } = req.body;
+    const spot = await Spot.findByPk(spotId);
 
-  if (url.length > 255) {
-    const err = new Error("Image URL too long");
-    err.title = "Image URL too long";
-    err.errors = ["Image URL must be 255 characters or less"];
-    err.status = 403;
-    return next(err);
+    if (url.length > 255) {
+      const err = new Error("Image url is too long");
+      err.title = "Image url is too long";
+      err.errors = ["Image url must be less than 255 characters"];
+      err.status = 400;
+      return next(err);
+    }
+
+    if (!spot) {
+      const err = new Error("Couldn't find a Spot with the specified id");
+      err.title = "Couldn't find a Spot with the specified id";
+      err.errors = ["Spot couldn't be found"];
+      err.status = 404;
+      return next(err);
+    }
+    const spotImages = await SpotImage.findAll({
+      where: { spotId },
+    });
+    if (spotImages.length >= 5) {
+      const err = new Error("Too many images for this Spot");
+      err.title = "Too many images for this Spot";
+      err.errors = ["Maximum of 5 images per Spot"];
+      err.status = 403;
+      return next(err);
+    }
+
+    if (preview) {
+      const spotImages = await SpotImage.findAll({
+        where: { spotId, preview: true },
+      });
+      if (spotImages.length) {
+        const err = new Error("Preview image already exists for this Spot");
+        err.title = "Preview image already exists for this Spot";
+        err.errors = ["Preview image already exists for this Spot"];
+        err.status = 403;
+        return next(err);
+      }
+    }
+    const newSpotImage = await SpotImage.create({
+      spotId,
+      url,
+      preview,
+    });
+    return res.status(201).json(newSpotImage);
   }
-
-  const spotImage = await SpotImage.create({
-    spotId,
-    url,
-    preview,
-  });
-  const image = spotImage.toJSON();
-  return res.json({
-    id: image.id,
-    url: image.url,
-    preview: image.preview,
-  });
-});
+);
 
 //POST a spot
 router.post("/", validateSpot, requireAuth, async (req, res) => {
@@ -538,6 +569,130 @@ router.delete("/:spotId", requireAuth, requireAuthor, async (req, res) => {
     message: "Successfully deleted",
     statusCode: res.statusCode,
   });
+});
+
+// //create a preview spot image
+// router.post("/:spotId/preview", requireAuth, async (req, res, next) => {
+//   const { spotId } = req.params;
+//   const spot = await Spot.findByPk(spotId);
+
+//   if (!spot) {
+//     const err = new Error("Couldn't find a Spot with the specified id");
+//     err.title = "Couldn't find a Spot with the specified id";
+//     err.errors = ["Spot couldn't be found"];
+//     err.status = 404;
+//     return next(err);
+//   }
+//   const spotImages = await SpotImage.findAll({
+//     where: { spotId, preview: true },
+//   });
+
+//   if (spotImages.length > 0) {
+//     const err = new Error("You already have a preview image for this spot");
+//     err.title = "You already have a preview image for this spot";
+//     err.errors = ["You already have a preview image for this spot"];
+//     err.status = 403;
+//     return next(err);
+//   }
+
+//   const { url } = req.body;
+
+//   if (url.length > 255) {
+//     const err = new Error("Image url is too long");
+//     err.title = "Image url is too long";
+//     err.errors = ["Image url must be less than 255 characters"];
+//     err.status = 400;
+//     return next(err);
+//   }
+
+//   const spotImage = await SpotImage.create({
+//     spotId,
+//     url,
+//     preview: true,
+//   });
+//   const image = spotImage.toJSON();
+//   return res.json({
+//     id: image.id,
+//     url: image.url,
+//     preview: image.preview,
+//   });
+// });
+
+// delete a preview spot image by id
+router.delete(
+  "/:spotId/preview",
+  requireAuth,
+  requireAuthor,
+  async (req, res, next) => {
+    const { spotId } = req.params;
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      const err = new Error("Couldn't find a Spot with the specified id");
+      err.title = "Couldn't find a Spot with the specified id";
+      err.errors = ["Spot couldn't be found"];
+      err.status = 404;
+      return next(err);
+    }
+    const spotImages = await SpotImage.findAll({
+      where: { spotId, preview: true },
+    });
+
+    if (spotImages.length === 0) {
+      const err = new Error("You don't have a preview image for this spot");
+      err.title = "You don't have a preview image for this spot";
+      err.errors = ["You don't have a preview image for this spot"];
+      err.status = 403;
+      return next(err);
+    }
+
+    const spotImage = spotImages[0];
+    spotImage.destroy();
+    return res.json({
+      message: "Successfully deleted",
+      statusCode: res.statusCode,
+    });
+  }
+);
+
+// edit a preview spot image by id
+router.put("/:spotId/preview", requireAuth, async (req, res, next) => {
+  const { spotId } = req.params;
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    const err = new Error("Couldn't find a Spot with the specified id");
+    err.title = "Couldn't find a Spot with the specified id";
+    err.errors = ["Spot couldn't be found"];
+    err.status = 404;
+    return next(err);
+  }
+  const spotImages = await SpotImage.findAll({
+    where: { spotId, preview: true },
+  });
+
+  if (spotImages.length === 0) {
+    const err = new Error("You don't have a preview image for this spot");
+    err.title = "You don't have a preview image for this spot";
+    err.errors = ["You don't have a preview image for this spot"];
+    err.status = 403;
+    return next(err);
+  }
+
+  const spotImage = spotImages[0];
+  const { url } = req.body;
+
+  if (url.length > 255) {
+    const err = new Error("Image url is too long");
+    err.title = "Image url is too long";
+    err.errors = ["Image url must be less than 255 characters"];
+    err.status = 400;
+    return next(err);
+  }
+
+  spotImage.set({ url });
+  await spotImage.save();
+  return res.json(spotImage);
 });
 
 module.exports = router;

@@ -58,9 +58,8 @@ export default function Bookings({ spot }) {
         history.push(`/${user.username}/trips`);
       })
       .catch(async (res) => {
-        console.log(res); //fix this
         const data = await res.json();
-        setErrors(data.errors);
+        if (data && data.errors) setErrors(data.errors);
       });
   };
 
@@ -69,7 +68,7 @@ export default function Bookings({ spot }) {
       <div className="bookings_header">
         <div>${spot.price} night</div>
         <div>
-          ★{rating} · {spot.numReviews} reviews
+          ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews} reviews
         </div>
       </div>
       <div className="bookings_inputs">

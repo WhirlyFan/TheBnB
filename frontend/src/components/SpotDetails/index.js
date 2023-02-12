@@ -38,14 +38,25 @@ export default function SpotDetails() {
   return (
     <div className="spot-details-1">
       <div className="spot-details-2">
-        <div className="spot-details-header">
-          <h1>{spot.name}</h1>
+        <div>
+          <div className="spot-details-header">
+            <h1>{spot.name}</h1>
+            {user.id === spot.ownerId && (
+              <div>
+                <button
+                  className="button"
+                  onClick={() => history.push(`/spots/${spot.id}/edit`)}
+                >
+                  Edit Spot
+                </button>
+              </div>
+            )}
+          </div>
           <div className="spot-details-sub-header">
             <span>
               ★{!isNaN(rating) ? rating : "No Reviews"} · {spot.numReviews}{" "}
               reviews · {spot.address}
             </span>
-            {/* <button>Edit Photos</button> */}
           </div>
         </div>
         <SpotImages spot={spot} />
