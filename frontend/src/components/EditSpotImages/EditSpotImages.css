@@ -63,6 +63,7 @@
   .edit-spot-images {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 3rem;
   }
 
   .edit-spot-images > div {

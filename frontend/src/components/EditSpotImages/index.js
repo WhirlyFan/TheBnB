@@ -40,6 +40,7 @@ export default function EditSpotImages() {
 
   const editPreviewImage = (e) => {
     e.preventDefault();
+    setErrors([]);
     dispatch(editSpotPreviewImageThunk({ url: previewImage }, spotId))
       .then((data) => {
         if (data) {
@@ -56,6 +57,7 @@ export default function EditSpotImages() {
   };
 
   const deleteImage = (imageId) => {
+    setOtherErrors([]);
     if (window.confirm("Are you sure you want to delete this image?")) {
     }
     dispatch(deleteSpotImageThunk(imageId))
@@ -71,6 +73,7 @@ export default function EditSpotImages() {
 
   const addImage = (e) => {
     e.preventDefault();
+    setOtherErrors([]);
     dispatch(createSpotImageThunk({ url: newImage }, spotId))
       .then((data) => {
         if (data) {
@@ -91,7 +94,7 @@ export default function EditSpotImages() {
     <div className="edit-spot-images-container">
       <div className="edit-preview-image">
         <h1>Edit Spot Images</h1>
-        <form onSubmit={editPreviewImage}>
+        <form onSubmit={editPreviewImage} className="form">
           <ul>
             {errors.map((error, idx) => (
               <li key={idx} className="error">
@@ -136,7 +139,7 @@ export default function EditSpotImages() {
         </form>
       </div>
       <div className="edit-preview-image">
-        <form onSubmit={addImage}>
+        <form onSubmit={addImage} className="form">
           <ul>
             {otherErrors.map((error, idx) => (
               <li key={idx} className="error">
