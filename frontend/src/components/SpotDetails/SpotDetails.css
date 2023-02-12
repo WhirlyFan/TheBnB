@@ -10,6 +10,16 @@
   margin: 0 0 5rem 0;
 }
 
+.spot-details-edit-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 1rem 0;
+}
+
+.spot-details-edit-buttons button {
+  margin: 0 0 0 1rem;
+}
+
 .air-cover {
   height: 2rem;
 }

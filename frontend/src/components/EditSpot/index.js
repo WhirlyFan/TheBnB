@@ -32,7 +32,7 @@ export default function EditSpot() {
       setName(res.name)
       setDescription(res.description)
       setPrice(res.price)
-      setPreviewImage(res.SpotImages.find((image) => image.preview).url)
+      // setPreviewImage(res.SpotImages.find((image) => image.preview).url)
       setIsLoaded(true)
     })
   }, [dispatch, spotId])
@@ -155,7 +155,7 @@ export default function EditSpot() {
           required
           placeholder="123"
         />
-        <label>{"Add an Image (Optional)"}</label>
+        {/* <label>{"Add an Image (Optional)"}</label>
         <input
           type="text"
           value={previewImage}
@@ -181,9 +181,9 @@ export default function EditSpot() {
               ></i>
             </div>
           )}
-        </div>
+        </div> */}
         <button className="button" type="submit">
-          Edit
+          Save
         </button>
       </form>
     </div>
