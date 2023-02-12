@@ -163,6 +163,11 @@ export default function EditSpotImages() {
       </div>
       <h2>Spot Images</h2>
       <div className="edit-spot-images">
+        {!images.length && (
+          <div className="no-images">
+            <p>No images have been added yet.</p>
+          </div>
+        )}
         {images.length > 0 && (
           <div className="edit-spot-images">
             {images.map((image) => {
