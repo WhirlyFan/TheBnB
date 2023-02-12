@@ -42,6 +42,11 @@ function ProfileButton({ user, setLogin, setShowModal }) {
     history.push(`/spots/new`);
   };
 
+  const trips = (e) => {
+    e.preventDefault();
+    history.push(`/${user.username}/trips`);
+  };
+
   return (
     <>
       <button id={"profile-button"} onClick={openMenu}>
@@ -57,6 +62,9 @@ function ProfileButton({ user, setLogin, setShowModal }) {
               </button>
               <button className="button-dropdown" onClick={profile}>
                 Profile
+              </button>
+              <button className="button-dropdown" onClick={trips}>
+                Bookings
               </button>
               <button className="button-dropdown" onClick={logout}>
                 Log Out

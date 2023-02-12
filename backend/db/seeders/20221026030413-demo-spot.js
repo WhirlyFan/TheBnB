@@ -137,7 +137,7 @@ module.exports = {
           price: 285,
         },
         {
-          ownerId: 3,
+          ownerId: 1,
           address: "11111 Chesapeake Rd.",
           city: "Malibu",
           state: "CA",
@@ -150,7 +150,7 @@ module.exports = {
           price: 350,
         },
         {
-          ownerId: 2,
+          ownerId: 1,
           address: "11111 Chesapeake Rd.",
           city: "Joshua Tree",
           state: "CA",
@@ -163,7 +163,7 @@ module.exports = {
           price: 250,
         },
         {
-          ownerId: 2,
+          ownerId: 1,
           address: "11111 Chesapeake Rd.",
           city: "Chelan",
           state: "CA",
@@ -176,7 +176,7 @@ module.exports = {
           price: 220,
         },
         {
-          ownerId: 2,
+          ownerId: 1,
           address: "11111 Chesapeake Rd.",
           city: "Sedona",
           state: "AZ",

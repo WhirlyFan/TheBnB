@@ -118,15 +118,16 @@ export const editSpotThunk = (spot, preview, spotId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(editSpot(data));
-    const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
-      method: "POST",
-      body: JSON.stringify(preview),
-    });
-    if (imageResponse.ok) {
-      return data;
-    } else {
-      throw imageResponse;
-    }
+    // const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
+    //   method: "POST",
+    //   body: JSON.stringify(preview),
+    // });
+    // if (imageResponse.ok) {
+    //   return data;
+    // } else {
+    //   throw imageResponse;
+    // }
+    return data;
   } else {
     throw response;
   }

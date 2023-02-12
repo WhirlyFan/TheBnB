@@ -10,7 +10,8 @@ export default function AllSpots() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(spotsActions.getAllSpotsThunk()).then(() => {
+    dispatch(spotsActions.getAllSpotsThunk()).then((data) => {
+      console.log("data", data)
       setIsLoaded(true);
     });
   }, [dispatch]);

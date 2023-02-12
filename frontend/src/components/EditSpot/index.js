@@ -32,6 +32,7 @@ export default function EditSpot() {
       setName(res.name)
       setDescription(res.description)
       setPrice(res.price)
+      // setPreviewImage(res.SpotImages.find((image) => image.preview).url)
       setIsLoaded(true)
     })
   }, [dispatch, spotId])
@@ -54,7 +55,7 @@ export default function EditSpot() {
           description,
           price,
         },
-        { url: previewImage, preview: true },
+        { url: previewImage, preview: false },
         spotId
       )
     )
@@ -154,15 +155,35 @@ export default function EditSpot() {
           required
           placeholder="123"
         />
-        <label>{"Add an Image (Optional)"}</label>
+        {/* <label>{"Add an Image (Optional)"}</label>
         <input
           type="text"
           value={previewImage}
           onChange={(e) => setPreviewImage(e.target.value)}
-          placeholder="www.imageurl.com"
+          placeholder="https://www.imageurl.com/image.jpg"
         />
+        <div className="preview-image-container-1">
+          {previewImage.length > 0 && (
+            <div className="preview-image-container-2">
+              <img
+                src={previewImage}
+                alt="preview"
+                className="preview-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    "https://static.vecteezy.com/system/resources/previews/004/141/669/original/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
+                }}
+              />
+              <i
+                className={`fas fa-remove fa-lg remove-icon`}
+                onClick={() => setPreviewImage("")}
+              ></i>
+            </div>
+          )}
+        </div> */}
         <button className="button" type="submit">
-          Edit
+          Save
         </button>
       </form>
     </div>

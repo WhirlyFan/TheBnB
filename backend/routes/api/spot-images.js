@@ -32,6 +32,15 @@ const requireAuthor = async function (req, _res, next) {
 //delete a spot image
 router.delete("/:imageId", requireAuth, requireAuthor, async (req, res) => {
   const image = await SpotImage.findByPk(req.params.imageId);
+
+  if (!image) {
+    const err = new Error("Couldn't find a Spot Image with the specified id");
+    err.title = "Couldn't find a Spot Image with the specified id";
+    err.errors = ["Spot Image couldn't be found"];
+    err.status = 404;
+    return next(err);
+  }
+
   image.destroy();
   return res.json({
     message: "Successfully deleted",

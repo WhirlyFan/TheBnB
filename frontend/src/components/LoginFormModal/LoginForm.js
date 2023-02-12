@@ -25,7 +25,7 @@ function LoginForm({ setShowModal }) {
     e.preventDefault();
     setErrors([]);
     return dispatch(
-      sessionActions.login({ credential: "demo@user.io", password: "password" })
+      sessionActions.login({ credential: "demo@aa.io", password: "password" })
     )
       .then(() => setShowModal(false))
       .catch(async (res) => {
