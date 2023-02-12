@@ -113,6 +113,9 @@ export default function EditSpotImages() {
               className="edit-spot-images-input"
             />
           </div>
+          <button type="submit" className="button">
+            Save
+          </button>
           <div className="spot-image-container-1">
             {previewImage.length > 0 && (
               <div className="spot-image-container-2">
@@ -133,9 +136,6 @@ export default function EditSpotImages() {
               </div>
             )}
           </div>
-          <button type="submit" className="button">
-            Save
-          </button>
         </form>
       </div>
       <div className="edit-preview-image">
