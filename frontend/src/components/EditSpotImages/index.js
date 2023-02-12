@@ -59,16 +59,16 @@ export default function EditSpotImages() {
   const deleteImage = (imageId) => {
     setOtherErrors([]);
     if (window.confirm("Are you sure you want to delete this image?")) {
+      dispatch(deleteSpotImageThunk(imageId))
+        .then(() => {
+          setImages(images.filter((image) => image.id !== imageId));
+          alert("Image has been deleted.");
+        })
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) otherErrors(data.errors);
+        });
     }
-    dispatch(deleteSpotImageThunk(imageId))
-      .then(() => {
-        setImages(images.filter((image) => image.id !== imageId));
-        alert("Image has been deleted.");
-      })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) otherErrors(data.errors);
-      });
   };
 
   const addImage = (e) => {
