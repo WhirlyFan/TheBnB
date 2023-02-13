@@ -29,8 +29,7 @@ export default function SpotDetails() {
       });
   }, [dispatch, spotId, hasClicked, user, history]);
 
-  if (!spot) return null;
-  if (!isLoaded) return null;
+  if (!isLoaded || !spot) return null;
 
   let rating = spot.avgStarRating;
   rating = parseFloat(rating).toFixed(1);
@@ -41,7 +40,7 @@ export default function SpotDetails() {
         <div>
           <div className="spot-details-header">
             <h1>{spot.name}</h1>
-            {user.id === spot.ownerId && (
+            {user?.id === spot.ownerId && (
               <div className="spot-details-edit-buttons">
                 <button
                   className="button"
