@@ -32,12 +32,12 @@ export default function Bookings({ spot }) {
       key: "selection",
     },
   ]);
-  const [disabled, isDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(true);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     if (range[0].startDate && range[0].endDate && guests) {
-      isDisabled(false);
+      setDisabled(false);
     }
   }, [range, guests]);
 
