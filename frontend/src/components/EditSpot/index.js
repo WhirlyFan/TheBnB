@@ -17,7 +17,7 @@ export default function EditSpot() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  // const [previewImage, setPreviewImage] = useState("");
+  const [previewImage, setPreviewImage] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false)
 
