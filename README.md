@@ -1,6 +1,6 @@
 # thebnb
 ## Background
-<a href='https://thebnb.herokuapp.com' alt=''>thebnb</a> is a clone of Airbnb that possess many of the core features from the original such as creating, reading, editing, and deleting spots and reviews. It utilizes login and signup features to correctly authenticate users as long as a demo user so people can try out the functionality of the app.
+<a href='https://thebnb.whirlyfan.com' alt=''>thebnb</a> is a clone of Airbnb that possess many of the core features from the original such as creating, reading, editing, and deleting spots and reviews. It utilizes login and signup features to correctly authenticate users as long as a demo user so people can try out the functionality of the app.
 
 ## Technologies
 - React.js - frontend components
